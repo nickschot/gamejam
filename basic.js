@@ -8,11 +8,13 @@ function initialize() {
     // create the root of the scene graph
     var stage = new PIXI.Container();
     
-    createBackground(stage);
+    loadMap();
+    
+    //createBackground(stage);
     
     var count = 0;
     
-    animate();
+    //animate();
     
     function animate() {
     
@@ -35,5 +37,13 @@ function initialize() {
         stage.addChild(tilingSprite);
     }
     
+};
+
+function loadMap(){
+    PIXI.loader.add('assets/map/desert.json', function(res){
+        var map = res.tiledMap;
+        console.log(map);
+    });
     
-    };
+    PIXI.loader.load();
+}
