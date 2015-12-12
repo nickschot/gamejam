@@ -88,7 +88,7 @@
       }
     },
     
-    initMap: function(){
+    initWorld: function(){
       this.game.TILESIZE = 32;
       
       
