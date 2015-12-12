@@ -4,7 +4,7 @@ var Resource = function(tile) {
     this.tile = tile;
 }
 
-Resource.prototype = Object.prototype;
+Resource.prototype = Object.create(Object.prototype);
 
 Resource.prototype.mine = function(robot) {
     var mineSpeed = this.tile.properties["mineSpeed"];

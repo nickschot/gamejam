@@ -8,15 +8,17 @@
       var canvasElement = document.getElementById('testgame');
       canvasElement.onmouseout  = function(){ self.canvasHasFocus = false; };
       canvasElement.onmouseover = function(){ self.canvasHasFocus = true; };
-
-  
       
-      var ResourceMap = require('../prefabs/resourceMap');
-      this.resourceMap = new ResourceMap(this.game, 'Resource');
+      
       
 
       this.initWorld();
       this.initRobot();
+      
+      var ResourceMap = require('../prefabs/resourceMap');
+      this.resourceMap = new ResourceMap(this.game, 'Resource');
+      console.log(this.resourceMap.getClosestResourceByType(64, 49, 'iron'));
+      
      
       
       var City = require("../prefabs/city");
@@ -35,7 +37,7 @@
       //move player with cursor keys
       this.cursors = this.game.input.keyboard.createCursorKeys();
       
-       this.robots[0].bringToTop();
+      this.robots[0].bringToTop();
        
        
       
