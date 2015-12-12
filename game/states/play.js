@@ -11,7 +11,6 @@
       
       this.game.TILESIZE = 32;
       
-      
       var Hud = require('../gui/hud');
       var currentGUI = new Hud();
       currentGUI.setupGUI();
@@ -55,16 +54,14 @@
       //resizes the game world to match the layer dimensions
       this.backgroundlayer.resizeWorld();
       
-      var Robot = require("../prefabs/robot");
-      this.robot = new Robot(this.game, 53, 68);
-      this.game.add.existing(this.robot);
+      this.initRobot();
      
       
       var City = require("../prefabs/city");
       this.city = new City(this.game, this.game.map.widthInPixels/2+this.game.camera.width/2, this.game.map.heightInPixels/2+this.game.camera.height/2);
       this.game.add.existing(this.city);
       
-      this.robot.setDestination(67,48);
+      this.robots[0].setDestination(67, 48);
       
       //Set camera to middle of map
       this.game.camera.x = this.game.map.widthInPixels/2;
@@ -76,7 +73,14 @@
       //move player with cursor keys
       this.cursors = this.game.input.keyboard.createCursorKeys();
       
-       this.robot.bringToTop();
+       this.robots[0].bringToTop();
+       
+       
+      
+      //CREATE GUI LAST, MUST HAVE CORRECT REFERENCES
+      var Hud = require('../gui/hud');
+      this.currentGUI = new Hud(this.robots);
+      this.currentGUI.setupGUI();
     },
     update: function() {
       if (this.cursors.up.isDown){
@@ -91,6 +95,7 @@
       }
       
       this.edgeScroll();
+      this.currentGUI.update();
     },
     
     edgeScrollEnabled: true,
@@ -123,6 +128,18 @@
           this.game.camera.y += this.cameraSpeed;
         }
       }
+    },
+    
+    initRobot: function(){
+      this.robots = [];
+      this.addRobot();
+    },
+    
+    addRobot: function(){
+      var Robot = require("../prefabs/robot");
+      var robot = new Robot(this.game, 64, 49);
+      this.robots.push(robot);
+      this.game.add.existing(robot);
     }
   };
   
