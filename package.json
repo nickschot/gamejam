@@ -16,8 +16,5 @@
     "url": "https://github.com/nickschot/gamejam/issues"
   },
   "homepage": "https://github.com/nickschot/gamejam#readme",
-  "dependencies": {
-    "pixi-tiled": "^1.1.2",
-    "pixi.js": "^3.0.8"
-  }
+  "dependencies": {}
 }
