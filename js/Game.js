@@ -3,6 +3,8 @@ var TopDownGame = TopDownGame || {};
 //title screen
 TopDownGame.Game = function(){};
 
+
+
 TopDownGame.Game.prototype = {
   create: function() {
     this.map = this.game.add.tilemap('level1');
@@ -20,8 +22,9 @@ TopDownGame.Game.prototype = {
     //resizes the game world to match the layer dimensions
     this.backgroundlayer.resizeWorld();
 
-    this.createItems();
-    this.createDoors();    
+    this.prefab_classes = {
+        "robot": TopDownGame.Robot.prototype.constructor,
+     };
 
     //create player
     var result = this.findObjectsByType('playerStart', this.map, 'objectsLayer')
