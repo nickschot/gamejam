@@ -93,6 +93,7 @@
             {
              "81":
                 {
+                 "mineSpeed":"1",
                  "resourceCount":"500",
                  "resourceName":"iron"
                 }
