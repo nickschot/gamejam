@@ -2,6 +2,7 @@
   "name": "testgame",
   "version": "0.0.0",
   "dependencies": {
-    "phaser-official": "2.4.3"
+    "phaser-official": "2.4.3",
+    "easystarjs": "0.2.3"
   }
 }
