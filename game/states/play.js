@@ -59,7 +59,6 @@
       }
       
       this.edgeScroll();
-      this.currentGUI.update();
     },
     
     edgeScrollEnabled: true,
