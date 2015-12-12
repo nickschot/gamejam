@@ -1,7 +1,9 @@
 'use strict';
 
 var Hud = function() {
-    this.template = require('./templates/hud.json');
+    this.templates = {};
+    this.templates.hud = require('./templates/hud.json');
+    this.templates.robots = require('./templates/robots.json');
 };
 
 Hud.prototype = Object.create(Object.prototype);
@@ -13,9 +15,23 @@ Hud.prototype.setupGUI = function() {
     EZGUI.Theme.load(['../../assets/EZGUI/kenney-theme/kenney-theme.json'], function () {
 	    //EZGUI.themes['metalworks'].override(themeOverride);
 		
-		var fakeGameScreen = EZGUI.create(self.template, 'kenney');
-		fakeGameScreen.visible = true;
+		self.hudWindow = EZGUI.create(self.templates.hud, 'kenney');
+		self.hudWindow.visible = true;
+		
+		self.robotsWindow = EZGUI.create(self.templates.robots, 'kenney');
+		self.robotsWindow.visible = false;
+		
+		self.initBinds();
 	});
 };
+
+Hud.prototype.initBinds = function() {
+    var self = this;
+    console.log(EZGUI.components.robotsButton);
+    
+    EZGUI.components.robotsButton.on('click', function(event, me) {
+       self.robotsWindow.visible = !self.robotsWindow.visible;
+    });
+}
 
 module.exports = Hud;

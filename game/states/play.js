@@ -9,6 +9,8 @@
       canvasElement.onmouseout  = function(){ self.canvasHasFocus = false; };
       canvasElement.onmouseover = function(){ self.canvasHasFocus = true; };
       
+      this.game.TILESIZE = 32;
+      
       
       var Hud = require('../gui/hud');
       var currentGUI = new Hud();
@@ -51,6 +53,11 @@
       var Robot = require("../prefabs/robot");
       this.robot = new Robot(this.game, 64, 49);
       this.game.add.existing(this.robot);
+     
+      
+      var City = require("../prefabs/city");
+      this.city = new City(this.game, this.map.widthInPixels/2+this.game.camera.width/2, this.map.heightInPixels/2+this.game.camera.height/2);
+      this.game.add.existing(this.city);
       
       this.robot.setDestination(67, 48);
       
@@ -64,6 +71,7 @@
       //move player with cursor keys
       this.cursors = this.game.input.keyboard.createCursorKeys();
       
+       this.robot.bringToTop();
     },
     update: function() {
       if (this.cursors.up.isDown){
