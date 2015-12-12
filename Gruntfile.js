@@ -21,7 +21,7 @@ module.exports = function (grunt) {
     watch: {
       scripts: {
         files: [
-            'game/**/*.js',
+            'game/**/*.*',
             '!game/main.js'
         ],
         options: {
