@@ -21,6 +21,10 @@ TopDownGame.Game.prototype = {
 
     //resizes the game world to match the layer dimensions
     this.backgroundlayer.resizeWorld();
+    
+    //Set camera to middle of map
+    this.game.camera.x = this.map.widthInPixels/2;
+    this.game.camera.y = this.map.heightInPixels/2;
 
     //this.createItems();
     //this.createDoors();    
