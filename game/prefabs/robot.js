@@ -122,7 +122,7 @@ Robot.prototype.setDestination = function(x, y) {
       }
   }).bind(this));
   
-  this.easyStar.setIterationsPerCalculation(1000);
+  this.easyStar.setIterationsPerCalculation(10000000000);
     
   this.easyStar.calculate();
 }
