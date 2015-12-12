@@ -27,7 +27,6 @@ Hud.prototype.setupGUI = function() {
 
 Hud.prototype.initBinds = function() {
     var self = this;
-    console.log(EZGUI.components.robotsButton);
     
     EZGUI.components.robotsButton.on('click', function(event, me) {
        self.robotsWindow.visible = !self.robotsWindow.visible;
