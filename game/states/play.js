@@ -9,43 +9,7 @@
       canvasElement.onmouseout  = function(){ self.canvasHasFocus = false; };
       canvasElement.onmouseover = function(){ self.canvasHasFocus = true; };
       
-      this.game.TILESIZE = 32;
-      
-      
-      this.map = this.game.add.tilemap('testmap');
-
-      //the first parameter is the tileset name as specified in Tiled, the second is the key to the asset
-      this.map.addTilesetImage('tileset', 'mapTiles');
-  
-      //create layer
-      this.backgroundlayer = this.map.createLayer('Ground');
-      this.backgroundCornersLayer = this.map.createLayer('GroundCorners');
-      this.backgroundBordersLayer = this.map.createLayer('GroundBorders');
-      this.buildingsLayer = this.map.createLayer('Building');
-      
-      this.collisionLayer = this.map.createLayer('Collision');
-      
-      console.log(this.map.layers[this.map.getLayer('Collision')]);
-      
-      this.game.collisionData = new Array(this.map.width);
-      
-      for (var y = 0; y < this.map.height; y++) {
-        var row = new Array(this.map.width);
-        for (var x = 0; x < this.map.width; x++) {
-          if (this.map.getTile(x, y, this.map.getLayer('Collision'))) {
-            row[x] = 1;
-          } else {
-            row[x] = 0;
-          }
-        }
-        
-        this.game.collisionData[y] = row;
-      }
-  
-      //resizes the game world to match the layer dimensions
-      this.backgroundlayer.resizeWorld();
-      
-      
+      this.initWorld();
       this.initRobot();
       
       
@@ -122,6 +86,44 @@
           this.game.camera.y += this.cameraSpeed;
         }
       }
+    },
+    
+    initMap: function(){
+      this.game.TILESIZE = 32;
+      
+      
+      this.map = this.game.add.tilemap('testmap');
+
+      //the first parameter is the tileset name as specified in Tiled, the second is the key to the asset
+      this.map.addTilesetImage('tileset', 'mapTiles');
+  
+      //create layer
+      this.backgroundlayer = this.map.createLayer('Ground');
+      this.backgroundCornersLayer = this.map.createLayer('GroundCorners');
+      this.backgroundBordersLayer = this.map.createLayer('GroundBorders');
+      this.buildingsLayer = this.map.createLayer('Building');
+      
+      this.collisionLayer = this.map.createLayer('Collision');
+      
+      console.log(this.map.layers[this.map.getLayer('Collision')]);
+      
+      this.game.collisionData = new Array(this.map.width);
+      
+      for (var y = 0; y < this.map.height; y++) {
+        var row = new Array(this.map.width);
+        for (var x = 0; x < this.map.width; x++) {
+          if (this.map.getTile(x, y, this.map.getLayer('Collision'))) {
+            row[x] = 1;
+          } else {
+            row[x] = 0;
+          }
+        }
+        
+        this.game.collisionData[y] = row;
+      }
+  
+      //resizes the game world to match the layer dimensions
+      this.backgroundlayer.resizeWorld();
     },
     
     initRobot: function(){
