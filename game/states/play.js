@@ -13,8 +13,11 @@
       this.backgroundlayer = this.map.createLayer('Ground');
       this.backgroundCornersLayer = this.map.createLayer('GroundCorners');
       this.backgroundBordersLayer = this.map.createLayer('GroundBorders');
+      this.buildingsLayer = this.map.createLayer('Building');
       
-      //this.map.setCollisionBetween(1, 2000, true, 'blockedLayer');
+      this.collisionLayer = this.map.createLayer('Collision');
+      
+      console.log(this.collisionLayer);
   
       //resizes the game world to match the layer dimensions
       this.backgroundlayer.resizeWorld();
@@ -28,6 +31,9 @@
   
       //move player with cursor keys
       this.cursors = this.game.input.keyboard.createCursorKeys();
+      
+      console.log(this.game);
+      
     },
     update: function() {
       if (this.cursors.up.isDown){
@@ -42,8 +48,13 @@
       }
       
       this.edgeScroll();
+
+      if(this.game.input.activePointer.justPressed()) {
+        console.log(this.game.camera.x + " " + this.game.camera.y);
+      }
     },
     clickListener: function() {
+      console.log("hoi");
       this.game.state.start('gameover');
     },
     
