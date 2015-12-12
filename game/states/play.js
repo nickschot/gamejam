@@ -62,10 +62,6 @@
         console.log(this.game.camera.x + " " + this.game.camera.y);
       }
     },
-    clickListener: function() {
-      console.log("hoi");
-      this.game.state.start('gameover');
-    },
     
     edgeScrollEnabled: true,
     disableEdgeScroll: function(){
