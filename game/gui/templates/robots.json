@@ -71,7 +71,10 @@
             		                text: 'open',
             		                width: 75,
             		                height: 30,
-            		                position: 'center'
+            		                position: 'center',
+            		                font: {
+            		                    size: '16px'
+            		                }
             		            }
         		            ]
             		    }
