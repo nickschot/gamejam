@@ -9,6 +9,12 @@
       canvasElement.onmouseout  = function(){ self.canvasHasFocus = false; };
       canvasElement.onmouseover = function(){ self.canvasHasFocus = true; };
       
+      
+      var Hud = require('../gui/hud');
+      var currentGUI = new Hud();
+      currentGUI.setupGUI();
+      
+      
       this.map = this.game.add.tilemap('testmap');
 
       //the first parameter is the tileset name as specified in Tiled, the second is the key to the asset

@@ -1,0 +1,53 @@
+{
+    id: 'fakeGameScreen',
+	component: 'Window',	
+	padding: 4,
+	position: { x: 550, y: 50 },
+	width: 200,
+	height: 500,
+
+
+	layout: [3, 3],
+	children: [
+        null,
+		{
+		    id: 'gameLabel',
+		    text: 'Label',
+		    component: 'Label',
+		    position: 'center',
+		    font : {
+                color:'white'
+		    },
+		    width: 200,
+		    height: 80
+		},
+        null,
+		{
+		  id: 'gameBtn1',
+		  text: 'Show dialog',
+		  component: 'Button',
+		  position: 'center',
+		  width: 150,
+		  height: 60
+		},
+        null,
+		{
+		  id: 'gameBtn2',
+		  text: 'Show end level',
+		  component: 'Button',
+		  position: 'center',
+		  width: 150,
+		  height: 60
+		},
+        null,
+		{
+		    id: 'gameBtn3',
+		    text: 'Back to menu',
+		    component: 'Button',
+		    position: 'center',
+		    width: 150,
+		    height: 60
+		},
+        null
+	]
+}

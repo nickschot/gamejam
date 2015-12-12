@@ -59,7 +59,7 @@ module.exports = function (grunt) {
           // includes files within path and its sub-directories
           { expand: true, src: ['assets/**'], dest: 'dist/' },
           { expand: true, flatten: true, src: ['game/plugins/*.js'], dest: 'dist/js/plugins/' },
-          { expand: true, flatten: true, src: ['bower_components/**/build/*.js'], dest: 'dist/js/' },
+          { expand: true, flatten: true, src: ['bower_components/**/build/*.js', 'vendor/**/*.js'], dest: 'dist/js/' },
           { expand: true, src: ['css/**'], dest: 'dist/' },
           { expand: true, src: ['index.html'], dest: 'dist/' }
         ]
