@@ -9,6 +9,8 @@
       canvasElement.onmouseout  = function(){ self.canvasHasFocus = false; };
       canvasElement.onmouseover = function(){ self.canvasHasFocus = true; };
       
+      this.game.TILESIZE = 32;
+      
       
       var Hud = require('../gui/hud');
       var currentGUI = new Hud();
@@ -36,6 +38,11 @@
       var Robot = require("../prefabs/robot");
       this.robot = new Robot(this.game, this.map.widthInPixels/2+this.game.camera.width/2, this.map.heightInPixels/2+this.game.camera.height/2);
       this.game.add.existing(this.robot);
+     
+      
+      var City = require("../prefabs/city");
+      this.city = new City(this.game, this.map.widthInPixels/2+this.game.camera.width/2, this.map.heightInPixels/2+this.game.camera.height/2);
+      this.game.add.existing(this.city);
       
       //Set camera to middle of map
       this.game.camera.x = this.map.widthInPixels/2;
@@ -48,6 +55,7 @@
       this.cursors = this.game.input.keyboard.createCursorKeys();
       
       console.log(this.game);
+       this.robot.bringToTop();
       
     },
     update: function() {
