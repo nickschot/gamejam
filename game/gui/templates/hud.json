@@ -1,0 +1,56 @@
+{
+    id: 'bottomHud',
+	component: 'Window',	
+	padding: 0,
+	position: {x: 50, y: 500},
+	width: 700,
+	height: 50,
+	layout: [5, 1],
+	children: [
+		{
+            id: 'menuButton',
+            text: 'menu',
+            component: 'Button',
+            position: 'center',
+            width: 130,
+            height: 40,
+        	font: {
+                color: '#333'
+            }
+		},
+		null,
+		{
+		    id: 'robotsButton',
+		    text: 'robots',
+		    component: 'Button',
+		    position: 'center',
+		    width: 130,
+		    height: 40,
+        	font: {
+                color: '#333'
+            }
+		},
+		{
+		    id: 'techButton',
+		    text: 'tech',
+		    component: 'Button',
+		    position: 'center',
+		    width: 130,
+		    height: 40,
+        	font: {
+                color: '#333'
+            }
+		},
+		{
+		    id: 'statsButton',
+		    text: 'stats',
+		    component: 'Button',
+		    position: 'center',
+		    width: 130,
+		    height: 40,
+        	font: {
+                color: '#333'
+            }
+		}
+	]
+}
