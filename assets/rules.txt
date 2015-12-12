@@ -1,0 +1,2 @@
+ruleGrassBorders.tmx
+ruleGrassCorners.tmx
