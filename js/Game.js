@@ -27,10 +27,13 @@ TopDownGame.Game.prototype = {
     //Set camera to middle of map
     this.game.camera.x = this.map.widthInPixels/2;
     this.game.camera.y = this.map.heightInPixels/2;
+    
+    //Set cameraspeed
+    this.cameraSpeed = 10;
 
-    this.prefab_classes = {
+    /*this.prefab_classes = {
         "robot": TopDownGame.Robot.prototype.constructor,
-     };
+     };*/
      
     //this.createItems();
     //this.createDoors();
@@ -103,20 +106,20 @@ TopDownGame.Game.prototype = {
 
     if (this.cursors.up.isDown)
     {
-        this.game.camera.y -= 4;
+        this.game.camera.y -= this.cameraSpeed;
     }
     else if (this.cursors.down.isDown)
     {
-        this.game.camera.y += 4;
+        this.game.camera.y += this.cameraSpeed;
     }
 
     if (this.cursors.left.isDown)
     {
-        this.game.camera.x -= 4;
+        this.game.camera.x -= this.cameraSpeed;
     }
     else if (this.cursors.right.isDown)
     {
-        this.game.camera.x += 4;
+        this.game.camera.x += this.cameraSpeed;
     }
   }/*,
   collect: function(player, collectable) {
