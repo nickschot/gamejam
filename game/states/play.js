@@ -2,7 +2,12 @@
   'use strict';
   function Play() {}
   Play.prototype = {
+    canvasHasFocus: true,
     create: function() {
+      var self = this;
+      var canvasElement = document.getElementById('testgame');
+      canvasElement.onmouseout  = function(){ self.canvasHasFocus = false; };
+      canvasElement.onmouseover = function(){ self.canvasHasFocus = true; };
       
       this.map = this.game.add.tilemap('testmap');
 
@@ -57,30 +62,36 @@
         console.log(this.game.camera.x + " " + this.game.camera.y);
       }
     },
-    clickListener: function() {
-      console.log("hoi");
-      this.game.state.start('gameover');
+    
+    edgeScrollEnabled: true,
+    disableEdgeScroll: function(){
+      this.edgeScrollEnabled = false;
+    },
+    enableEdgeScroll: function(){
+      this.edgeScrollEnabled = true;
     },
     
     edgeScroll: function(){
-      var deadzone = 50;
-      
-      var width = this.game.width;
-      var height = this.game.height;
-      
-      var x = this.game.input.mousePointer.x;
-      var y = this.game.input.mousePointer.y;
-      
-      if(x < deadzone){
-        this.game.camera.x -= this.cameraSpeed;
-      }else if(x > width - deadzone){
-        this.game.camera.x += this.cameraSpeed;
-      }
-      
-      if(y < deadzone){
-        this.game.camera.y -= this.cameraSpeed;
-      } else if(y > height - deadzone){
-        this.game.camera.y += this.cameraSpeed;
+      if(this.canvasHasFocus){
+        var deadzone = 50;
+        
+        var width = this.game.width;
+        var height = this.game.height;
+        
+        var x = this.game.input.mousePointer.x;
+        var y = this.game.input.mousePointer.y;
+        
+        if(x < deadzone){
+          this.game.camera.x -= this.cameraSpeed;
+        }else if(x > width - deadzone){
+          this.game.camera.x += this.cameraSpeed;
+        }
+        
+        if(y < deadzone){
+          this.game.camera.y -= this.cameraSpeed;
+        } else if(y > height - deadzone){
+          this.game.camera.y += this.cameraSpeed;
+        }
       }
     }
   };
