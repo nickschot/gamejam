@@ -17,7 +17,7 @@ var Robot = function(game, x, y, frame) {
   Phaser.Sprite.call(this, game, x * 32 + 16, y * 32 + 16, 'robot', frame);
 
   this.speed = 1;
-  this.rotationSpeed = 0.1 * Math.PI;
+  this.rotationSpeed = 0.02 * Math.PI;
   this.previous_position;
   this.anchor.setTo(0.5, 0.5);
   this.startlocation = new Phaser.Point(x, y);
@@ -44,32 +44,27 @@ Robot.prototype.update = function() {
   var ZeroPoint = new Phaser.Point(0, 0);
   
   var direction = Phaser.Point.subtract(this.currentTarget, this.position);
-  var directionAngle = Phaser.Point.angle(ZeroPoint, direction);
+  var directionAngle = Phaser.Point.angle(direction, ZeroPoint);
 
   // Floating point is vervelend
-  if(Math.abs(directionAngle - this.rotation) < 0.01) {
+  if(Math.abs(directionAngle - this.rotation) < 0.0001) {
     this.rotation = directionAngle;
   }
   
   // Update rotation if needed.
   if(this.rotation != directionAngle) {
-    console.log("rotating... current angle: " + this.rotation + "; directionAngle: " + directionAngle);
     // Not in right rotation, rotate!
-    if(!isNaN(this.rotation)) {
-      console.log("this.rotation=" + this.rotation + "; directionAngle=" + directionAngle + "; directionAngle - this.rotation=" + (directionAngle - this.rotation));
-      
-      var rotateAngle = normalizeAngle(directionAngle - this.rotation);
-      console.log("rotateAngle=" + rotateAngle + "; rotationSpeed=" + this.rotationSpeed);
+    var rotateAngle = normalizeAngle(directionAngle - this.rotation);
+    if(rotateAngle < 0) {
+      rotateAngle = Math.max(-this.rotationSpeed, rotateAngle);
+    } else {
       rotateAngle = Math.min(this.rotationSpeed, rotateAngle);
-      
-      console.log("this.rotation=" + this.rotation + "; rotateAngle=" + rotateAngle + "; new angle: " + (this.rotation + rotateAngle));
-      
-      this.rotation = normalizeAngle(this.rotation + rotateAngle);
     }
+
+    this.rotation = normalizeAngle(this.rotation + rotateAngle);
   } else {
     // Right rotation, drive!
-    console.log("driving...");
-  
+
     var magnitude = direction.getMagnitude();
     
     direction.setMagnitude(Math.min(this.speed, magnitude));
@@ -77,12 +72,11 @@ Robot.prototype.update = function() {
     Phaser.Point.add(this.position, direction, this.position);
     
     // Floating point is vervelend
-    if(Phaser.Point.subtract(this.currentTarget, this.position).getMagnitude() < 0.01) {
+    if(Phaser.Point.subtract(this.currentTarget, this.position).getMagnitude() < 0.0001) {
       this.position = this.currentTarget;
     }
     
     if(this.position == this.currentTarget) {
-      console.log("Target " + this.currentTarget + " reached");
       this.currentTarget = null;
       this.updatePath();
     }
@@ -105,8 +99,6 @@ Robot.prototype.updatePath = function () {
 Robot.prototype.setCurrentTargetForTile = function (tileX, tileY) {
   this.currentTarget = new Phaser.Point(tileX * 32 + 16, tileY * 32 + 16);
 }
-
-
 
 Robot.prototype.setDestination = function(x, y) {
   this.currentDestination = {x: x, y: y};
