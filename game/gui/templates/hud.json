@@ -1,53 +1,56 @@
 {
-    id: 'fakeGameScreen',
+    id: 'bottomHud',
 	component: 'Window',	
-	padding: 4,
-	position: { x: 550, y: 50 },
-	width: 200,
-	height: 500,
-
-
-	layout: [3, 3],
+	padding: 0,
+	position: {x: 50, y: 500},
+	width: 700,
+	height: 50,
+	layout: [5, 1],
 	children: [
-        null,
 		{
-		    id: 'gameLabel',
-		    text: 'Label',
-		    component: 'Label',
-		    position: 'center',
-		    font : {
-                color:'white'
-		    },
-		    width: 200,
-		    height: 80
+            id: 'menuButton',
+            text: 'menu',
+            component: 'Button',
+            position: 'center',
+            width: 130,
+            height: 40,
+        	font: {
+                color: '#333'
+            }
 		},
-        null,
+		null,
 		{
-		  id: 'gameBtn1',
-		  text: 'Show dialog',
-		  component: 'Button',
-		  position: 'center',
-		  width: 150,
-		  height: 60
-		},
-        null,
-		{
-		  id: 'gameBtn2',
-		  text: 'Show end level',
-		  component: 'Button',
-		  position: 'center',
-		  width: 150,
-		  height: 60
-		},
-        null,
-		{
-		    id: 'gameBtn3',
-		    text: 'Back to menu',
+		    id: 'robotsButton',
+		    text: 'robots',
 		    component: 'Button',
 		    position: 'center',
-		    width: 150,
-		    height: 60
+		    width: 130,
+		    height: 40,
+        	font: {
+                color: '#333'
+            }
 		},
-        null
+		{
+		    id: 'techButton',
+		    text: 'tech',
+		    component: 'Button',
+		    position: 'center',
+		    width: 130,
+		    height: 40,
+        	font: {
+                color: '#333'
+            }
+		},
+		{
+		    id: 'statsButton',
+		    text: 'stats',
+		    component: 'Button',
+		    position: 'center',
+		    width: 130,
+		    height: 40,
+        	font: {
+                color: '#333'
+            }
+		}
 	]
 }

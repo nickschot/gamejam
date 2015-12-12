@@ -30,19 +30,36 @@
       
       this.collisionLayer = this.map.createLayer('Collision');
       
-      console.log(this.collisionLayer);
+      console.log(this.map.layers[this.map.getLayer('Collision')]);
+      
+      this.game.collisionData = new Array(this.map.width);
+      
+      for (var y = 0; y < this.map.height; y++) {
+        var row = new Array(this.map.width);
+        for (var x = 0; x < this.map.width; x++) {
+          if (this.map.getTile(x, y, this.map.getLayer('Collision'))) {
+            row[x] = 1;
+          } else {
+            row[x] = 0;
+          }
+        }
+        
+        this.game.collisionData[y] = row;
+      }
   
       //resizes the game world to match the layer dimensions
       this.backgroundlayer.resizeWorld();
       
       var Robot = require("../prefabs/robot");
-      this.robot = new Robot(this.game, this.map.widthInPixels/2+this.game.camera.width/2, this.map.heightInPixels/2+this.game.camera.height/2);
+      this.robot = new Robot(this.game, 64, 49);
       this.game.add.existing(this.robot);
      
       
       var City = require("../prefabs/city");
       this.city = new City(this.game, this.map.widthInPixels/2+this.game.camera.width/2, this.map.heightInPixels/2+this.game.camera.height/2);
       this.game.add.existing(this.city);
+      
+      this.robot.setDestination(67, 48);
       
       //Set camera to middle of map
       this.game.camera.x = this.map.widthInPixels/2;
@@ -54,9 +71,7 @@
       //move player with cursor keys
       this.cursors = this.game.input.keyboard.createCursorKeys();
       
-      console.log(this.game);
        this.robot.bringToTop();
-      
     },
     update: function() {
       if (this.cursors.up.isDown){
@@ -71,10 +86,6 @@
       }
       
       this.edgeScroll();
-
-      if(this.game.input.activePointer.justPressed()) {
-        console.log(this.game.camera.x + " " + this.game.camera.y);
-      }
     },
     
     edgeScrollEnabled: true,
