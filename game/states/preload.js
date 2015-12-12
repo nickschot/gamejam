@@ -13,9 +13,7 @@ Preload.prototype = {
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
     this.load.setPreloadSprite(this.asset);
     this.load.image('yeoman', 'assets/yeoman-logo.png');
-    this.load.image('robot', 'assets/robot.png');
-    
-    
+    this.load.spritesheet('robot', 'assets/robot.png', 32, 32);
     
     this.load.tilemap('testmap', 'assets/testmap.json', null, Phaser.Tilemap.TILED_JSON);
     this.load.image('mapTiles', 'assets/tileset.png');

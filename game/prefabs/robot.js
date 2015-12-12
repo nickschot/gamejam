@@ -5,7 +5,8 @@ var Robot = function(game, x, y, frame) {
 
   this.speed = 1;
   this.previous_position;
-  
+  this.anchor.setTo(0.5, 0.5);
+  this.from = this.previous_position;
   
 };
 

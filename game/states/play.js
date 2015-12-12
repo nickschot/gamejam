@@ -17,6 +17,10 @@
       //resizes the game world to match the layer dimensions
       this.backgroundlayer.resizeWorld();
       
+      var Robot = require("../prefabs/robot");
+      this.robot = new Robot(this.game, this.map.widthInPixels/2+this.game.camera.width/2, this.map.heightInPixels/2+this.game.camera.height/2);
+      this.game.add.existing(this.robot);
+      
       //Set camera to middle of map
       this.game.camera.x = this.map.widthInPixels/2;
       this.game.camera.y = this.map.heightInPixels/2;
