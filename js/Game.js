@@ -3,6 +3,8 @@ var TopDownGame = TopDownGame || {};
 //title screen
 TopDownGame.Game = function(){};
 
+
+
 TopDownGame.Game.prototype = {
   create: function() {
     this.map = this.game.add.tilemap('testmap');
@@ -26,8 +28,14 @@ TopDownGame.Game.prototype = {
     this.game.camera.x = this.map.widthInPixels/2;
     this.game.camera.y = this.map.heightInPixels/2;
 
+<<<<<<< HEAD
+    this.prefab_classes = {
+        "robot": TopDownGame.Robot.prototype.constructor,
+     };
+=======
     //this.createItems();
     //this.createDoors();    
+>>>>>>> e67c80354cabda43b894a4adc8f9fe75eacc4657
 
     //create player
     //var result = this.findObjectsByType('playerStart', this.map, 'objectsLayer')
