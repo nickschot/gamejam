@@ -1,3 +1,2 @@
-ruleGrassClear.tmx
 ruleGrassBorders.tmx
 ruleGrassCorners.tmx
