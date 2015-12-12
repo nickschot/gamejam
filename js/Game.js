@@ -29,7 +29,7 @@ TopDownGame.Game.prototype = {
     this.game.physics.arcade.enable(this.player);
 
     //the camera will follow the player in the world
-    this.game.camera.follow(this.player);
+    //this.game.camera.follow(this.player);
 
     //move player with cursor keys
     this.cursors = this.game.input.keyboard.createCursorKeys();
@@ -89,22 +89,22 @@ TopDownGame.Game.prototype = {
     
     this.player.body.velocity.x = 0;
 
-    if(this.cursors.up.isDown) {
-      if(this.player.body.velocity.y == 0)
-      this.player.body.velocity.y -= 50;
+    if (this.cursors.up.isDown)
+    {
+        this.game.camera.y -= 4;
     }
-    else if(this.cursors.down.isDown) {
-      if(this.player.body.velocity.y == 0)
-      this.player.body.velocity.y += 50;
+    else if (this.cursors.down.isDown)
+    {
+        this.game.camera.y += 4;
     }
-    else {
-      this.player.body.velocity.y = 0;
+
+    if (this.cursors.left.isDown)
+    {
+        this.game.camera.x -= 4;
     }
-    if(this.cursors.left.isDown) {
-      this.player.body.velocity.x -= 50;
-    }
-    else if(this.cursors.right.isDown) {
-      this.player.body.velocity.x += 50;
+    else if (this.cursors.right.isDown)
+    {
+        this.game.camera.x += 4;
     }
   },
   collect: function(player, collectable) {
