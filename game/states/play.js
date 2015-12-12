@@ -12,11 +12,6 @@
       this.game.TILESIZE = 32;
       
       
-      var Hud = require('../gui/hud');
-      var currentGUI = new Hud();
-      currentGUI.setupGUI();
-      
-      
       this.map = this.game.add.tilemap('testmap');
 
       //the first parameter is the tileset name as specified in Tiled, the second is the key to the asset
@@ -73,6 +68,13 @@
       this.cursors = this.game.input.keyboard.createCursorKeys();
       
        this.robots[0].bringToTop();
+       
+       
+      
+      //CREATE GUI LAST, MUST HAVE CORRECT REFERENCES
+      var Hud = require('../gui/hud');
+      this.currentGUI = new Hud(this.robots);
+      this.currentGUI.setupGUI();
     },
     update: function() {
       if (this.cursors.up.isDown){
@@ -87,6 +89,7 @@
       }
       
       this.edgeScroll();
+      this.currentGUI.update();
     },
     
     edgeScrollEnabled: true,
