@@ -5,82 +5,102 @@
 	position: {x: 50, y: 50},
 	width: 700,
 	height: 400,
-	layout: [2, 10],
+	layout: [2, 1],
 	children: [
 	    {
-	        text: 'Robots',
-		    font: {
-		        size: '24px',
-		        family: 'Arial'
-		    },
-		    component: 'Label',
-
-		    position: 'center',
-
-		    width: 300,
-		    height: 40
+	        id: 'robotsLayout',
+	        component: 'Layout',
+	        layout: [1,10],
+	        width: 340,
+	        height: 380,
+	        position: 'center',
+	        children: [
+	            {
+        	        text: 'Robots',
+        		    font: {
+        		        size: '24px',
+        		        family: 'Arial'
+        		    },
+        		    component: 'Label',
+        
+        		    position: 'center',
+        
+        		    width: 300,
+        		    height: 40
+        	    },
+            	{
+            		id: 'levelsList',
+            		component: 'List',
+            		dragX:false,
+            		padding: 3,
+            		position: {x: 30, y: 0},
+            		width: 300,
+            		height: 310,
+            		layout: [null, 6],
+            		children: [
+            		    {   
+            		        id: 'test1',
+            		        component: 'Layout',
+            		        layout: [3,1],
+            		        position: { x: 10, y: 10 },
+            		        width: 275,
+            		        height:50,
+            		        children: [
+            		            {
+            		                id: 'test1Name',
+            		                component: 'Label',
+            		                text: 'ROBOT 1',
+            		                width: 100,
+            		                height: 50,
+            		                position: 'center'
+            		            },
+            		            {
+            		                id: 'test1Status',
+            		                component: 'Label',
+            		                text: 'LIVE',
+            		                font: {
+            		                    color: 'green'
+            		                },
+            		                width: 100,
+            		                height: 50,
+            		                position: 'center'
+            		            },
+            		            {
+            		                id: 'test1Button',
+            		                component: 'Button',
+            		                text: 'open',
+            		                width: 75,
+            		                height: 30,
+            		                position: 'center'
+            		            }
+        		            ]
+            		    }
+            		]
+            	}
+        	]
 	    },
-	    null,
-	    null,
-	    null,
-    	{
-    		id: 'levelsList',
-    		component: 'List',
-    		dragX:false,
-    		padding: 3,
-    		position: {x: 30, y: -35},
-    		width: 300,
-    		height: 310,
-    		layout: [null, 6],
-    		children: [
-    		    {   
-    		        id: 'test1',
-    		        component: 'Layout',
-    		        layout: [3,1],
-    		        position: { x: 10, y: 10 },
-    		        width: 275,
-    		        height:50,
-    		        children: [
-    		            {
-    		                id: 'test1Name',
-    		                component: 'Label',
-    		                text: 'ROBOT 1',
-    		                width: 100,
-    		                height: 50,
-    		                position: 'center',
-    		                skin: ''
-    		            },
-    		            {
-    		                id: 'test1Status',
-    		                component: 'Label',
-    		                text: 'LIVE',
-    		                font: {
-    		                    color: 'green'
-    		                },
-    		                width: 100,
-    		                height: 50,
-    		                position: 'center'
-    		            },
-    		            {
-    		                id: 'test1Button',
-    		                component: 'Button',
-    		                text: 'open',
-    		                width: 75,
-    		                height: 30,
-    		                position: 'center'
-    		            }
-		            ]
-    		    },
-    		    
-    			{ id: 'lvl1', text: '1', userData: 'level 1', component: 'Button', position: {x:10, y:10}, width: 275, height: 50, skin: 'levelBtn' },
-    			{ id: 'lvl2', text: '2', userData: 'level 2', component: 'Button', position: {x:10, y:10}, width: 275, height: 50, skin: 'levelBtn' },
-    		    { id: 'lvl3', text: '3', userData: 'level 3', component: 'Button', position: {x:10, y:10}, width: 275, height: 50, skin: 'levelBtn' },
-    			{ id: 'lvl4', text: '4', userData: 'level 4', component: 'Button', position: {x:10, y:10}, width: 275, height: 50, skin: 'levelBtn' },
-    			{ id: 'lvl5', text: '5', userData: 'level 5', component: 'Button', position: {x:10, y:10}, width: 275, height: 50, skin: 'levelBtn' },
-    			{ id: 'lvl6', text: '6', userData: 'level 6', component: 'Button', position: {x:10, y:10}, width: 275, height: 50, skin: 'levelBtn' },
-    			{ id: 'lvl7', text: '7', userData: 'level 7', component: 'Button', position: {x:10, y:10}, width: 275, height: 50, skin: 'levelBtn' },
-    			{ id: 'lvl8', text: '8', userData: 'level 8', component: 'Button', position: {x:10, y:10}, width: 275, height: 50, skin: 'levelBtn' }
-    		]
-    	}
+	    {
+	        id: 'robotDetailLayout',
+	        component: 'Layout',
+	        layout: [1,10],
+	        width: 340,
+	        height: 380,
+	        position: 'center',
+	        children: [
+	            {
+        	        text: '[no robot selected]',
+        		    font: {
+        		        size: '24px',
+        		        family: 'Arial'
+        		    },
+        		    component: 'Label',
+        
+        		    position: 'center',
+        
+        		    width: 300,
+        		    height: 40
+        	    }
+    	    ]
+	    }
 	]
 }
