@@ -8,7 +8,7 @@ var EndState = require("../commandStates/endState");
 function OffCommand (game, robot) {
     Command.call(this, game, robot);
 
-    var destination = this.game.city.airlock.destination;
+    var destination = this.game.city.airlock.position;
 
     this.goState(new DriveState(this, destination,
                                 new AirlockState(this, (function(){this.goToCity();}).bind(this))));
