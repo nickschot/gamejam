@@ -35,9 +35,17 @@ Hud.prototype.setupGUI = function() {
 Hud.prototype.initBinds = function() {
     var self = this;
     
+    //Window control
     EZGUI.components.robotsButton.on('click', function(event, me) {
        self.robotsWindow.visible = !self.robotsWindow.visible;
     });
+	
+	//Add a click handler to each robot button
+	this.robots.forEach(function(robot, index){
+	    EZGUI.components['robot'+index+'Button'].on('click', function(event, me) {
+            console.log('Opening detailed view for robot '+index);
+        });
+	});
 };
 
 Hud.prototype.renderRobotsView = function(){
@@ -98,13 +106,6 @@ Hud.prototype.renderRobotsView = function(){
     //Create the new view from the new edited template
     this.robotsWindow = EZGUI.create(self.templates.robots, self.theme);
 	this.robotsWindow.visible = false;
-	
-	//Add a click handler to each robot button
-	this.robots.forEach(function(robot, index){
-	    EZGUI.components['robot'+index+'Button'].on('click', function(event, me) {
-            console.log('Opening detailed view for robot '+index);
-        });
-	});
 };
 
 module.exports = Hud;
