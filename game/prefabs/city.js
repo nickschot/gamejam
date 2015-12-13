@@ -42,7 +42,7 @@ City.prototype.transferResource = function (robot) {
 };
 
 City.prototype.buyRobot = function () {
-  if (this.game.techTree.hasAchieved('RobotFactory')) {
+  if (this.game.techTree.hasAchieved('robotFactory')) {
     if (this.storage["iron"] >= 500 && this.storage["plastic"] >= 500) {
       this.storage["iron"] -= 500;
       this.storage["plastic"] -= 500;

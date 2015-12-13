@@ -48,8 +48,10 @@ TechTree.prototype.getValueModification = function (affectedValue){
 TechTree.prototype.hasAchieved = function (unlock){
     var achieved = false;
     
-    for (var item in this.tree) {
+    for (var item of this.tree) {
+        console.log(item);
         if (item instanceof TechTreeUnlockNode && item.affects(unlock) && item.hasAchieved) {
+            console.log("Woei");
             achieved = true;
         }
     }
@@ -67,14 +69,23 @@ TechTree.prototype.buyUpgrade = function (city, upgradeName) {
         }
     }
     
+
+    //  Is this actually an upgrade
+    if (!res) return true;
+    
     // Buying an upgrade you already have is silly
-    // Then check if you can actually buy this upgrade
-    if (!res || res.hasAchieved) return true;
+    if (res.hasAchieved) return true;
+    
     var canBuy = true;
     
     for (var key in res.costs) {
-        if (res.hasOwnProperty(key) && city.storage[key] < res.costs[key]) {
-            canBuy = false;
+        console.log(key);
+        if (res.costs.hasOwnProperty(key)) {
+            console.log("City has " + key + " " + city.storage[key] + ", should have " + res.costs[key]);
+            
+            if (city.storage[key] < res.costs[key]) {
+                canBuy = false;
+            }
         }
     }
     
@@ -82,7 +93,7 @@ TechTree.prototype.buyUpgrade = function (city, upgradeName) {
     
     // We've check everything, go buy
     for (var key in res.costs) {
-        if (res.hasOwnProperty(key)) {
+        if (res.costs.hasOwnProperty(key)) {
             city.storage[key] -= res.costs[key];
         }
     }

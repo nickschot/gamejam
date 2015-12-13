@@ -5,7 +5,7 @@ var TechTreeNode = function(name, desc, costs) {
     this.desc = desc;
     this.costs = costs;
     
-    this.hasAchieved = true;
+    this.hasAchieved = false;
 }
 
 TechTreeNode.prototype = Object.create(Object.prototype);
