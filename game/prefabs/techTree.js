@@ -49,9 +49,7 @@ TechTree.prototype.hasAchieved = function (unlock){
     var achieved = false;
     
     for (var item of this.tree) {
-        console.log(item);
         if (item instanceof TechTreeUnlockNode && item.affects(unlock) && item.hasAchieved) {
-            console.log("Woei");
             achieved = true;
         }
     }
@@ -79,9 +77,7 @@ TechTree.prototype.buyUpgrade = function (city, upgradeName) {
     var canBuy = true;
     
     for (var key in res.costs) {
-        console.log(key);
         if (res.costs.hasOwnProperty(key)) {
-            console.log("City has " + key + " " + city.storage[key] + ", should have " + res.costs[key]);
             
             if (city.storage[key] < res.costs[key]) {
                 canBuy = false;

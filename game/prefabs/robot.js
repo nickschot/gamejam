@@ -146,14 +146,11 @@ Robot.prototype.setDestinationPoint = function(destination) {
       
   this.easyStar.findPath(this.currentTile.x, this.currentTile.y, this.currentDestination.x, this.currentDestination.y, (function( path ) {
       if (path === null || path.length < 2) {
-          console.log("No path!");
           this.hasFailedPathing = true;
           this.path = [];
       } else {
           this.path = path;
           this.currentIndex = 0;
-          
-          console.log("I found a path!");
           
           this.updatePath();
       }
