@@ -5,3 +5,16 @@ Today, one very old robot was found, and a way off this destroyed world lies bef
 ## How to play
 You can give your robot binary commands to go out into the world and find the resources you need to improve life in this horrible world. This world still provides some resources from left over waste and destroyed buildings. 
 The resources you can find are: iron, plastic, stone, glass and lead. With these resources you can upgrade your robot and build more robots.
+
+## How to code
+You can code your robot by giving the robot bits, either one or zero. If you don't have enough bits to programm the full 3-bit string the robot will add zeros to your string. 
+
+* 000 - Return to city (doable with one bit)
+* 100 - Mine iron (doable with one bit)
+* 010 - Mine plastic (doable with two bits)
+* 110 - Mine stone (only doable with two bits)
+* 001 - Mine lead (only doable with three bits)
+* 011 - Mine glass (only doable with three bits)
+
+## How to expand
+You can expand your army of world-rescuring robots by building a Robot Factory and then buying more robots. A robot cost 500 iron and 500 plastic.
