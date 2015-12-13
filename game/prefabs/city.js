@@ -1,6 +1,7 @@
 'use strict';
 
 var City = function(game, x, y, frame) {
+  this.position = new Phaser.Point(x, y);
   
   this.storage = {
     'glass': 0,
