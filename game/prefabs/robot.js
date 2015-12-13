@@ -120,7 +120,6 @@ Robot.prototype.updatePath = function () {
     if (this.currentIndex < this.path.length) {
       this.setCurrentTargetForTile(this.path[this.currentIndex].x, this.path[this.currentIndex].y);
     } else {
-      console.log("Path ended");
       this.hasFinishedPathing = true;
       this.path = null;
     }
