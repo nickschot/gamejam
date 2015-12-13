@@ -183,7 +183,7 @@
 							width: 100,
 							height: 40,
 							position: 'center',
-							text: '001'
+							text: ''
 						},
 						{
 							id: 'robotProgramLayout',
