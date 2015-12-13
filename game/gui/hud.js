@@ -62,6 +62,7 @@ Hud.prototype.initBinds = function() {
         var visible = !self.techWindow.visible;
         self.hideWindows();
         self.techWindow.visible = visible;
+        self.currentRobotDetailView = {'robot':self.game.city.robots[0], 'index':0 };
     });
     EZGUI.components.statsButton.on('click', function(event, me) {
         var visible = !self.statsWindow.visible;
@@ -78,15 +79,13 @@ Hud.prototype.initBinds = function() {
 	//Add a click handler to each robot button
 	this.game.city.robots.forEach(function(robot, index){
 	    EZGUI.components['robot'+index+'Button'].on('click', function(event, me) {
-            console.log('Opening detailed view for robot '+index);
-            self.currentRobotDetailView = {robot, index};
+            self.currentRobotDetailView = {'robot':robot, 'index':index };
         });
 	});
 	
 	this.tech.tree.forEach(function(tech, index){
 	    EZGUI.components[encodeURIComponent(tech.name)].on('click', function(event, me){
-	        console.log('Opening detailed view for tech '+tech.name);
-	        self.currentTechDetailView = {tech, index};
+	        self.currentRobotDetailView = {'tech':tech, 'index':index };
 	        
             self.showTechDetailView();
 	    });
