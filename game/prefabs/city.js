@@ -48,8 +48,12 @@ City.prototype.buyRobot = function () {
       this.storage["plastic"] -= 500;
       
       this.addRobot();
+      
+      return true;
     }
   }
+  
+  return false;
 }
 
 
@@ -63,6 +67,7 @@ City.prototype.addRobot = function () {
   var robot = new Robot(this.game, 64, 64);
   this.robots.push(robot);
   this.game.add.existing(robot);
+  
 }
 
 

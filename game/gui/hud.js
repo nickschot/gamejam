@@ -76,12 +76,7 @@ Hud.prototype.initBinds = function() {
         self.game.state.start('menu');
     });
 	
-	//Add a click handler to each robot button
-	this.game.city.robots.forEach(function(robot, index){
-	    EZGUI.components['robot'+index+'Button'].on('click', function(event, me) {
-            self.currentRobotDetailView = {'robot':robot, 'index':index };
-        });
-	});
+	
 	
 	this.tech.tree.forEach(function(tech, index){
 	    EZGUI.components[encodeURIComponent(tech.name)].on('click', function(event, me){
@@ -138,7 +133,11 @@ Hud.prototype.initBinds = function() {
 	});
 	
 	EZGUI.components.robotBuy.on('click', function (event, me) {
-	    self.game.city.buyRobot();
+	    console.log("Buying robot!");
+	    if (self.game.city.buyRobot()) {
+            console.log("HOI");
+            self.renderRobotsView();
+	    }
 	});
 };
 
@@ -162,6 +161,8 @@ Hud.prototype.renderMenuView = function(){
 //TODO: call this whenever a robot is added
 Hud.prototype.renderRobotsView = function(){
     var self = this;
+    
+    console.log("Render this!");
     
     //Empty the list of robots and add all current robots to the template
     this.templates.robots.children[0].children[2].children = [];
@@ -211,13 +212,21 @@ Hud.prototype.renderRobotsView = function(){
     });  
     
     //Destroy the old view;
-    if(this.robotsWindow && !this.robotsWindow === {}){
+    if(this.robotsWindow && this.robotsWindow.destroy){
+        console.log("Destroying?");
         this.robotsWindow.destroy();
     }
     
     //Create the new view from the new edited template
     this.robotsWindow = EZGUI.create(this.templates.robots, this.theme);
 	this.robotsWindow.visible = false;
+	
+	//Add a click handler to each robot button
+	this.game.city.robots.forEach(function(robot, index){
+	    EZGUI.components['robot'+index+'Button'].on('click', function(event, me) {
+            self.currentRobotDetailView = {'robot':robot, 'index':index };
+        });
+	});
 };
 
 Hud.prototype.showRobotDetailView = function(){

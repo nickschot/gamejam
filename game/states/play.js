@@ -43,6 +43,8 @@
       var Hud = require('../gui/hud');
       this.currentGUI = new Hud(this.game, null, this.city);
       this.currentGUI.setupGUI();
+      
+      this.game.currentGUI = this.currentGUI;
     },
     update: function() {
       this.updates++;
