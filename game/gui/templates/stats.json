@@ -11,9 +11,9 @@
 	        id: 'statsLayout',
 	        component: 'Layout',
 	        layout: [1,10],
-	        width: 340,
+	        width: 200,
 	        height: 380,
-	        position: 'center',
+	        position: 'center left',
 	        children: [
 	            {
         	        text: 'Statistics',
@@ -25,29 +25,25 @@
         
         		    position: 'center',
         
-        		    width: 300,
+        		    width: 140,
         		    height: 40
         	    },
-            	{
-            		id: 'statsList',
-            		component: 'List',
-            		dragX:false,
-            		padding: 3,
-            		position: {x: 30, y: 0},
-            		width: 300,
-            		height: 310,
-            		layout: [null, 6],
-            		children: [
-            		    
-            		]
-            	}
+        	    null,
+    		    {
+	    			id: 'statsOverviewButton',
+	    			component: 'Button',
+	    			width:140,
+	    			height: 40,
+	    			position: 'center',
+	    			text: 'Overview'
+	    		}
         	]
 	    },
 	    {
 	        id: 'statsDetailLayout',
 	        component: 'Layout',
 	        layout: [1,10],
-	        width: 340,
+	        width: 500,
 	        height: 380,
 	        position: 'center',
 	        children: [
@@ -63,6 +59,17 @@
         
         		    width: 300,
         		    height: 40
+        	    },
+        	    {
+        	    	id: 'statsDetailContainer',
+        	    	component: 'Layout',
+        	    	layout: [2,10],
+        	    	width:480,
+        	    	height:340,
+        	    	position: 'center',
+        	    	children: [
+        	    		
+        	    		]
         	    }
     	    ]
 	    }

@@ -1,10 +1,10 @@
 'use strict';
 
-var Hud = function(game, robots, tech, stats) {
+var Hud = function(game, robots, tech, city) {
     this.game   = game;
     this.robots = robots;
     this.tech   = tech;
-    this.stats  = stats;
+    this.city   = city;
     
     this.templates          = {};
     this.templates.hud      = require('./templates/hud.json');
@@ -16,6 +16,7 @@ var Hud = function(game, robots, tech, stats) {
     this.hudWindow      = {};
     this.robotsWindow   = {};
     this.techWindow     = {};
+    this.statsWindow    = {};
     
     this.robotsList = [];
     
@@ -87,6 +88,7 @@ Hud.prototype.initBinds = function() {
 
 Hud.prototype.update = function(){
     this.showRobotDetailView();
+    this.updateStats();
 };
 
 Hud.prototype.hideWindows = function(){
@@ -163,7 +165,7 @@ Hud.prototype.renderRobotsView = function(){
 };
 
 Hud.prototype.showRobotDetailView = function(){
-    if(this.currentRobotDetailView.robot){
+    if(this.robotsWindow.visible && this.currentRobotDetailView.robot){
         var robot = this.currentRobotDetailView.robot;
         var index = this.currentRobotDetailView.index;
         
@@ -192,7 +194,7 @@ Hud.prototype.showRobotDetailView = function(){
         }
         
         header.text = 'Robot '+index;
-        inventoryStatus.text = inventoryCount + '/' + robot.maxCapacity;
+        inventoryStatus.text = inventoryCount + '/' + robot.getMaxCapacity();
     }
 };
 
@@ -205,5 +207,11 @@ Hud.prototype.renderStatsView = function(){
     this.statsWindow = EZGUI.create(this.templates.stats, this.theme);
 	this.statsWindow.visible = false;
 };
+
+Hud.prototype.updateStats = function(){
+    if(this.statsWindow.visible){
+        console.log('update stats');
+    }
+}
 
 module.exports = Hud;
