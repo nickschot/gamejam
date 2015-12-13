@@ -3,7 +3,7 @@
 var Utils = require('../utils');
 var TechTreeNode = require('./techTreeNode');
 
-var TechtreeModificationNode = function(name, desc, costs, affectedValue) {
+var TechtreeUnlockNode = function(name, desc, costs, affectedValue) {
     TechTreeNode.call(this, name, desc, costs);
     
     this.affectedValue = affectedValue;
@@ -11,10 +11,10 @@ var TechtreeModificationNode = function(name, desc, costs, affectedValue) {
     this.hasAchieved = false;
 }
 
-Utils.extend(TechTreeNode, TechtreeModificationNode);
+Utils.extend(TechTreeNode, TechtreeUnlockNode);
 
-TechtreeModificationNode.prototype.affects = function (value) {
+TechtreeUnlockNode.prototype.affects = function (value) {
     return value == this.affectedValue;
 }
 
-module.exports = TechtreeModificationNode;
+module.exports = TechtreeUnlockNode;

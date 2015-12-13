@@ -48,8 +48,10 @@ TechTree.prototype.getValueModification = function (affectedValue){
 TechTree.prototype.hasAchieved = function (unlock){
     var achieved = false;
     
-    for (var item in this.tree) {
+    for (var item of this.tree) {
+        console.log(item);
         if (item instanceof TechTreeUnlockNode && item.affects(unlock) && item.hasAchieved) {
+            console.log("Woei");
             achieved = true;
         }
     }

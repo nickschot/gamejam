@@ -8,6 +8,7 @@ var TechtreeModificationNode = function(name, desc, costs, affectedValue, additi
     
     this.affectedValue = affectedValue;
     this.addition = addition;
+    this.hasAchieved = true;
 }
 
 Utils.extend(TechTreeNode, TechtreeModificationNode);
