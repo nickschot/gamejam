@@ -35,7 +35,7 @@ Fog.prototype.update = function() {
             if(x==0 && y==0)
               self.map.removeTile(tilex,tiley);
             else {
-              tile.alpha -= 0.008*this.updatefreq/(Math.abs(x)+Math.abs(y));
+              tile.alpha -= 0.008*self.updatefreq/(Math.abs(x)+Math.abs(y));
               if(tile.alpha <= 0) {
                 self.map.removeTile(tilex-x,tiley-y);
               }
