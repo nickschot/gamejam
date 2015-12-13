@@ -95,7 +95,9 @@ Hud.prototype.initBinds = function() {
 	    var name = this.currentTechDetailView.tech.name;
 	    var city = this.game.city;
 	    
-	    this.tech.buyUpgrade(city, name);
+	    if(name && name !== ""){
+	        this.tech.buyUpgrade(city, name);
+	    }
 	});
 };
 
@@ -291,8 +293,6 @@ Hud.prototype.showTechDetailView = function(){
             EZGUI.components.techBoughtButton.visible = false;
             EZGUI.components.techBuyButton.visible = true;
         }
-        
-        //TOOD: handler for button
     }
 };
 
