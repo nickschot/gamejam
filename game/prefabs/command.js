@@ -1,7 +1,9 @@
+var EndState = require("../commandStates/endState");
+
 function Command (game, robot) {
     this.game = game;
     this.robot = robot;
-    this.state = null;
+    this.state = new EndState(this);
 }
 
 Command.prototype = Object.create(Object.prototype);
