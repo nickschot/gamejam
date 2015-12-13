@@ -22,6 +22,7 @@ var Hud = function(game, tech, stats) {
     this.robotsList = [];
     
     this.currentRobotDetailView = {};
+    this.currentTechDetailView  = {};
     
     this.theme = 'kenney';
 };
@@ -85,10 +86,18 @@ Hud.prototype.initBinds = function() {
             self.currentRobotDetailView = {robot, index};
         });
 	});
+	
+	this.tech.tree.forEach(function(tech, index){
+	    EZGUI.components[encodeURIComponent(tech.name)].on('click', function(event, me){
+	        console.log('Opening detailed view for tech '+tech.name);
+	        self.currentTechDetailView = {tech, index};
+	    });
+	});
 };
 
 Hud.prototype.update = function(){
     this.showRobotDetailView();
+    this.showTechDetailView();
     this.updateStats();
 };
 
@@ -231,6 +240,44 @@ Hud.prototype.updateTechView = function(){
         
         self.templates.tech.children[0].children[1].children.push(listItem);
     });
+};
+
+Hud.prototype.showTechDetailView = function(){
+    if(this.techWindow.visible && this.currentTechDetailView.tech){
+        var tech = this.currentTechDetailView.tech;
+        var index = this.currentTechDetailView.index;
+        
+        var header = EZGUI.components.techDetailHeader;
+        
+        header.text = 'Tech: '+tech.name;
+        
+        EZGUI.components.techDetailCosts.container.children = [];
+        EZGUI.components.techDetailCosts.addChild(EZGUI.create({
+            component: 'Label',
+            text: 'Costs:',
+            position: 'left',
+            width: 300,
+            height: 30,
+            font: {
+                size: '22px'
+            }
+        }, this.theme));
+        for (var key in tech.costs) {
+            if (tech.costs.hasOwnProperty(key)) {
+                
+                EZGUI.components.techDetailCosts.addChild(EZGUI.create({
+                    component: 'Label',
+                    width: 300,
+                    height: 30,
+                    position: 'left',
+                    text: key + ': ' + tech.costs[key],
+                    font: {
+                        size: '16px'
+                    }
+                }, this.theme));
+            }
+        }
+    }
 };
 
 Hud.prototype.renderStatsView = function(){

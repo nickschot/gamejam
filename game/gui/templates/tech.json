@@ -52,6 +52,7 @@
 	        position: 'center',
 	        children: [
 	            {
+	            	id: 'techDetailHeader',
         	        text: '[no tech selected]',
         		    font: {
         		        size: '24px',
@@ -63,6 +64,16 @@
         
         		    width: 300,
         		    height: 40
+        	    },
+        	    {
+        	    	id: 'techDetailCosts',
+        	    	component: 'Layout',
+        	    	position: {x:-100, y:0},
+        	    	width: 300,
+        	    	height: 200,
+        	    	layout: [1,5],
+        	    	children: [
+        	    		]
         	    }
     	    ]
 	    }
