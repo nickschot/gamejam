@@ -16,7 +16,9 @@
       
       var ResourceMap = require('../prefabs/resourceMap');
       this.game.resourceMap = new ResourceMap(this.game, 'Resource');
-     
+      
+      var TechTree = require("../prefabs/techTree");
+      this.game.techTree = new TechTree();
       
       var City = require("../prefabs/city");
       this.city = new City(this.game, this.game.map.widthInPixels/2+this.game.camera.width/2, this.game.map.heightInPixels/2+this.game.camera.height/2);
@@ -37,6 +39,10 @@
       
       this.robots[0].bringToTop();
        
+       
+      var Fog = require("../prefabs/fog");
+      this.fog = new Fog(this.game, 0, 0);
+      this.game.add.existing(this.fog); 
        
       
       //CREATE GUI LAST, MUST HAVE CORRECT REFERENCES

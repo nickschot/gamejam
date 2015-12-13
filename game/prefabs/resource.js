@@ -13,7 +13,7 @@ Resource.prototype = Object.create(Object.prototype);
 Resource.prototype.mine = function(robot) {
     var mineSpeed = this.tile.properties["mineSpeed"];
     var resourceCount = this.tile.properties["resourceCount"];
-    var mined = Math.min(mineSpeed, resourceCount, robot.getCapacity(this.tile.properties["resourceName"]));
+    var mined = Math.min(mineSpeed, resourceCount, robot.getCapacity());
     
     resourceCount -= mined;
     
