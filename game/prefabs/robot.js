@@ -11,6 +11,8 @@ function normalizeAngle(angle) {
   return result;
 }
 
+var MineCommand = require("../prefabs/mineCommand");
+
 var Robot = function(game, x, y, frame) {
   this.currentTile = {x: x, y: y};
   
@@ -31,11 +33,11 @@ var Robot = function(game, x, y, frame) {
   this.path = [];
   this.currentIndexInPath = 0;
   this.currentTarget = null;
-  
+  this.hasFailedPathing = false;
   this.hasFinishedPathing = true;
   
   // Commands
-  this.command = null;
+  this.command = new MineCommand(this.game, this, 'iron');
   
   // Home city TODO
   this.city = null;
@@ -48,7 +50,7 @@ var Robot = function(game, x, y, frame) {
     'stone': 0
   }
   
-  this.maxCapacity = 10;
+  this.maxCapacity = 100;
 };
 
 Robot.prototype = Object.create(Phaser.Sprite.prototype);
@@ -109,6 +111,9 @@ Robot.prototype.moveToCurrentTarget = function() {
 
 Robot.prototype.updatePath = function () {
     if (!this.path) return;
+    
+    // Update current tile.
+    this.currentTile = new Phaser.Point(this.path[this.currentIndex].x, this.path[this.currentIndex].y);
 
     this.currentIndex++;
     
@@ -127,10 +132,11 @@ Robot.prototype.setCurrentTargetForTile = function (tileX, tileY) {
 
 
 Robot.prototype.setDestination = function(x, y) {
-  return this.setDestinationPoint({x: x, y: y});
+  this.setDestinationPoint({x: x, y: y});
 };
 
 Robot.prototype.setDestinationPoint = function(destination) {
+  this.hasFailedPathing = false;
   this.hasFinishedPathing = false;
 
   this.currentDestination = destination;
@@ -142,8 +148,8 @@ Robot.prototype.setDestinationPoint = function(destination) {
   this.easyStar.findPath(this.currentTile.x, this.currentTile.y, this.currentDestination.x, this.currentDestination.y, (function( path ) {
       if (path === null) {
           console.log("No path!");
+          this.hasFailedPathing = true;
           this.path = [];
-          return false;
       } else {
           this.path = path;
           this.currentIndex = 0;
@@ -151,7 +157,6 @@ Robot.prototype.setDestinationPoint = function(destination) {
           console.log("I found a path!");
           
           this.updatePath();
-          return true;
       }
   }).bind(this));
   

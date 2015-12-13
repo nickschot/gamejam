@@ -7,6 +7,8 @@ var States = {
     End : -1,
 };
 
+var Command = require("./command");
+var Utils = require("../utils");
 
 function MineCommand (game, robot, resourceType) {
     Command.call(this, game, robot);
@@ -21,9 +23,7 @@ function MineCommand (game, robot, resourceType) {
     this.resource = null;
 }
 
-var Utils = require("../utils");
-
-MineCommand.prototype = Utils.extend(Command, MineCommand);
+Utils.extend(Command, MineCommand);
 
 MineCommand.prototype.update = function () {
     if(this.state == States.City) {
@@ -36,41 +36,45 @@ MineCommand.prototype.update = function () {
         this.resource = this.game.resourceMap.getClosestResourceByType(this.robot.currentTile.x, this.robot.currentTile.y, this.resourceType);
         
         if (this.resource) {
-            var foundPath = this.robot.setDestination(this.resource.x, this.resource.y);
-            if(foundPath) {
-                this.state = States.DriveToNode;
-            } else {
-                this.state = States.End;
-            }
+            this.robot.setDestination(this.resource.tile.x, this.resource.tile.y);
+            this.state = States.DriveToNode;
         } else {
             console.log("Could not find node :(");
             this.state = States.End;
         }
     } else if(this.state == States.DriveToNode) {
-        if (this.robot.hasFinishedPathing) {
+        if (this.robot.hasFailedPathing) {
+            console.log("Could not find path to node :(");
+            this.state = States.End;
+        } else if (this.robot.hasFinishedPathing) {
             this.state = States.Mining;
         }
     } else if(this.state == States.Mining) {
         this.resource.mine(this.robot);
         
-        if (this.resource.isDepleted() && !this.robot.isFullResource(this.resource["resourceName"])) {
+        if (this.resource.isDepleted() && !this.robot.isFull()) {
             this.state = States.FindNode;
-        } else if (this.resource.isDepleted()) {
+        } else if (this.robot.isFull()) {
             this.goToAirlock();
         }
         
     } else if(this.state == States.Airlock) {
-        if(this.hasFinishedPathing) {
+        if (this.robot.hasFailedPathing) {
+            console.log("Could not find path to airlock :(");
+            this.state = States.End;
+        } else if(this.hasFinishedPathing) {
             if(this.airlockTimer > 0) {
                 this.airlockTimer--;
             } else {
                 this.state = States.City;
             }
         }
+    } else if(this.state == States.End) {
+        // End state
     } else {
         console.error("Invalid state " + this.state + " for " + this);
     }
-    
+    console.log("State " + this.state + " for " + this);
 }
 
 MineCommand.prototype.isFinished = function () {
@@ -79,13 +83,9 @@ MineCommand.prototype.isFinished = function () {
 
 MineCommand.prototype.goToAirlock = function () {
     console.error("mineCommand.goToAirlock is nog niet af");
-    var foundPath = this.robot.setDestination(this.airlock.position);
-    if(foundPath) {
-        this.state = States.Airlock;
-        this.airlockTimer = 120; // TODO Get airlocktime from Game.
-    } else {
-        this.state = States.End;
-    }
+    this.robot.setDestinationPoint(this.airlock.position);
+    this.state = States.Airlock;
+    this.airlockTimer = 120; // TODO Get airlocktime from Game.
 }
 
 module.exports = MineCommand;
