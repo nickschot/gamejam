@@ -1,10 +1,9 @@
 'use strict';
 
-var Hud = function(game, robots, tech, city) {
+var Hud = function(game, tech, stats) {
     this.game   = game;
-    this.robots = robots;
     this.tech   = tech;
-    this.city   = city;
+    this.city   = game.city;
     
     this.templates          = {};
     this.templates.hud      = require('./templates/hud.json');
@@ -78,7 +77,7 @@ Hud.prototype.initBinds = function() {
     });
 	
 	//Add a click handler to each robot button
-	this.robots.forEach(function(robot, index){
+	this.game.city.robots.forEach(function(robot, index){
 	    EZGUI.components['robot'+index+'Button'].on('click', function(event, me) {
             console.log('Opening detailed view for robot '+index);
             self.currentRobotDetailView = {robot, index};
@@ -109,7 +108,7 @@ Hud.prototype.renderRobotsView = function(){
     
     //Empty the list of robots and add all current robots to the template
     this.templates.robots.children[0].children[1].children = [];
-	this.robots.forEach(function(robot, index){
+	this.game.city.robots.forEach(function(robot, index){
         var currentElem = {   
             id: 'robot'+index+'Entry',
             component: 'Layout',

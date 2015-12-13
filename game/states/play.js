@@ -14,6 +14,8 @@
 
       this.initWorld();
       
+      console.log(this.game);
+      
       var ResourceMap = require('../prefabs/resourceMap');
       this.game.resourceMap = new ResourceMap(this.game, 'Resource');
       
@@ -21,10 +23,8 @@
       this.game.techTree = new TechTree();
       
       var City = require("../prefabs/city");
-      this.city = new City(this.game, this.game.map.widthInPixels/2+this.game.camera.width/2, this.game.map.heightInPixels/2+this.game.camera.height/2);
-      this.game.city = this.city;
-      
-      this.initRobot();
+      this.game.city = new City(this.game, this.game.map.widthInPixels/2+this.game.camera.width/2, this.game.map.heightInPixels/2+this.game.camera.height/2);
+      this.game.city.initRobot();
       
       //Set camera to middle of map
       this.game.camera.x = this.game.map.widthInPixels/2;
@@ -35,8 +35,6 @@
   
       //move player with cursor keys
       this.cursors = this.game.input.keyboard.createCursorKeys();
-      
-      this.robots[0].bringToTop();
        
        
       var Fog = require("../prefabs/fog");
@@ -46,7 +44,7 @@
       
       //CREATE GUI LAST, MUST HAVE CORRECT REFERENCES
       var Hud = require('../gui/hud');
-      this.currentGUI = new Hud(this.game, this.robots, null, this.city);
+      this.currentGUI = new Hud(this.game, null, this.city);
       this.currentGUI.setupGUI();
     },
     update: function() {
@@ -137,19 +135,6 @@
       //resizes the game world to match the layer dimensions
       this.backgroundlayer.resizeWorld();
     },
-    
-    initRobot: function(){
-      this.robots = [];
-      this.game.robots = this.robots;
-      this.addRobot();
-    },
-    
-    addRobot: function(){
-      var Robot = require("../prefabs/robot");
-      var robot = new Robot(this.game, 53, 68);
-      this.robots.push(robot);
-      this.game.add.existing(robot);
-    }
   };
   
   module.exports = Play;

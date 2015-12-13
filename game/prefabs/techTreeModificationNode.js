@@ -15,7 +15,6 @@ var TechtreeModificationNode = function(name, desc, costs, affectedValue, additi
 Utils.extend(TechTreeNode, TechtreeModificationNode);
 
 TechtreeModificationNode.prototype.affects = function (value) {
-    console.log("Value: " + value + " , AffectedValue: " + this.affectedValue);
     return value == this.affectedValue;
 }
 

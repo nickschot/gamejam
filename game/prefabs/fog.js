@@ -24,7 +24,7 @@ Fog.prototype.update = function() {
   this.updates++;
   if(this.updates%4==0) {
     var self = this;
-    this.game.robots.forEach(function(robot) {
+    this.game.city.robots.forEach(function(robot) {
       var tilex = Math.floor(robot.position.x/self.game.map.tileWidth)
       var tiley = Math.floor(robot.position.y/self.game.map.tileHeight)
       for(var x = -2; x <= 2; x++) {

@@ -36,15 +36,11 @@ TechTree.prototype.getValueModification = function (affectedValue){
     var mod = 0;
     
     for (var item of this.tree) {
-        console.log(item instanceof TechTreeModificationNode && item.affects(affectedValue));
         if (item instanceof TechTreeModificationNode && item.affects(affectedValue) && item.hasAchieved) {
             
             mod += item.getModificaton();
         }
     }
-    
-    
-    console.log("getting mod for " + affectedValue + ", it was: " + mod);
     
     return mod;
 }
@@ -59,6 +55,42 @@ TechTree.prototype.hasAchieved = function (unlock){
     }
     
     return achieved;
+}
+
+TechTree.prototype.buyUpgrade = function (city, upgradeName) {
+    // Buying an upgrade you already have is silly
+    if (res.hasAchieved) return true;
+    
+    var res = null;
+    
+    // First check if this actually an upgrade
+    for (var obj of this.tree) {
+        if (obj.name == upgradeName) {
+            res = obj;
+        }
+    }
+    
+    if (!res) return false;
+    
+    // Then check if you can actually buy this upgrade
+    var canBuy = true;
+    
+    for (var key in res.costs) {
+        if (res.hasOwnProperty(key) && city.storage[key] < res.costs[key]) {
+            canBuy = false;
+        }
+    }
+    
+    if (!canBuy) return false;
+    
+    // We've check everything, go buy
+    for (var key in res.costs) {
+        if (res.hasOwnProperty(key)) {
+            city.storage[key] -= res.costs[key];
+        }
+    }
+    
+    res.hasAchieved = true;
 }
 
 

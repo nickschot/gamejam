@@ -1,6 +1,10 @@
 'use strict';
 
+
+var Robot = require("../prefabs/robot");
+  
 var City = function(game, x, y, frame) {
+  this.game = game;
   
   this.storage = {
     'glass': 0,
@@ -11,8 +15,7 @@ var City = function(game, x, y, frame) {
   };
   
   // TODO FInd airlock
-  this.airlock = {'position': new Phaser.Point(53,66)};  
-
+  this.airlock = {'position': new Phaser.Point(53,66)}; 
   // initialize your prefab here
   
 };
@@ -36,6 +39,30 @@ City.prototype.transferResource = function (robot) {
     }
   }
 };
+
+City.prototype.buyRobot = function () {
+  if (this.game.techTree.hasAchieved('RobotFactory')) {
+    if (this.storage["iron"] >= 500 && this.storage["plastic"] >= 500) {
+      this.storage["iron"] -= 500;
+      this.storage["plastic"] -= 500;
+      
+      this.addRobot();
+    }
+  }
+}
+
+
+    
+City.prototype.initRobot = function(){
+  this.robots = [];
+  this.addRobot();
+};
+    
+City.prototype.addRobot = function () {
+  var robot = new Robot(this.game, 53, 68);
+  this.robots.push(robot);
+  this.game.add.existing(robot);
+}
 
 
 module.exports = City;

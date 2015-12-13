@@ -40,6 +40,8 @@ ResourceMap.prototype.getClosestResourceByType = function (tileX, tileY, type) {
     typeList.forEach(function (item) {
         var dist = Math.sqrt(Math.pow(item.tile.x - tileX, 2) + Math.pow(item.tile.y - tileY, 2));
         
+        dist += Math.random() * 5;
+        
         
         if (resDist == -1 || dist < resDist) {
             res = item;
@@ -55,9 +57,6 @@ ResourceMap.prototype.removeDepletedResource = function (tile, type) {
     
     var index = -1;
     
-    
-    console.log("De lengte: " + typeList.length);
-    
     typeList.forEach((function (item, i) {
         if (item.tile == tile) {
             this.game.map.removeTile(tile.x,  tile.y, this.layerName);
@@ -69,8 +68,6 @@ ResourceMap.prototype.removeDepletedResource = function (tile, type) {
     if (index > -1) {
         typeList.splice(index, 1);
     }
-    
-    console.log("En nu is de lengte: " + typeList.length);
 }
 
 
