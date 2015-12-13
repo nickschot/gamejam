@@ -209,7 +209,53 @@ Hud.prototype.renderStatsView = function(){
 
 Hud.prototype.updateStats = function(){
     if(this.statsWindow.visible){
-        console.log('update stats');
+        var self = this;
+        var resources = this.city.storage;
+        
+        //Remove current stats
+        EZGUI.components.statsDetailLayout.container.children = [];
+        
+        //Amount of robots
+        var robotStats = EZGUI.create({
+                    component: 'Label',
+                    text: 'robots: ' + self.robotsList.length,
+                    width: 310,
+                    height: 40,
+                    position: {x:0, y:0}
+                }, this.theme);
+                
+        //Add two empty elements and the robot stats
+        EZGUI.components.statsDetailLayout.addChild(EZGUI.create({component: 'Label', position: {x:0,y:0}}, this.theme));
+        EZGUI.components.statsDetailLayout.addChild(robotStats);
+        EZGUI.components.statsDetailLayout.addChild(EZGUI.create({component: 'Label', position: {x:0,y:0}}, this.theme));
+        EZGUI.components.statsDetailLayout.addChild(EZGUI.create({
+            component: 'Label', 
+            text: 'Resources', 
+            position: 'center',
+            width: 300,
+            height: 40,
+            font: {
+		        size: '24px',
+		        family: 'Arial'
+		    }
+        }, this.theme));
+        
+        //Add city resources
+        var keyIndex = 0;
+        for (var key in resources) {
+            if (resources.hasOwnProperty(key)) {
+                var invItem = EZGUI.create({
+                    component: 'Label',
+                    text: key + ': ' + resources[key],
+                    width: 310,
+                    height: 40,
+                    position: {x:0, y:0}
+                }, this.theme);
+                
+                EZGUI.components.statsDetailLayout.addChild(invItem);
+            }
+            keyIndex++;
+        }
     }
 }
 

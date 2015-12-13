@@ -2,8 +2,8 @@
     id: 'statsWindow',
 	component: 'Window',	
 	padding: 10,
-	position: {x: 50, y: 50},
-	width: 700,
+	position: {x: 225, y: 50},
+	width: 350,
 	height: 400,
 	layout: [2, 1],
 	children: [
@@ -11,7 +11,7 @@
 	        id: 'statsLayout',
 	        component: 'Layout',
 	        layout: [1,10],
-	        width: 200,
+	        width: 310,
 	        height: 380,
 	        position: 'center left',
 	        children: [
@@ -22,56 +22,21 @@
         		        family: 'Arial'
         		    },
         		    component: 'Label',
-        
         		    position: 'center',
-        
-        		    width: 140,
+        		    width: 310,
         		    height: 40
         	    },
-        	    null,
     		    {
-	    			id: 'statsOverviewButton',
-	    			component: 'Button',
-	    			width:140,
-	    			height: 40,
-	    			position: 'center',
-	    			text: 'Overview'
-	    		}
+			        id: 'statsDetailLayout',
+			        component: 'Layout',
+			        layout: [1,10],
+			        width: 310,
+			        height: 340,
+			        position: 'top center',
+			        children: [
+		    	    ]
+			    }
         	]
-	    },
-	    {
-	        id: 'statsDetailLayout',
-	        component: 'Layout',
-	        layout: [1,10],
-	        width: 500,
-	        height: 380,
-	        position: 'center',
-	        children: [
-	            {
-        	        text: '[no stats selected]',
-        		    font: {
-        		        size: '24px',
-        		        family: 'Arial'
-        		    },
-        		    component: 'Label',
-        
-        		    position: 'center',
-        
-        		    width: 300,
-        		    height: 40
-        	    },
-        	    {
-        	    	id: 'statsDetailContainer',
-        	    	component: 'Layout',
-        	    	layout: [2,10],
-        	    	width:480,
-        	    	height:340,
-        	    	position: 'center',
-        	    	children: [
-        	    		
-        	    		]
-        	    }
-    	    ]
 	    }
 	]
 }
