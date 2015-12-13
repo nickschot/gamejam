@@ -2,8 +2,10 @@
 
 var Hud = function(game, tech, stats) {
     this.game   = game;
-    this.tech   = tech;
+    this.tech   = game.techTree;
     this.city   = game.city;
+    
+    console.log(this.tech);
     
     this.templates          = {};
     this.templates.hud      = require('./templates/hud.json');
@@ -198,8 +200,37 @@ Hud.prototype.showRobotDetailView = function(){
 };
 
 Hud.prototype.renderTechView = function(){
+	this.updateTechView();
+	
     this.techWindow = EZGUI.create(this.templates.tech, this.theme);
 	this.techWindow.visible = false;
+};
+
+Hud.prototype.updateTechView = function(){
+    var self = this;
+    var techTree = this.tech.tree;
+    
+    this.templates.tech.children[0].children[1].children = [];
+    
+    techTree.forEach(function(tech, index){
+        var listItem = {
+            id: encodeURIComponent(tech.name),
+            component: 'Button',
+            text: tech.name,
+            width: 280,
+            height: 50,
+            position: 'center'
+        };
+        
+        if(tech.hasAchieved){
+            listItem.component = 'Header';
+            listItem.font = {
+                color: '#888'
+            };
+        }
+        
+        self.templates.tech.children[0].children[1].children.push(listItem);
+    });
 };
 
 Hud.prototype.renderStatsView = function(){
