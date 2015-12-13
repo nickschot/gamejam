@@ -98,9 +98,8 @@ Hud.prototype.initBinds = function() {
 	    if(name && name !== ""){
 	        var didBuy = self.tech.buyUpgrade(city, name);
 	        if(didBuy){
-	            //hide buy button
-	            EZGUI.components.techBoughtButton.visible = true;
-                EZGUI.components.techBuyButton.visible = false;
+	            //Update buy button
+	            self.showTechDetailView();
 	        }
 	    }
 	});
