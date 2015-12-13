@@ -15,7 +15,7 @@ function MineCommand (game, robot, resourceType) {
     
     this.resourceType = resourceType;
     
-    this.airlock = this.robot.city.airlock;
+    this.airlock = this.game.city.airlock;
     this.airlockTimer = 0;
     
     this.resource = null;

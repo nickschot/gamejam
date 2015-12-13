@@ -37,6 +37,9 @@ var Robot = function(game, x, y, frame) {
   // Commands
   this.command = null;
   
+  // Home city TODO
+  this.city = null;
+  
   this.inventory = {
     'glass': 0,
     'iron': 0,
@@ -174,7 +177,7 @@ Robot.prototype.resourceCount = function () {
   }
   
   return count;
-}
+};
   
 Robot.prototype.getCapacity = function () {
   return Math.max(this.resourceCount() - this.capacity, 0);
@@ -190,7 +193,7 @@ Robot.prototype.isFull = function () {
 
 Robot.prototype.isEmpty = function () {
   return this.resourceCount() == 0;
-}
+};
 
 Robot.prototype.removeResource = function (type, count) {
   this.inventory["resource"] -= count;

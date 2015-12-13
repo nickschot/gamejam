@@ -23,7 +23,9 @@ var City = function(game, x, y, frame) {
     'plastic': 0,
     'stone': 0
   }
-    
+  
+  // TODO FInd airlock
+  this.airlock = null;  
   
 
   // initialize your prefab here
