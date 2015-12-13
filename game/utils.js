@@ -1,3 +1,7 @@
+var mineCommand = require("../prefabs/mineCommand");
+var offCommand = require("../prefabs/offCommand");
+var exploreCommand = require("../prefabs/exploreCommand");
+
 // From http://stackoverflow.com/a/4389429
 function extend(base, sub) {
   // Avoid instantiating the base class just to setup inheritance
@@ -40,3 +44,33 @@ module.exports = {
     tileMidToPixes: tileMidToPixes,
     pixelsToTile: pixelsToTile,
 };
+
+function bitsToCommand(game, robot, bits){
+  if (bits.length < 3){
+    if (bits.length == 2) {
+      bits = bits + "0";
+    }
+    else {
+      bits = bits + "00";
+    }
+  }
+  switch (bits) {
+  case "000":
+      return new offCommand(game, robot);
+  case "001":
+    return new mineCommand(game, robot, "lead");
+  case "010":
+      return new mineCommand(game, robot, "plastic");
+  case "011":
+      return new mineCommand(game, robot, "glass");
+  case "100":
+      return new mineCommand(game, robot, "iron");
+  case "101":
+      return new exploreCommand(game, robot);
+  case "110":
+      return new mineCommand(game, robot, "stone");
+  case "111":
+    console.log("Jippie, you've discovered the lazy mode :)");
+    break;
+  } 
+}
