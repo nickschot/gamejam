@@ -57,12 +57,12 @@ Hud.prototype.initBinds = function() {
         var visible = !self.robotsWindow.visible;
         self.hideWindows();
         self.robotsWindow.visible = visible;
+        self.currentRobotDetailView = {'robot':self.game.city.robots[0], 'index':0 };
     });
     EZGUI.components.techButton.on('click', function(event, me) {
         var visible = !self.techWindow.visible;
         self.hideWindows();
         self.techWindow.visible = visible;
-        self.currentRobotDetailView = {'robot':self.game.city.robots[0], 'index':0 };
     });
     EZGUI.components.statsButton.on('click', function(event, me) {
         var visible = !self.statsWindow.visible;
