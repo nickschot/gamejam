@@ -5,6 +5,7 @@ var Fog = function(game, x, y, frame) {
   this.fogTiles = []
   this.game = game;
   this.updates = 0;
+  this.updatefreq=4;
   this.map = game.add.tilemap();
   this.map.addTilesetImage('fog');
   this.fogLayer = this.map.create('fog', this.game.map.width, this.game.map.height, this.game.map.tileWidth, this.game.map.tileHeight);
@@ -22,7 +23,7 @@ Fog.prototype.constructor = Fog;
 
 Fog.prototype.update = function() {
   this.updates++;
-  if(this.updates%4==0) {
+  if(this.updates%this.updatefreq==0) {
     var self = this;
     this.game.city.robots.forEach(function(robot) {
       var tilex = Math.floor(robot.position.x/self.game.map.tileWidth)
@@ -34,7 +35,7 @@ Fog.prototype.update = function() {
             if(x==0 && y==0)
               self.map.removeTile(tilex,tiley);
             else {
-              tile.alpha -= 0.008/(Math.abs(x)+Math.abs(y));
+              tile.alpha -= 0.008*self.updatefreq/(Math.abs(x)+Math.abs(y));
               if(tile.alpha <= 0) {
                 self.map.removeTile(tilex-x,tiley-y);
               }

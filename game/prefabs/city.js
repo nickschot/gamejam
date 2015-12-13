@@ -5,6 +5,7 @@ var Robot = require("../prefabs/robot");
   
 var City = function(game, x, y, frame) {
   this.game = game;
+  this.position = new Phaser.Point(x, y);
   
   this.storage = {
     'glass': 0,
