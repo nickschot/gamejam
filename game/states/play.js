@@ -27,8 +27,8 @@
       this.game.city.initRobot();
       
       //Set camera to middle of map
-      this.game.camera.x = this.game.map.widthInPixels/2;
-      this.game.camera.y = this.game.map.heightInPixels/2;
+      this.game.camera.x = this.game.map.widthInPixels/2 - this.game.camera.width/2;
+      this.game.camera.y = this.game.map.heightInPixels/2 - this.game.camera.height/2;
       
       //Set cameraspeed
       this.cameraSpeed = 10;
