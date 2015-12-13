@@ -226,7 +226,11 @@ Hud.prototype.renderRobotsView = function(){
 	this.game.city.robots.forEach(function(robot, index){
 	    EZGUI.components['robot'+index+'Button'].on('click', function(event, me) {
             self.currentRobotDetailView = {'robot':robot, 'index':index };
+            
+            console.log("clickyclick on " + index);
         });
+        
+        console.log("creating new handler for robot: " + index);
 	});
 };
 
