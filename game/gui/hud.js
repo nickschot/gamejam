@@ -137,6 +137,7 @@ Hud.prototype.initBinds = function() {
 	    if (self.game.city.buyRobot()) {
             console.log("HOI");
             self.renderRobotsView();
+            self.robotsWindow.visible = true;
 	    }
 	});
 };
