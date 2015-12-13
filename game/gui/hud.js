@@ -114,7 +114,6 @@ Hud.prototype.initBinds = function() {
 	    
 	    text = text.substring(text.length - bits, text.length);
 	    
-	    console.log(text);
 	    
 	    EZGUI.components.robotProgramCurrentLabel.text = text;
 	    
@@ -130,15 +129,15 @@ Hud.prototype.initBinds = function() {
 	    
 	    text = text.substring(text.length - bits, text.length);
 	    
-	    
-	    console.log(text);
-	    
 	    EZGUI.components.robotProgramCurrentLabel.text = text;
 	});
 	
 	EZGUI.components.robotProgramSubmitButton.on('click', function (event, me) {
-	    console.log("Setting command to: " + EZGUI.components.robotProgramCurrentLabel.text);
 	    self.currentRobotDetailView.robot.changeCommand(EZGUI.components.robotProgramCurrentLabel.text);
+	});
+	
+	EZGUI.components.robotBuy.on('click', function (event, me) {
+	    self.game.city.buyRobot();
 	});
 };
 
