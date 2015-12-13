@@ -60,7 +60,7 @@ City.prototype.initRobot = function(){
 };
     
 City.prototype.addRobot = function () {
-  var robot = new Robot(this.game, 53, 68);
+  var robot = new Robot(this.game, 64, 64);
   this.robots.push(robot);
   this.game.add.existing(robot);
 }

@@ -14,8 +14,6 @@
 
       this.initWorld();
       
-      console.log(this.game);
-      
       var ResourceMap = require('../prefabs/resourceMap');
       this.game.resourceMap = new ResourceMap(this.game, 'Resource');
       
