@@ -17,4 +17,8 @@ You can code your robot by giving the robot bits, either one or zero. If you don
 * 011 - Mine glass (only doable with three bits)
 
 ## How to expand
-You can expand your army of world-rescuring robots by building a Robot Factory and then buying more robots. A robot cost 500 iron and 500 plastic.
+You can expand your army of world-rescuring robots by unlocking the Robot Factory and then buying more robots. A robot cost 500 iron and 500 plastic.
+You can unlock more features in the tech tree, such as more bits (called commands), more storage for your robots and more drive speed for your robots.
+
+## Controls
+In the tech tree and when you have enough robots you can scroll through the list by dragging.
