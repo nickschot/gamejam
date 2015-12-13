@@ -32,15 +32,14 @@
       
       //Set cameraspeed
       this.cameraSpeed = 10;
+      
+      //Update frequency settings;
+      this.updates = 0;
+      this.fogUpdateSkip = 4;
   
       //move player with cursor keys
       this.cursors = this.game.input.keyboard.createCursorKeys();
-       
-       
-      var Fog = require("../prefabs/fog");
-      this.fog = new Fog(this.game, 0, 0);
-      this.game.add.existing(this.fog); 
-       
+      
       
       //CREATE GUI LAST, MUST HAVE CORRECT REFERENCES
       var Hud = require('../gui/hud');
@@ -48,6 +47,7 @@
       this.currentGUI.setupGUI();
     },
     update: function() {
+      this.updates++;
       if (this.cursors.up.isDown){
         this.game.camera.y -= this.cameraSpeed;
       }else if (this.cursors.down.isDown){
@@ -60,6 +60,8 @@
       }
       
       this.edgeScroll();
+      
+      this.fogUpdate();
 
       this.currentGUI.update();
     },
@@ -96,6 +98,33 @@
       }
     },
     
+    fogUpdate: function() {
+      
+      if(this.updates%this.fogUpdateSkip==0) {
+        var self = this;
+        this.game.city.robots.forEach(function(robot) {
+          var tilex = Math.floor(robot.position.x/self.game.map.tileWidth)
+          var tiley = Math.floor(robot.position.y/self.game.map.tileHeight)
+          for(var x = -2; x <= 2; x++) {
+            for(var y = -2; y<= 2; y++) {
+              var tile = self.game.map.getTile(tilex-x,tiley-y,'fog');
+              if(tile != null) {
+                if(x==0 && y==0)
+                  self.game.map.removeTile(tilex,tiley,'fog');
+                else {
+                  tile.alpha -= 0.008*self.fogUpdateSkip/(Math.abs(x)+Math.abs(y));
+                  if(tile.alpha <= 0) {
+                    self.game.map.removeTile(tilex-x,tiley-y,'fog');
+                  }
+                  self.fogLayer.dirty=true;
+                }
+              }
+            }
+          }
+        });
+      }
+    },
+    
     initWorld: function(){
       this.game.TILESIZE = 32;
       
@@ -115,6 +144,7 @@
 
       this.collisionLayer = this.game.map.createLayer('Collision');
       this.resourceLayer = this.game.map.createLayer('Resource');
+      this.fogLayer = this.game.map.createLayer('fog');
       
       
       this.game.collisionData = new Array(this.game.map.width);
