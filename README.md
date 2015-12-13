@@ -21,4 +21,4 @@ You can expand your army of world-rescuring robots by unlocking the Robot Factor
 You can unlock more features in the tech tree, such as more bits (called commands), more storage for your robots and more drive speed for your robots.
 
 ## Controls
-In the tech tree and when you have enough robots you can scroll through the list by dragging.
+In the tech tree and when you have enough robots you can scroll through the list by dragging with the mouse.
