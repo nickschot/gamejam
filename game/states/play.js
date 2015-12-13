@@ -80,15 +80,15 @@
         var y = this.game.input.mousePointer.y;
         
         if(x < deadzone){
-          this.game.camera.x -= this.cameraSpeed;
+          this.game.camera.x -= this.cameraSpeed*Math.min((deadzone-x)/deadzone*1.5,1);
         }else if(x > width - deadzone){
-          this.game.camera.x += this.cameraSpeed;
+          this.game.camera.x += this.cameraSpeed*Math.min((x-width+deadzone)/deadzone*1.5,1);
         }
         
         if(y < deadzone){
-          this.game.camera.y -= this.cameraSpeed;
+          this.game.camera.y -= this.cameraSpeed*Math.min((deadzone-y)/deadzone*1.5,1);
         } else if(y > height - deadzone){
-          this.game.camera.y += this.cameraSpeed;
+          this.game.camera.y += this.cameraSpeed*Math.min((y-height+deadzone)/deadzone*1.5,1);
         }
       }
     },
