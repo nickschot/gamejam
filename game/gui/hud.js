@@ -85,7 +85,7 @@ Hud.prototype.initBinds = function() {
 	
 	this.tech.tree.forEach(function(tech, index){
 	    EZGUI.components[encodeURIComponent(tech.name)].on('click', function(event, me){
-	        self.currentRobotDetailView = {'tech':tech, 'index':index };
+	        self.currentTechDetailView = {'tech':tech, 'index':index };
 	        
             self.showTechDetailView();
 	    });
