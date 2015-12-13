@@ -152,14 +152,31 @@
       for (var y = 0; y < this.game.map.height; y++) {
         var row = new Array(this.game.map.width);
         for (var x = 0; x < this.game.map.width; x++) {
-          if (this.game.map.getTile(x, y, this.game.map.getLayer('Collision'))) {
+          if (this.game.map.getTile(x, y, 'Collision')) {
             row[x] = 1;
           } else {
             row[x] = 0;
           }
+          // Set default fog alpha
+          this.game.map.getTile(x, y, 'fog').alpha = 0.9;
         }
         
         this.game.collisionData[y] = row;
+      }
+      
+      // Remove some fog initially.
+      var center = 63.5;
+      var citysize = 2.5;
+      var extrafog = 2;
+      for (var x = -citysize-extrafog; x <= citysize+extrafog; x++) {
+        for (var y = -citysize-extrafog; y <= citysize+extrafog; y++) {
+          var sx = Math.floor(center-x);
+          var sy = Math.floor(center-y);
+          if(x >= -citysize && x <= citysize && y >= -citysize && y <= citysize)
+            this.game.map.removeTile(sx,sy,'fog');
+          else 
+            this.game.map.getTile(sx, sy, 'fog').alpha = Math.max(Math.abs(x)-citysize,Math.abs(y)-citysize)*0.3;
+        }
       }
   
       //resizes the game world to match the layer dimensions
