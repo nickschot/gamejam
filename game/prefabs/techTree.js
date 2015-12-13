@@ -59,9 +59,6 @@ TechTree.prototype.hasAchieved = function (unlock){
 
 TechTree.prototype.buyUpgrade = function (city, upgradeName) {
     var res = null;
-        
-    // Buying an upgrade you already have is silly
-    if (res.hasAchieved) return true;
     
     // First check if this actually an upgrade
     for (var obj of this.tree) {
@@ -70,9 +67,9 @@ TechTree.prototype.buyUpgrade = function (city, upgradeName) {
         }
     }
     
-    if (!res) return false;
-    
+    // Buying an upgrade you already have is silly
     // Then check if you can actually buy this upgrade
+    if (!res || res.hasAchieved) return true;
     var canBuy = true;
     
     for (var key in res.costs) {
@@ -91,6 +88,8 @@ TechTree.prototype.buyUpgrade = function (city, upgradeName) {
     }
     
     res.hasAchieved = true;
+    
+    return true;
 }
 
 
