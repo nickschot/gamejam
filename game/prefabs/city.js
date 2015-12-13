@@ -16,7 +16,7 @@ var City = function(game, x, y, frame) {
   };
   
   // TODO FInd airlock
-  this.airlock = {'position': new Phaser.Point(53,66)}; 
+  this.airlock = {'position': new Phaser.Point(61,64)};
   // initialize your prefab here
   
 };

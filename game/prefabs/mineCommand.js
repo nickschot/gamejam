@@ -9,13 +9,11 @@ var FindNodeState = require("../commandStates/findNodeState");
 function MineCommand (game, robot, resourceType) {
     Command.call(this, game, robot);
 
-    this.state = new FindNodeState(this);
-    
     this.resourceType = resourceType;
-    
+    this.resource = null;
     this.airlock = this.game.city.airlock;
 
-    this.resource = null;
+    this.goState(new FindNodeState(this));
 }
 
 Utils.extend(Command, MineCommand);
