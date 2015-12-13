@@ -49,19 +49,19 @@ function bitsToCommand(game, robot, bits){
   }
   switch (bits) {
   case "000":
-      return new offCommand(game, robot);
+      return new OffCommand(game, robot);
   case "001":
-    return new mineCommand(game, robot, "lead");
+    return new MineCommand(game, robot, "lead");
   case "010":
-      return new mineCommand(game, robot, "plastic");
+      return new MineCommand(game, robot, "plastic");
   case "011":
-      return new mineCommand(game, robot, "glass");
+      return new MineCommand(game, robot, "glass");
   case "100":
-      return new mineCommand(game, robot, "iron");
+      return new MineCommand(game, robot, "iron");
   case "101":
-      return new exploreCommand(game, robot);
+      return new ExploreCommand(game, robot);
   case "110":
-      return new mineCommand(game, robot, "stone");
+      return new MineCommand(game, robot, "stone");
   case "111":
     console.log("Jippie, you've discovered the lazy mode :)");
     break;
