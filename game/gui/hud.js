@@ -91,13 +91,14 @@ Hud.prototype.initBinds = function() {
 	    EZGUI.components[encodeURIComponent(tech.name)].on('click', function(event, me){
 	        console.log('Opening detailed view for tech '+tech.name);
 	        self.currentTechDetailView = {tech, index};
+	        
+            self.showTechDetailView();
 	    });
 	});
 };
 
 Hud.prototype.update = function(){
     this.showRobotDetailView();
-    this.showTechDetailView();
     this.updateStats();
 };
 
@@ -213,6 +214,9 @@ Hud.prototype.renderTechView = function(){
 	
     this.techWindow = EZGUI.create(this.templates.tech, this.theme);
 	this.techWindow.visible = false;
+	
+	EZGUI.components.techBoughtButton.visible = false;
+    EZGUI.components.techBuyButton.visible = false;
 };
 
 Hud.prototype.updateTechView = function(){
@@ -278,27 +282,15 @@ Hud.prototype.showTechDetailView = function(){
         }
         
         //Add buy button
-        var buyComp = {};
         if(tech.hasAchieved){
-            buyComp = {
-                component: 'Header',
-                width: 280,
-                height: 40,
-                position: {x:0, y:0},
-                text: 'Tech already unlocked'
-            };
+            EZGUI.components.techBoughtButton.visible = true;
+            EZGUI.components.techBuyButton.visible = false;
         } else {
-            buyComp = {
-                component: 'Button',
-                width: 280,
-                height: 40,
-                position: {x:0, y:0},
-                text: 'Unlock'
-            };
+            EZGUI.components.techBoughtButton.visible = false;
+            EZGUI.components.techBuyButton.visible = true;
         }
         
-        EZGUI.components.techDetailBuy.container.children = [];
-        EZGUI.components.techDetailBuy.addChild(EZGUI.create(buyComp, this.theme));
+        //TOOD: handler for button
     }
 };
 
