@@ -22,4 +22,8 @@ OffCommand.prototype.goToCity = function () {
                                 new EndState(this)));
 };
 
+Command.prototype.toString = function () {
+    return "Off";
+};
+
 module.exports = OffCommand;
