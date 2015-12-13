@@ -12,7 +12,6 @@ Preload.prototype = {
 
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
     this.load.setPreloadSprite(this.asset);
-    this.load.image('yeoman', 'assets/yeoman-logo.png');
     this.load.spritesheet('robot', 'assets/robot.png', 32, 32);
     this.load.spritesheet('city', 'assets/city.png', 32, 32);
     this.load.image('nuclear', 'assets/nuclear-01.png');
