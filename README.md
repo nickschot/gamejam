@@ -15,6 +15,7 @@ You can code your robot by giving the robot bits, either one or zero. If you don
 * 110 - Mine stone (only doable with two bits)
 * 001 - Mine lead (only doable with three bits)
 * 011 - Mine glass (only doable with three bits)
+* 101 - Explore the world (only doable with three bits)
 
 ## How to expand
 You can expand your army of world-rescuring robots by unlocking the Robot Factory and then buying more robots. A robot cost 500 iron and 500 plastic.
