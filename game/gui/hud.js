@@ -164,7 +164,7 @@ Hud.prototype.renderRobotsView = function(){
     var self = this;
     
     //Empty the list of robots and add all current robots to the template
-    this.templates.robots.children[0].children[1].children = [];
+    this.templates.robots.children[0].children[2].children = [];
 	this.game.city.robots.forEach(function(robot, index){
         var currentElem = {   
             id: 'robot'+index+'Entry',
