@@ -1,159 +1,169 @@
 {
-    id: 'robotsWindow',
-	component: 'Window',	
+	id: 'robotsWindow',
+	component: 'Window',
 	padding: 10,
-	position: {x: 50, y: 50},
+	position: {
+		x: 50,
+		y: 50
+	},
 	width: 700,
 	height: 400,
 	layout: [2, 1],
-	children: [
-	    {
-	        id: 'robotsLayout',
-	        component: 'Layout',
-	        layout: [1,10],
-	        width: 340,
-	        height: 380,
-	        position: 'center',
-	        children: [
-	            {
-        	        text: 'Robots',
-        		    font: {
-        		        size: '24px',
-        		        family: 'Arial'
-        		    },
-        		    component: 'Label',
-        
-        		    position: 'center',
-        
-        		    width: 300,
-        		    height: 40
-        	    },
-            	{
-            		id: 'levelsList',
-            		component: 'List',
-            		dragX:false,
-            		padding: 3,
-            		position: {x: 30, y: 0},
-            		width: 300,
-            		height: 310,
-            		layout: [null, 6],
-            		children: [
-            		    
-            		]
-            	}
-        	]
-	    },
-	    {
-	        id: 'robotDetailLayout',
-	        component: 'Layout',
-	        layout: [1,10],
-	        width: 340,
-	        height: 380,
-	        position: 'center',
-	        children: [
-	            {
-	            	id: 'robotDetailHeader',
-        	        text: '[no robot selected]',
-        		    font: {
-        		        size: '24px',
-        		        family: 'Arial'
-        		    },
-        		    component: 'Label',
-        
-        		    position: 'top center',
-        
-        		    width: 300,
-        		    height: 40
-        	    },
-        	    {
-        	    	id: 'robotDetailHealth',
-        	    	component: 'Layout',
-        	    	layout: [2,1],
-        	    	width: 300,
-        	    	height: 40,
-        	    	position: {x:0, y:15},
-        	    	children: [
-        	    		{
-        	    			id: 'robotDetailHealthLabel',
-        	    			component: 'Label',
-        	    			width:100,
-        	    			height: 30,
-        	    			position: {x:5,y:0},
-        	    			text: 'Health: '
-        	    		},
-        	    		{
-        	    			id: 'robotDetailHealthStatus',
-        	    			component: 'Label',
-        	    			width:100,
-        	    			height: 30,
-        	    			text: 'n/a',
-        	    			position: 'right',
-        	    		}
-    	    		]
-        	    },
-        	    {
-        	    	id: 'robotDetailTask',
-        	    	component: 'Layout',
-        	    	layout: [2,1],
-        	    	width: 300,
-        	    	height: 40,
-        	    	position: {x:-3, y:10},
-        	    	children: [
-        	    		{
-        	    			id: 'robotDetailTaskLabel',
-        	    			component: 'Label',
-        	    			width:100,
-        	    			height: 30,
-        	    			position: {x:0,y:0},
-        	    			text: 'Task: '
-        	    		},
-        	    		{
-        	    			id: 'robotDetailTaskStatus',
-        	    			component: 'Label',
-        	    			width:100,
-        	    			height: 30,
-        	    			text: 'n/a',
-        	    			position: 'right',
-        	    		}
-    	    		]
-        	    },
-        	    {
-        	    	id: 'robotDetailInventoryLayout',
-        	    	component: 'Layout',
-        	    	layout: [2,1],
-        	    	width: 300,
-        	    	height: 40,
-        	    	position: {x:13, y:6},
-        	    	children: [
-        	    		{
-        	    			id: 'robotDetailInventoryLabel',
-        	    			component: 'Label',
-        	    			width:100,
-        	    			height: 30,
-        	    			position: {x:0,y:0},
-        	    			text: 'Inventory'
-        	    		},
-        	    		{
-        	    			id: 'robotDetailInventoryStatus',
-        	    			component: 'Label',
-        	    			width:100,
-        	    			height: 30,
-        	    			text: 'n/a',
-        	    			position: 'right',
-        	    		}
-    	    		]
-        	    },
-        	    {
-        	    	id: 'robotDetailInventory',
-        	    	component: 'List',
-        	    	position: {x: 20, y: -5},
-        	    	width: 270,
-        	    	height: 200,
-        	    	children: [
-        	    		
-    	    		]
-        	    }
-    	    ]
-	    }
-	]
+	children: [{
+		id: 'robotsLayout',
+		component: 'Layout',
+		layout: [1, 10],
+		width: 340,
+		height: 380,
+		position: 'center',
+		children: [{
+			text: 'Robots',
+			font: {
+				size: '24px',
+				family: 'Arial'
+			},
+			component: 'Label',
+
+			position: 'center',
+
+			width: 300,
+			height: 40
+		}, {
+			id: 'levelsList',
+			component: 'List',
+			dragX: false,
+			padding: 3,
+			position: {
+				x: 30,
+				y: 0
+			},
+			width: 300,
+			height: 310,
+			layout: [null, 6],
+			children: [
+
+			]
+		}]
+	}, {
+		id: 'detailPanelTabs',
+		component: 'Tabs',
+
+		//Tabs bar height
+		tabHeight: 50,
+		position: {
+			x: 0,
+			y: 0
+		},
+		width: 320,
+		height: 360,
+
+
+		//tabs components
+		children: [
+			//titles are used in tabs
+			{
+				id: 'robotDetailLayout',
+				component: 'Layout',
+				text: 'tab 2',
+				title: 'Detail',
+				layout: [1, 10],
+				width: 340,
+				height: 300,
+				position: 'center',
+				active: true,
+				children: [{
+					id: 'robotDetailHeader',
+					text: '[no robot selected]',
+					font: {
+						size: '24px',
+						family: 'Arial'
+					},
+					component: 'Label',
+
+					position: 'top center',
+
+					width: 300,
+					height: 40
+				}, {
+					id: 'robotDetailTask',
+					component: 'Layout',
+					layout: [2, 1],
+					width: 300,
+					height: 40,
+					position: {
+						x: -3,
+						y: 10
+					},
+					children: [{
+						id: 'robotDetailTaskLabel',
+						component: 'Label',
+						width: 100,
+						height: 30,
+						position: {
+							x: 0,
+							y: 0
+						},
+						text: 'Task: '
+					}, {
+						id: 'robotDetailTaskStatus',
+						component: 'Label',
+						width: 100,
+						height: 30,
+						text: 'n/a',
+						position: 'right',
+					}]
+				}, {
+					id: 'robotDetailInventoryLayout',
+					component: 'Layout',
+					layout: [2, 1],
+					width: 300,
+					height: 40,
+					position: {
+						x: 13,
+						y: 6
+					},
+					children: [{
+						id: 'robotDetailInventoryLabel',
+						component: 'Label',
+						width: 100,
+						height: 30,
+						position: {
+							x: 0,
+							y: 0
+						},
+						text: 'Inventory'
+					}, {
+						id: 'robotDetailInventoryStatus',
+						component: 'Label',
+						width: 100,
+						height: 30,
+						text: 'n/a',
+						position: 'right',
+					}]
+				}, {
+					id: 'robotDetailInventory',
+					component: 'List',
+					position: {
+						x: 20,
+						y: 5
+					},
+					width: 270,
+					height: 200,
+					children: [
+
+					]
+				}]
+			}, {
+				id: 'lvl2',
+				text: '[Hacking as fast as I can]',
+				title: 'Program',
+				userData: 'level 2',
+				component: 'Label',
+				position: 'center',
+				width: "100%",
+				height: "100%",
+				skin: 'levelBtn'
+			}
+		]
+	}]
 }
