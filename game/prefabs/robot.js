@@ -12,6 +12,7 @@ function normalizeAngle(angle) {
 }
 
 var MineCommand = require("../prefabs/mineCommand");
+var Utils = require("../utils");
 
 var Robot = function(game, x, y, frame) {
   this.currentTile = {x: x, y: y};
@@ -215,5 +216,10 @@ Robot.prototype.emptyToCity = function (city) {
     }
   }
 };
+
+Robot.prototype.changeCommand = function (bits) {
+  this.clearDestination();
+  this.command = Utils.bitsToCommand(this.game, this, bits);
+}
 
 module.exports = Robot;
