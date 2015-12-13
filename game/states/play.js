@@ -38,6 +38,10 @@
       this.robots[0].bringToTop();
        
        
+      var Fog = require("../prefabs/fog");
+      this.fog = new Fog(this.game, 0, 0);
+      this.game.add.existing(this.fog); 
+       
       
       //CREATE GUI LAST, MUST HAVE CORRECT REFERENCES
       var Hud = require('../gui/hud');
