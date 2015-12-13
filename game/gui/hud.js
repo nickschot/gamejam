@@ -247,9 +247,8 @@ Hud.prototype.showTechDetailView = function(){
         var tech = this.currentTechDetailView.tech;
         var index = this.currentTechDetailView.index;
         
-        var header = EZGUI.components.techDetailHeader;
-        
-        header.text = 'Tech: '+tech.name;
+        EZGUI.components.techDetailHeader.text = 'Tech: '+tech.name;
+        EZGUI.components.techDetailDescription.text = tech.desc;
         
         EZGUI.components.techDetailCosts.container.children = [];
         EZGUI.components.techDetailCosts.addChild(EZGUI.create({
@@ -277,6 +276,29 @@ Hud.prototype.showTechDetailView = function(){
                 }, this.theme));
             }
         }
+        
+        //Add buy button
+        var buyComp = {};
+        if(tech.hasAchieved){
+            buyComp = {
+                component: 'Header',
+                width: 280,
+                height: 40,
+                position: {x:0, y:0},
+                text: 'Tech already unlocked'
+            };
+        } else {
+            buyComp = {
+                component: 'Button',
+                width: 280,
+                height: 40,
+                position: {x:0, y:0},
+                text: 'Unlock'
+            };
+        }
+        
+        EZGUI.components.techDetailBuy.container.children = [];
+        EZGUI.components.techDetailBuy.addChild(EZGUI.create(buyComp, this.theme));
     }
 };
 

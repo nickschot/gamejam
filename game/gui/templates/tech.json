@@ -66,12 +66,35 @@
         		    height: 40
         	    },
         	    {
+        	    	id: 'techDetailDescription',
+        	    	component: 'Label',
+        	    	position: 'center',
+        	    	font: {
+        	    		size: '16px'
+        	    	},
+        	    	
+        	    	width: 300,
+        	    	height: 60,
+        	    	
+        	    	text: ''
+        	    },
+        	    {
         	    	id: 'techDetailCosts',
         	    	component: 'Layout',
         	    	position: {x:-100, y:0},
         	    	width: 300,
         	    	height: 200,
         	    	layout: [1,5],
+        	    	children: [
+        	    		]
+        	    },
+        	    {
+        	    	id: 'techDetailBuy',
+        	    	component: 'Layout',
+        	    	position: 'center',
+        	    	width: 300,
+        	    	height: 50,
+        	    	layout: [1,1],
         	    	children: [
         	    		]
         	    }
