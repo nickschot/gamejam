@@ -14,8 +14,6 @@
 
       this.initWorld();
       
-      console.log(this.game);
-      
       var ResourceMap = require('../prefabs/resourceMap');
       this.game.resourceMap = new ResourceMap(this.game, 'Resource');
       
@@ -143,6 +141,7 @@
       this.spawnLayer = this.game.map.createLayer('spawn');
 
       this.collisionLayer = this.game.map.createLayer('Collision');
+      this.collisionLayer.visible = false;
       this.resourceLayer = this.game.map.createLayer('Resource');
       this.fogLayer = this.game.map.createLayer('fog');
       

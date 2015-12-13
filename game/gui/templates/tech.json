@@ -66,14 +66,53 @@
         		    height: 40
         	    },
         	    {
+        	    	id: 'techDetailDescription',
+        	    	component: 'Label',
+        	    	position: 'center',
+        	    	font: {
+        	    		size: '16px'
+        	    	},
+        	    	
+        	    	width: 300,
+        	    	height: 60,
+        	    	
+        	    	text: ''
+        	    },
+        	    {
         	    	id: 'techDetailCosts',
         	    	component: 'Layout',
-        	    	position: {x:-100, y:0},
+        	    	position: {x:-100, y:20},
         	    	width: 300,
         	    	height: 200,
         	    	layout: [1,5],
         	    	children: [
         	    		]
+        	    },
+        	    {
+        	    	id: 'techDetailBuy',
+        	    	component: 'Layout',
+        	    	position: {x:5, y:190},
+        	    	width: 300,
+        	    	height: 50,
+        	    	layout: [1,1],
+        	    	children: [
+        	    		{
+        	    			id: 'techBoughtButton',
+			                component: 'Header',
+			                width: 290,
+			                height: 40,
+			                position: {x:0, y:0},
+			                text: 'Tech already unlocked'
+			            },
+			            {
+			                id: 'techBuyButton',
+			                component: 'Button',
+			                width: 290,
+			                height: 40,
+			                position: {x:0, y:-50},
+			                text: 'Unlock'
+			            }
+    	    		]
         	    }
     	    ]
 	    }

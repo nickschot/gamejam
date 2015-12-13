@@ -5,8 +5,6 @@ var Hud = function(game, tech, stats) {
     this.tech   = game.techTree;
     this.city   = game.city;
     
-    console.log(this.tech);
-    
     this.templates          = {};
     this.templates.hud      = require('./templates/hud.json');
     this.templates.menu     = require('./templates/menu.json');
@@ -18,8 +16,6 @@ var Hud = function(game, tech, stats) {
     this.robotsWindow   = {};
     this.techWindow     = {};
     this.statsWindow    = {};
-    
-    this.robotsList = [];
     
     this.currentRobotDetailView = {};
     this.currentTechDetailView  = {};
@@ -61,6 +57,7 @@ Hud.prototype.initBinds = function() {
         var visible = !self.robotsWindow.visible;
         self.hideWindows();
         self.robotsWindow.visible = visible;
+        self.currentRobotDetailView = {'robot':self.game.city.robots[0], 'index':0 };
     });
     EZGUI.components.techButton.on('click', function(event, me) {
         var visible = !self.techWindow.visible;
@@ -82,22 +79,21 @@ Hud.prototype.initBinds = function() {
 	//Add a click handler to each robot button
 	this.game.city.robots.forEach(function(robot, index){
 	    EZGUI.components['robot'+index+'Button'].on('click', function(event, me) {
-            console.log('Opening detailed view for robot '+index);
-            self.currentRobotDetailView = {robot, index};
+            self.currentRobotDetailView = {'robot':robot, 'index':index };
         });
 	});
 	
 	this.tech.tree.forEach(function(tech, index){
 	    EZGUI.components[encodeURIComponent(tech.name)].on('click', function(event, me){
-	        console.log('Opening detailed view for tech '+tech.name);
-	        self.currentTechDetailView = {tech, index};
+	        self.currentRobotDetailView = {'tech':tech, 'index':index };
+	        
+            self.showTechDetailView();
 	    });
 	});
 };
 
 Hud.prototype.update = function(){
     this.showRobotDetailView();
-    this.showTechDetailView();
     this.updateStats();
 };
 
@@ -213,6 +209,9 @@ Hud.prototype.renderTechView = function(){
 	
     this.techWindow = EZGUI.create(this.templates.tech, this.theme);
 	this.techWindow.visible = false;
+	
+	EZGUI.components.techBoughtButton.visible = false;
+    EZGUI.components.techBuyButton.visible = false;
 };
 
 Hud.prototype.updateTechView = function(){
@@ -247,9 +246,8 @@ Hud.prototype.showTechDetailView = function(){
         var tech = this.currentTechDetailView.tech;
         var index = this.currentTechDetailView.index;
         
-        var header = EZGUI.components.techDetailHeader;
-        
-        header.text = 'Tech: '+tech.name;
+        EZGUI.components.techDetailHeader.text = 'Tech: '+tech.name;
+        EZGUI.components.techDetailDescription.text = tech.desc;
         
         EZGUI.components.techDetailCosts.container.children = [];
         EZGUI.components.techDetailCosts.addChild(EZGUI.create({
@@ -277,6 +275,17 @@ Hud.prototype.showTechDetailView = function(){
                 }, this.theme));
             }
         }
+        
+        //Add buy button
+        if(tech.hasAchieved){
+            EZGUI.components.techBoughtButton.visible = true;
+            EZGUI.components.techBuyButton.visible = false;
+        } else {
+            EZGUI.components.techBoughtButton.visible = false;
+            EZGUI.components.techBuyButton.visible = true;
+        }
+        
+        //TOOD: handler for button
     }
 };
 
@@ -296,7 +305,7 @@ Hud.prototype.updateStats = function(){
         //Amount of robots
         var robotStats = EZGUI.create({
                     component: 'Label',
-                    text: 'robots: ' + self.robotsList.length,
+                    text: 'robots: ' + self.game.city.robots.length,
                     width: 310,
                     height: 40,
                     position: {x:0, y:0}
