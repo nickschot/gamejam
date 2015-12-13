@@ -73,4 +73,5 @@ module.exports = {
     tileCornerToPixes: tileCornerToPixes,
     tileMidToPixes: tileMidToPixes,
     pixelsToTile: pixelsToTile,
+    bitsToCommand: bitsToCommand
 };
