@@ -1,0 +1,70 @@
+{
+    id: 'techWindow',
+	component: 'Window',	
+	padding: 10,
+	position: {x: 50, y: 50},
+	width: 700,
+	height: 400,
+	layout: [2, 1],
+	children: [
+	    {
+	        id: 'techLayout',
+	        component: 'Layout',
+	        layout: [1,10],
+	        width: 340,
+	        height: 380,
+	        position: 'center',
+	        children: [
+	            {
+        	        text: 'Tech',
+        		    font: {
+        		        size: '24px',
+        		        family: 'Arial'
+        		    },
+        		    component: 'Label',
+        
+        		    position: 'center',
+        
+        		    width: 300,
+        		    height: 40
+        	    },
+            	{
+            		id: 'techList',
+            		component: 'List',
+            		dragX:false,
+            		padding: 3,
+            		position: {x: 30, y: 0},
+            		width: 300,
+            		height: 310,
+            		layout: [null, 6],
+            		children: [
+            		    
+            		]
+            	}
+        	]
+	    },
+	    {
+	        id: 'techDetailLayout',
+	        component: 'Layout',
+	        layout: [1,10],
+	        width: 340,
+	        height: 380,
+	        position: 'center',
+	        children: [
+	            {
+        	        text: '[no tech selected]',
+        		    font: {
+        		        size: '24px',
+        		        family: 'Arial'
+        		    },
+        		    component: 'Label',
+        
+        		    position: 'center',
+        
+        		    width: 300,
+        		    height: 40
+        	    }
+    	    ]
+	    }
+	]
+}

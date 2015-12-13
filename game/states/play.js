@@ -43,7 +43,7 @@
       
       //CREATE GUI LAST, MUST HAVE CORRECT REFERENCES
       var Hud = require('../gui/hud');
-      this.currentGUI = new Hud(this.robots);
+      this.currentGUI = new Hud(this.game, this.robots);
       this.currentGUI.setupGUI();
     },
     update: function() {
