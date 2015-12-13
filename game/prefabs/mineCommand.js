@@ -13,7 +13,7 @@ function MineCommand (game, robot, resourceType) {
     this.resource = null;
     this.airlock = this.game.city.airlock;
 
-    this.goState(new FindNodeState(this));
+    this.goState(new FindNodeState(this.command));
 }
 
 Utils.extend(Command, MineCommand);
