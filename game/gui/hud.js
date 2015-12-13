@@ -78,6 +78,7 @@ Hud.prototype.initBinds = function() {
 	this.robots.forEach(function(robot, index){
 	    EZGUI.components['robot'+index+'Button'].on('click', function(event, me) {
             console.log('Opening detailed view for robot '+index);
+            self.showRobotDetailView(robot, index);
         });
 	});
 };
@@ -153,6 +154,13 @@ Hud.prototype.renderRobotsView = function(){
     //Create the new view from the new edited template
     this.robotsWindow = EZGUI.create(this.templates.robots, this.theme);
 	this.robotsWindow.visible = false;
+};
+
+Hud.prototype.showRobotDetailView = function(robot, index){
+    var header = EZGUI.components.robotDetailHeader;
+    var inventory = EZGUI.components.robotDetailInventory;
+    
+    header.text = 'Robot '+index;
 };
 
 Hud.prototype.renderTechView = function(){
