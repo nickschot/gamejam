@@ -63,8 +63,7 @@ function bitsToCommand(game, robot, bits){
   case "110":
       return new MineCommand(game, robot, "stone");
   case "111":
-    console.log("Jippie, you've discovered the lazy mode :)");
-    break;
+      return new OffCommand(game, robot);
   } 
 }
 
