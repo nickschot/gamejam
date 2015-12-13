@@ -1,5 +1,5 @@
 {
-    id: 'robotsWindow',
+    id: 'techWindow',
 	component: 'Window',	
 	padding: 10,
 	position: {x: 50, y: 50},
@@ -8,7 +8,7 @@
 	layout: [2, 1],
 	children: [
 	    {
-	        id: 'robotsLayout',
+	        id: 'techLayout',
 	        component: 'Layout',
 	        layout: [1,10],
 	        width: 340,
@@ -16,7 +16,7 @@
 	        position: 'center',
 	        children: [
 	            {
-        	        text: 'Robots',
+        	        text: 'Tech',
         		    font: {
         		        size: '24px',
         		        family: 'Arial'
@@ -29,7 +29,7 @@
         		    height: 40
         	    },
             	{
-            		id: 'levelsList',
+            		id: 'techList',
             		component: 'List',
             		dragX:false,
             		padding: 3,
@@ -44,7 +44,7 @@
         	]
 	    },
 	    {
-	        id: 'robotDetailLayout',
+	        id: 'techDetailLayout',
 	        component: 'Layout',
 	        layout: [1,10],
 	        width: 340,
@@ -52,7 +52,7 @@
 	        position: 'center',
 	        children: [
 	            {
-        	        text: '[no robot selected]',
+        	        text: '[no tech selected]',
         		    font: {
         		        size: '24px',
         		        family: 'Arial'

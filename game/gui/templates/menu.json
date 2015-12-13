@@ -1,0 +1,31 @@
+{
+    id: 'menuOverlay',
+	component: 'Window',	
+	padding: 0,
+	position: {x: 250, y: 100},
+	width: 300,
+	height: 300,
+	layout: [1, 4],
+	children: [
+		{
+			component: 'Label',
+			position: 'center',
+			width: 260,
+			height: 40,
+			text: 'MENU'
+		},
+		null,
+		null,
+		{
+            id: 'quitButton',
+            text: 'quit',
+            component: 'Button',
+            position: 'center',
+            width: 260,
+            height: 40,
+        	font: {
+                color: '#333'
+            }
+		}
+	]
+}
