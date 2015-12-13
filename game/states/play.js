@@ -133,6 +133,7 @@
     
     initRobot: function(){
       this.robots = [];
+      this.game.robots = this.robots;
       this.addRobot();
     },
     
