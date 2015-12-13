@@ -27,9 +27,13 @@ Utils.extend(Command, MineCommand);
 
 MineCommand.prototype.update = function () {
     if(this.state == States.City) {
-        // TODO: give resources to city
-        console.log("City state not implemented");
-        
+        if (this.robot.hasFailedPathing) {
+            console.log("Could not find path to city :(");
+            this.state = States.End;
+        } else if(this.robot.hasFinishedPathing) {
+            this.robot.emptyToCity(this.game.city);
+            this.state = States.FindNode;
+        }
     } else if(this.state == States.FindNode) {
         this.robot.clearDestination();
         
@@ -66,7 +70,7 @@ MineCommand.prototype.update = function () {
             if(this.airlockTimer > 0) {
                 this.airlockTimer--;
             } else {
-                this.state = States.City;
+                this.goToCity();
             }
         }
     } else if(this.state == States.End) {
@@ -74,16 +78,23 @@ MineCommand.prototype.update = function () {
     } else {
         console.error("Invalid state " + this.state + " for " + this);
     }
-}
+};
 
 MineCommand.prototype.isFinished = function () {
     return this.state == States.End;
-}
+};
 
 MineCommand.prototype.goToAirlock = function () {
     this.robot.setDestinationPoint(this.airlock.position);
     this.state = States.Airlock;
     this.airlockTimer = 120; // TODO Get airlocktime from Game.
-}
+};
+
+MineCommand.prototype.goToCity = function () {
+    var target = Utils.pixelsToTile(this.game.city.position);
+    this.robot.setDestinationPoint(target);
+    this.state = States.City;
+};
+
 
 module.exports = MineCommand;

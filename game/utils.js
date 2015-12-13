@@ -22,16 +22,16 @@ function extend(base, sub) {
 }
 
 function tileCornerToPixes(tilePoint) {
-  return Phaser.Point(tilePoint.x * 32, tilePoint.y * 32);
+  return new Phaser.Point(tilePoint.x * 32, tilePoint.y * 32);
 }
 
 function tileMidToPixes(tilePoint) {
-  return Phaser.Point(tilePoint.x * 32 + 16, tilePoint.y * 32 + 16);
+  return new Phaser.Point(tilePoint.x * 32 + 16, tilePoint.y * 32 + 16);
 }
 
 function pixelsToTile(pixelPoint) {
-  return Phaser.Point(Math.floor(pixelPoint.x / 32),
-                      Math.floor(pixelPoint.y / 32));
+  return new Phaser.Point(Math.floor(pixelPoint.x / 32),
+                          Math.floor(pixelPoint.y / 32));
 }
 
 module.exports = {

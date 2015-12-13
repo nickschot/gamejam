@@ -204,4 +204,13 @@ Robot.prototype.removeResource = function (type, count) {
   this.inventory["resource"] -= count;
 };
 
+Robot.prototype.emptyToCity = function (city) {
+  for (var key in this.inventory) {
+    if (this.inventory.hasOwnProperty(key)) {
+      city.storage[key] += this.inventory[key];
+      this.inventory[key] = 0;
+    }
+  }
+};
+
 module.exports = Robot;
