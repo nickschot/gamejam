@@ -35,9 +35,6 @@ var Robot = function(game, x, y, frame) {
   this.hasFailedPathing = false;
   this.hasFinishedPathing = true;
   
-  // Commands
-  this.command = new MineCommand(this.game, this, 'iron');
-  
   // Home city TODO
   this.city = null;
   
@@ -50,6 +47,9 @@ var Robot = function(game, x, y, frame) {
   }
   
   this.maxCapacity = 100;
+
+  // Commands
+  this.command = new MineCommand(this.game, this, 'iron');
 };
 
 Robot.prototype = Object.create(Phaser.Sprite.prototype);
