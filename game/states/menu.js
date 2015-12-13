@@ -11,7 +11,7 @@ Menu.prototype = {
     this.sprite = this.game.add.sprite(this.game.width/2, 138, 'yeoman');
     this.sprite.anchor.setTo(0.5, 0.5);
 
-    this.titleText = this.game.add.text(this.game.width/2, 300, 'Roomba! Roomba!', style);
+    this.titleText = this.game.add.text(this.game.width/2, 300, 'Robopocalypse!', style);
     this.titleText.anchor.setTo(0.5, 0.5);
 
     this.instructionsText = this.game.add.text(this.game.width/2, 400, 'Click anywhere to play', { font: '20px Arial', fill: '#ffffff', align: 'center'});
