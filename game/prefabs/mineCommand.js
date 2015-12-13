@@ -30,4 +30,8 @@ MineCommand.prototype.goToCity = function () {
                                 new CityDumpState(this)));
 };
 
+Command.prototype.toString = function () {
+    return "Mine " + this.resourceType;
+};
+
 module.exports = MineCommand;

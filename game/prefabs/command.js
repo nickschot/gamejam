@@ -9,13 +9,18 @@ function Command (game, robot) {
 Command.prototype = Object.create(Object.prototype);
 
 Command.prototype.goState = function (state) {
-    console.log("State: " + this.state.name + " ==>" + state.name);
+    console.log("State: " + this.state.name + " ==> " + state.name);
     this.state = state;
     this.state.start();
 };
 
 Command.prototype.update = function () {
     this.state.update();
+};
+
+Command.prototype.toString = function () {
+    console.warn("command.toString() is not implemented");
+    return "<command>";
 };
 
 Command.prototype.isFinished = function () {
