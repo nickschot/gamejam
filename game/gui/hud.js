@@ -98,9 +98,8 @@ Hud.prototype.initBinds = function() {
 	    if(name && name !== ""){
 	        var didBuy = self.tech.buyUpgrade(city, name);
 	        if(didBuy){
-	            //hide buy button
-	            EZGUI.components.techBoughtButton.visible = true;
-                EZGUI.components.techBuyButton.visible = false;
+	            //Update buy button
+	            self.showTechDetailView();
 	        }
 	    }
 	});
@@ -114,7 +113,6 @@ Hud.prototype.initBinds = function() {
 	    
 	    text = text.substring(text.length - bits, text.length);
 	    
-	    console.log(text);
 	    
 	    EZGUI.components.robotProgramCurrentLabel.text = text;
 	    
@@ -130,15 +128,15 @@ Hud.prototype.initBinds = function() {
 	    
 	    text = text.substring(text.length - bits, text.length);
 	    
-	    
-	    console.log(text);
-	    
 	    EZGUI.components.robotProgramCurrentLabel.text = text;
 	});
 	
 	EZGUI.components.robotProgramSubmitButton.on('click', function (event, me) {
-	    console.log("Setting command to: " + EZGUI.components.robotProgramCurrentLabel.text);
 	    self.currentRobotDetailView.robot.changeCommand(EZGUI.components.robotProgramCurrentLabel.text);
+	});
+	
+	EZGUI.components.robotBuy.on('click', function (event, me) {
+	    self.game.city.buyRobot();
 	});
 };
 
@@ -207,7 +205,7 @@ Hud.prototype.renderRobotsView = function(){
             ]
         };
         
-        self.templates.robots.children[0].children[1].children.push(currentElem);
+        self.templates.robots.children[0].children[2].children.push(currentElem);
     });  
     
     //Destroy the old view;

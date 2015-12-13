@@ -12,7 +12,7 @@
 	children: [{
 		id: 'robotsLayout',
 		component: 'Layout',
-		layout: [1, 10],
+		layout: [2, 10],
 		width: 340,
 		height: 380,
 		position: 'center',
@@ -24,11 +24,21 @@
 			},
 			component: 'Label',
 
-			position: 'center',
+			position: 'left',
 
-			width: 300,
+			width: 200,
 			height: 40
 		}, {
+            id: 'robotBuy',
+            component: 'Button',
+            text: 'Buy robot',
+            width: 75,
+            height: 40,
+            position: 'center',
+            font: {
+                size: '16px'
+            }
+        }, {
 			id: 'levelsList',
 			component: 'List',
 			dragX: false,

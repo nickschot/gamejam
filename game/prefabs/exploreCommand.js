@@ -11,7 +11,7 @@ function ExploreCommand (game, robot) {
 
 Utils.extend(Command, ExploreCommand);
 
-Command.prototype.toString = function () {
+ExploreCommand.prototype.toString = function () {
     return "Explore";
 };
 
