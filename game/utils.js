@@ -21,6 +21,22 @@ function extend(base, sub) {
   });
 }
 
+function tileCornerToPixes(tilePoint) {
+  return new Phaser.Point(tilePoint.x * 32, tilePoint.y * 32);
+}
+
+function tileMidToPixes(tilePoint) {
+  return new Phaser.Point(tilePoint.x * 32 + 16, tilePoint.y * 32 + 16);
+}
+
+function pixelsToTile(pixelPoint) {
+  return new Phaser.Point(Math.floor(pixelPoint.x / 32),
+                          Math.floor(pixelPoint.y / 32));
+}
+
 module.exports = {
     extend: extend,
-}
+    tileCornerToPixes: tileCornerToPixes,
+    tileMidToPixes: tileMidToPixes,
+    pixelsToTile: pixelsToTile,
+};

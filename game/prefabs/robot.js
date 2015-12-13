@@ -207,4 +207,13 @@ Robot.prototype.getMaxCapacity = function () {
   return this.maxCapacity + this.game.techTree.getValueModification('storageSize');
 }
 
+Robot.prototype.emptyToCity = function (city) {
+  for (var key in this.inventory) {
+    if (this.inventory.hasOwnProperty(key)) {
+      city.storage[key] += this.inventory[key];
+      this.inventory[key] = 0;
+    }
+  }
+};
+
 module.exports = Robot;
