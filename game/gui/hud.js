@@ -90,6 +90,13 @@ Hud.prototype.initBinds = function() {
             self.showTechDetailView();
 	    });
 	});
+	
+	EZGUI.components.techBuyButton.on('click', function(event, me){
+	    var name = this.currentTechDetailView.tech.name;
+	    var city = this.game.city;
+	    
+	    this.tech.buyUpgrade(city, name);
+	});
 };
 
 Hud.prototype.update = function(){
