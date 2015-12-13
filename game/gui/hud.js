@@ -19,6 +19,8 @@ var Hud = function(game, robots, tech, stats) {
     
     this.robotsList = [];
     
+    this.currentRobotDetailView = {};
+    
     this.theme = 'kenney';
 };
 
@@ -78,9 +80,13 @@ Hud.prototype.initBinds = function() {
 	this.robots.forEach(function(robot, index){
 	    EZGUI.components['robot'+index+'Button'].on('click', function(event, me) {
             console.log('Opening detailed view for robot '+index);
-            self.showRobotDetailView(robot, index);
+            self.currentRobotDetailView = {robot, index};
         });
 	});
+};
+
+Hud.prototype.update = function(){
+    this.showRobotDetailView();
 };
 
 Hud.prototype.hideWindows = function(){
@@ -156,11 +162,38 @@ Hud.prototype.renderRobotsView = function(){
 	this.robotsWindow.visible = false;
 };
 
-Hud.prototype.showRobotDetailView = function(robot, index){
-    var header = EZGUI.components.robotDetailHeader;
-    var inventory = EZGUI.components.robotDetailInventory;
-    
-    header.text = 'Robot '+index;
+Hud.prototype.showRobotDetailView = function(){
+    if(this.currentRobotDetailView.robot){
+        var robot = this.currentRobotDetailView.robot;
+        var index = this.currentRobotDetailView.index;
+        
+        var header = EZGUI.components.robotDetailHeader;
+        var inventory = EZGUI.components.robotDetailInventory;
+        var inventoryStatus = EZGUI.components.robotDetailInventoryStatus;
+        
+        var inventoryCount = 0;
+        var keyIndex = 0;
+        inventory.container.children = [];
+        for (var key in robot.inventory) {
+            if (robot.inventory.hasOwnProperty(key)) {
+                inventoryCount += robot.inventory[key];
+                
+                var invItem = EZGUI.create({
+                    component: 'Label',
+                    text: key + ': ' + robot.inventory[key],
+                    width: 100,
+                    height: 40,
+                    position: {x:0, y:40*keyIndex}
+                }, this.theme);
+                
+                inventory.addChild(invItem);
+            }
+            keyIndex++;
+        }
+        
+        header.text = 'Robot '+index;
+        inventoryStatus.text = inventoryCount + '/' + robot.maxCapacity;
+    }
 };
 
 Hud.prototype.renderTechView = function(){

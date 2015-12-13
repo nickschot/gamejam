@@ -118,7 +118,7 @@
     	    		]
         	    },
         	    {
-        	    	id: 'robotDetailInventory',
+        	    	id: 'robotDetailInventoryLayout',
         	    	component: 'Layout',
         	    	layout: [2,1],
         	    	width: 300,
@@ -148,7 +148,10 @@
         	    	component: 'List',
         	    	position: {x: 20, y: -5},
         	    	width: 270,
-        	    	height: 200
+        	    	height: 200,
+        	    	children: [
+        	    		
+    	    		]
         	    }
     	    ]
 	    }

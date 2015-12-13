@@ -66,6 +66,8 @@
       this.edgeScroll();
       
       this.dest.mine(this.robots[0]);
+      
+      this.currentGUI.update();
     },
     
     edgeScrollEnabled: true,
