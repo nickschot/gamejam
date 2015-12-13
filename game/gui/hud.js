@@ -2,8 +2,10 @@
 
 var Hud = function(game, tech, stats) {
     this.game   = game;
-    this.tech   = tech;
+    this.tech   = game.techTree;
     this.city   = game.city;
+    
+    console.log(this.tech);
     
     this.templates          = {};
     this.templates.hud      = require('./templates/hud.json');
@@ -20,6 +22,7 @@ var Hud = function(game, tech, stats) {
     this.robotsList = [];
     
     this.currentRobotDetailView = {};
+    this.currentTechDetailView  = {};
     
     this.theme = 'kenney';
 };
@@ -83,10 +86,18 @@ Hud.prototype.initBinds = function() {
             self.currentRobotDetailView = {robot, index};
         });
 	});
+	
+	this.tech.tree.forEach(function(tech, index){
+	    EZGUI.components[encodeURIComponent(tech.name)].on('click', function(event, me){
+	        console.log('Opening detailed view for tech '+tech.name);
+	        self.currentTechDetailView = {tech, index};
+	    });
+	});
 };
 
 Hud.prototype.update = function(){
     this.showRobotDetailView();
+    this.showTechDetailView();
     this.updateStats();
 };
 
@@ -198,8 +209,75 @@ Hud.prototype.showRobotDetailView = function(){
 };
 
 Hud.prototype.renderTechView = function(){
+	this.updateTechView();
+	
     this.techWindow = EZGUI.create(this.templates.tech, this.theme);
 	this.techWindow.visible = false;
+};
+
+Hud.prototype.updateTechView = function(){
+    var self = this;
+    var techTree = this.tech.tree;
+    
+    this.templates.tech.children[0].children[1].children = [];
+    
+    techTree.forEach(function(tech, index){
+        var listItem = {
+            id: encodeURIComponent(tech.name),
+            component: 'Button',
+            text: tech.name,
+            width: 280,
+            height: 50,
+            position: 'center'
+        };
+        
+        if(tech.hasAchieved){
+            listItem.component = 'Header';
+            listItem.font = {
+                color: '#888'
+            };
+        }
+        
+        self.templates.tech.children[0].children[1].children.push(listItem);
+    });
+};
+
+Hud.prototype.showTechDetailView = function(){
+    if(this.techWindow.visible && this.currentTechDetailView.tech){
+        var tech = this.currentTechDetailView.tech;
+        var index = this.currentTechDetailView.index;
+        
+        var header = EZGUI.components.techDetailHeader;
+        
+        header.text = 'Tech: '+tech.name;
+        
+        EZGUI.components.techDetailCosts.container.children = [];
+        EZGUI.components.techDetailCosts.addChild(EZGUI.create({
+            component: 'Label',
+            text: 'Costs:',
+            position: 'left',
+            width: 300,
+            height: 30,
+            font: {
+                size: '22px'
+            }
+        }, this.theme));
+        for (var key in tech.costs) {
+            if (tech.costs.hasOwnProperty(key)) {
+                
+                EZGUI.components.techDetailCosts.addChild(EZGUI.create({
+                    component: 'Label',
+                    width: 300,
+                    height: 30,
+                    position: 'left',
+                    text: key + ': ' + tech.costs[key],
+                    font: {
+                        size: '16px'
+                    }
+                }, this.theme));
+            }
+        }
+    }
 };
 
 Hud.prototype.renderStatsView = function(){
