@@ -23,7 +23,6 @@
       var City = require("../prefabs/city");
       this.city = new City(this.game, this.game.map.widthInPixels/2+this.game.camera.width/2, this.game.map.heightInPixels/2+this.game.camera.height/2);
       this.game.city = this.city;
-      this.game.add.existing(this.city);
       
       this.initRobot();
       
@@ -113,7 +112,9 @@
       this.backgroundCornersLayer = this.game.map.createLayer('GroundCorners');
       this.backgroundBordersLayer = this.game.map.createLayer('GroundBorders');
       this.buildingsLayer = this.game.map.createLayer('Building');
-      
+      this.airlocksLayer = this.game.map.createLayer('Airlocks');
+      this.spawnLayer = this.game.map.createLayer('spawn');
+
       this.collisionLayer = this.game.map.createLayer('Collision');
       this.resourceLayer = this.game.map.createLayer('Resource');
       

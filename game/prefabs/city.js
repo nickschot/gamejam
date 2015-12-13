@@ -17,7 +17,7 @@ var City = function(game, x, y, frame) {
   
 };
 
-City.prototype = Object.create(Phaser.Sprite.prototype);
+City.prototype = Object.create(Object.prototype);
 City.prototype.constructor = City;
 
 City.prototype.update = function() {
