@@ -3,6 +3,9 @@
 var Resource = function(resourceMap, tile) {
     this.resourceMap = resourceMap;
     this.tile = tile;
+
+    this.tile.properties["mineSpeed"] = parseInt(this.tile.properties["mineSpeed"]);
+    this.tile.properties["resourceCount"] = parseInt(this.tile.properties["resourceCount"]);
 }
 
 Resource.prototype = Object.create(Object.prototype);
@@ -21,7 +24,7 @@ Resource.prototype.mine = function(robot) {
     
     this.tile.properties["resourceCount"] = resourceCount;
     
-    robot.addResource(this.tile["resourceName"], mined);
+    robot.addResource(this.tile.properties["resourceName"], mined);
     
     return mined;
 }

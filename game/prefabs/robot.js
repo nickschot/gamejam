@@ -180,7 +180,7 @@ Robot.prototype.resourceCount = function () {
 };
   
 Robot.prototype.getCapacity = function () {
-  return Math.max(this.resourceCount() - this.capacity, 0);
+  return Math.max(this.maxCapacity - this.resourceCount(), 0);
 };
 
 Robot.prototype.addResource = function (type, count) {

@@ -24,8 +24,9 @@
       this.game.city = this.city;
       this.game.add.existing(this.city);
       
-      this.dest = this.resourceMap.getClosestResourceByType(this.robots[0].currentTile.x, this.robots[0].currentTile.y, 'iron');
+      this.dest = this.game.resourceMap.getClosestResourceByType(this.robots[0].currentTile.x, this.robots[0].currentTile.y, 'iron');
       
+      console.log(this.dest);
       
       //this.robots[0].setDestination(dest.tile.x, dest.tile.y);
       
