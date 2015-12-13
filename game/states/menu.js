@@ -14,7 +14,7 @@ Menu.prototype = {
     this.titleText.anchor.setTo(0.5, 0.5);
     
     var story = "Once a vibrant city, after the nuclear disaster five years ago, there is not much left. Protected from the radiation by shields, some people have survived. \
-Today, one very old robot was found, and a way off this destroyed world lies before you. It is up to you to make use of this robot, gather the necessary resources, and find a way to save everyone. \n Goodluck";
+Today, one very old robot was found, and a way off this destroyed world lies before you. It is up to you to make use of this robot, gather the necessary resources, and find a way to save everyone. \n Good luck!";
     
     this.storyText = this.game.add.text(this.game.width/2, 380, story, { font: '20px sans-serif', fill: '#ffffff', align: 'center', wordWrapWidth: 570, wordWrap: true, stroke: '#000000', strokeThickness: 2});
     this.storyText.anchor.setTo(0.5, 0.5);
