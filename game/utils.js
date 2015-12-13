@@ -1,7 +1,3 @@
-var mineCommand = require("../prefabs/mineCommand");
-var offCommand = require("../prefabs/offCommand");
-var exploreCommand = require("../prefabs/exploreCommand");
-
 // From http://stackoverflow.com/a/4389429
 function extend(base, sub) {
   // Avoid instantiating the base class just to setup inheritance
@@ -38,14 +34,11 @@ function pixelsToTile(pixelPoint) {
                           Math.floor(pixelPoint.y / 32));
 }
 
-module.exports = {
-    extend: extend,
-    tileCornerToPixes: tileCornerToPixes,
-    tileMidToPixes: tileMidToPixes,
-    pixelsToTile: pixelsToTile,
-};
-
 function bitsToCommand(game, robot, bits){
+  var MineCommand = require("./prefabs/mineCommand");
+  var OffCommand = require("./prefabs/offCommand");
+  var ExploreCommand = require("./prefabs/exploreCommand");
+  
   if (bits.length < 3){
     if (bits.length == 2) {
       bits = bits + "0";
@@ -74,3 +67,10 @@ function bitsToCommand(game, robot, bits){
     break;
   } 
 }
+
+module.exports = {
+    extend: extend,
+    tileCornerToPixes: tileCornerToPixes,
+    tileMidToPixes: tileMidToPixes,
+    pixelsToTile: pixelsToTile,
+};
