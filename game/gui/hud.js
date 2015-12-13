@@ -5,8 +5,6 @@ var Hud = function(game, tech, stats) {
     this.tech   = game.techTree;
     this.city   = game.city;
     
-    console.log(this.tech);
-    
     this.templates          = {};
     this.templates.hud      = require('./templates/hud.json');
     this.templates.menu     = require('./templates/menu.json');
@@ -18,8 +16,6 @@ var Hud = function(game, tech, stats) {
     this.robotsWindow   = {};
     this.techWindow     = {};
     this.statsWindow    = {};
-    
-    this.robotsList = [];
     
     this.currentRobotDetailView = {};
     this.currentTechDetailView  = {};
@@ -296,7 +292,7 @@ Hud.prototype.updateStats = function(){
         //Amount of robots
         var robotStats = EZGUI.create({
                     component: 'Label',
-                    text: 'robots: ' + self.robotsList.length,
+                    text: 'robots: ' + self.game.city.robots.length,
                     width: 310,
                     height: 40,
                     position: {x:0, y:0}
