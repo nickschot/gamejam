@@ -42,6 +42,8 @@ Hud.prototype.initBinds = function() {
 
 Hud.prototype.renderRobotsView = function(){
     var self = this;
+    
+    //Empty the list of robots and add all current robots to the template
     this.templates.robots.children[0].children[1].children = [];
 	this.robots.forEach(function(robot, index){
         var currentElem = {   
@@ -88,9 +90,16 @@ Hud.prototype.renderRobotsView = function(){
         self.templates.robots.children[0].children[1].children.push(currentElem);
     });  
     
+    //Destroy the old view;
+    if(this.robotsWindow){
+        this.robotsWindow.destroy();
+    }
+    
+    //Create the new view from the new edited template
     this.robotsWindow = EZGUI.create(self.templates.robots, self.theme);
 	this.robotsWindow.visible = false;
 	
+	//Add a click handler to each robot button
 	this.robots.forEach(function(robot, index){
 	    EZGUI.components['robot'+index+'Button'].on('click', function(event, me) {
             console.log('Opening detailed view for robot '+index);
