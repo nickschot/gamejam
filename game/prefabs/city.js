@@ -8,7 +8,6 @@ var City = function(game, x, y, frame) {
   this.sprites.forEach(function(sprite) { 
     var sx = (i%3-1)*game.TILESIZE;
     var sy = (Math.floor(i/3)-1)*game.TILESIZE;
-    console.log(sx,sy);
     var s = self.addChild(new Phaser.Sprite(game, sx,sy,'city',sprite));
     s.anchor.setTo(0.5, 0.5);
     if(sy==0)
@@ -22,7 +21,7 @@ var City = function(game, x, y, frame) {
     'lead' : 0,
     'plastic': 0,
     'stone': 0
-  }
+  };
   
   // TODO FInd airlock
   this.airlock = {'position': new Phaser.Point(53,66)};  
@@ -49,7 +48,7 @@ City.prototype.transferResource = function (robot) {
       robot.inventory[key] = 0;
     }
   }
-}
+};
 
 
 module.exports = City;

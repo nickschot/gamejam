@@ -18,7 +18,6 @@ var Robot = function(game, x, y, frame) {
   
   Phaser.Sprite.call(this, game, x * 32 + 16, y * 32 + 16, 'robot', frame);
 
-  this.speed = 1;
   this.rotationSpeed = 0.02 * Math.PI;
   this.previous_position;
   this.anchor.setTo(0.5, 0.5);
@@ -93,7 +92,7 @@ Robot.prototype.moveToCurrentTarget = function() {
 
     var magnitude = direction.getMagnitude();
     
-    direction.setMagnitude(Math.min(this.speed, magnitude));
+    direction.setMagnitude(Math.min(1.0 + this.game.techTree.getValueModification('drivingSpeed'), magnitude));
     
     Phaser.Point.add(this.position, direction, this.position);
     
@@ -185,7 +184,7 @@ Robot.prototype.resourceCount = function () {
 };
   
 Robot.prototype.getCapacity = function () {
-  return Math.max(this.maxCapacity - this.resourceCount(), 0);
+  return Math.max(this.getMaxCapacity() - this.resourceCount(), 0);
 };
 
 Robot.prototype.addResource = function (type, count) {
@@ -202,6 +201,19 @@ Robot.prototype.isEmpty = function () {
 
 Robot.prototype.removeResource = function (type, count) {
   this.inventory["resource"] -= count;
+};
+
+Robot.prototype.getMaxCapacity = function () {
+  return this.maxCapacity + this.game.techTree.getValueModification('storageSize');
+}
+
+Robot.prototype.emptyToCity = function (city) {
+  for (var key in this.inventory) {
+    if (this.inventory.hasOwnProperty(key)) {
+      city.storage[key] += this.inventory[key];
+      this.inventory[key] = 0;
+    }
+  }
 };
 
 module.exports = Robot;

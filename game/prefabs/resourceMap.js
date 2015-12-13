@@ -44,10 +44,6 @@ ResourceMap.prototype.getClosestResourceByType = function (tileX, tileY, type) {
         if (resDist == -1 || dist < resDist) {
             res = item;
             resDist = dist;
-            
-            console.log(dist);
-            
-            console.log("bingo!");
         }
     });
     
