@@ -91,17 +91,28 @@
         	    {
         	    	id: 'techDetailBuy',
         	    	component: 'Layout',
-        	    	position: {x:5, y:190},
+        	    	position: {x:5, y:140},
         	    	width: 300,
-        	    	height: 50,
+        	    	height: 100,
         	    	layout: [1,1],
         	    	children: [
+        	    		{
+        	    			id: 'techBuyErrorLabel',
+			                component: 'Label',
+			                width: 290,
+			                height: 20,
+			                position: {x:0, y:0},
+			                text: 'Not enough resources',
+			                font: {
+			                	color: '#FF0000'
+			                }
+			            },
         	    		{
         	    			id: 'techBoughtButton',
 			                component: 'Header',
 			                width: 290,
 			                height: 40,
-			                position: {x:0, y:0},
+			                position: {x:0, y:-60},
 			                text: 'Tech already unlocked'
 			            },
 			            {
@@ -109,7 +120,7 @@
 			                component: 'Button',
 			                width: 290,
 			                height: 40,
-			                position: {x:0, y:-50},
+			                position: {x:0, y:-160},
 			                text: 'Unlock'
 			            }
     	    		]

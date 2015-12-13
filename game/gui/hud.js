@@ -100,6 +100,8 @@ Hud.prototype.initBinds = function() {
 	        if(didBuy){
 	            //Update buy button
 	            self.showTechDetailView();
+	        } else {
+	            EZGUI.components.techBuyErrorLabel.visible = true;
 	        }
 	    }
 	});
@@ -262,6 +264,7 @@ Hud.prototype.renderTechView = function(){
 	
 	EZGUI.components.techBoughtButton.visible = false;
     EZGUI.components.techBuyButton.visible = false;
+    EZGUI.components.techBuyErrorLabel.visible = false;
 };
 
 Hud.prototype.updateTechView = function(){
@@ -292,6 +295,7 @@ Hud.prototype.updateTechView = function(){
 };
 
 Hud.prototype.showTechDetailView = function(){
+    EZGUI.components.techBuyErrorLabel.visible = false;
     if(this.techWindow.visible && this.currentTechDetailView.tech){
         var tech = this.currentTechDetailView.tech;
         var index = this.currentTechDetailView.index;
