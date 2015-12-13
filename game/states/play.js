@@ -23,7 +23,7 @@
       this.game.techTree = new TechTree();
       
       var City = require("../prefabs/city");
-      this.city = new City(this.game, this.game.map.widthInPixels/2, this.game.map.heightInPixels/2);
+      this.game.city = new City(this.game, this.game.map.widthInPixels/2, this.game.map.heightInPixels/2);
       this.game.city.initRobot();
       
       //Set camera to middle of map
