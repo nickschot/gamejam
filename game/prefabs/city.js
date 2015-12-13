@@ -15,6 +15,14 @@ var City = function(game, x, y, frame) {
       s.angle=90;
     i++;
   });
+  
+  this.storage = {
+    'glass': 0,
+    'iron': 0,
+    'lead' : 0,
+    'plastic': 0,
+    'stone': 0
+  }
     
   
 
@@ -30,5 +38,17 @@ City.prototype.update = function() {
   // write your prefab's specific update code here
   
 };
+
+
+City.prototype.transferResource = function (robot) {
+  for (var key in this.inventory) {
+    if (robot.inventory.hasOwnProperty(key)) {
+      this.storage[key] += robot.inventory[key];
+      
+      robot.inventory[key] = 0;
+    }
+  }
+}
+
 
 module.exports = City;

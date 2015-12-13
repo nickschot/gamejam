@@ -23,7 +23,7 @@ ResourceMap.prototype.init = function() {
 
                 var currResourceList = this.resourceMap[resourceTile.properties["resourceName"]] || [];
 
-                currResourceList.push(new Resource(resourceTile));
+                currResourceList.push(new Resource(this, resourceTile));
 
                 this.resourceMap[resourceTile.properties["resourceName"]] = currResourceList;
             }
@@ -38,7 +38,7 @@ ResourceMap.prototype.getClosestResourceByType = function (tileX, tileY, type) {
     var resDist = -1;
     
     typeList.forEach(function (item) {
-        var dist = Math.sqrt(Math.pow(item.tile.x - tileX, 2), Math.pow(item.tile.y - tileY, 2));
+        var dist = Math.sqrt(Math.pow(item.tile.x - tileX, 2) + Math.pow(item.tile.y - tileY, 2));
         
         
         if (resDist == -1 || dist < resDist) {
@@ -52,6 +52,29 @@ ResourceMap.prototype.getClosestResourceByType = function (tileX, tileY, type) {
     });
     
     return res;
+}
+
+ResourceMap.prototype.removeDepletedResource = function (tile, type) {
+    var typeList = this.resourceMap[type] || [];
+    
+    var index = -1;
+    
+    
+    console.log("De lengte: " + typeList.length);
+    
+    typeList.forEach((function (item, i) {
+        if (item.tile == tile) {
+            this.game.map.removeTile(tile.x,  tile.y, this.layerName);
+            
+            index = i;
+        }
+    }).bind(this));
+    
+    if (index > -1) {
+        typeList.splice(index, 1);
+    }
+    
+    console.log("En nu is de lengte: " + typeList.length);
 }
 
 

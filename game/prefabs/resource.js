@@ -1,6 +1,7 @@
 'use strict';
 
-var Resource = function(tile) {
+var Resource = function(resourceMap, tile) {
+    this.resourceMap = resourceMap;
     this.tile = tile;
 }
 
@@ -9,7 +10,7 @@ Resource.prototype = Object.create(Object.prototype);
 Resource.prototype.mine = function(robot) {
     var mineSpeed = this.tile.properties["mineSpeed"];
     var resourceCount = this.tile.properties["resourceCount"];
-    var mined = Math.min(mineSpeed, Math.max(mineSpeed - resourceCount, 0), robot.getCapacity(this.tile.properties["resourceName"]));
+    var mined = Math.min(mineSpeed, resourceCount, robot.getCapacity(this.tile.properties["resourceName"]));
     
     resourceCount -= mined;
     
@@ -17,12 +18,20 @@ Resource.prototype.mine = function(robot) {
         this.delete();
     }
     
+    
+    this.tile.properties["resourceCount"] = resourceCount;
+    
+    robot.addResource(this.tile["resourceName"], mined);
+    
     return mined;
 }
 
 Resource.prototype.delete = function() {
-    // TODO dit kan nog wel eens stuk zijn.
-    this.game.map.removeTile(this.tile.x, this.tile.y, this.tile.layer);
+    this.resourceMap.removeDepletedResource(this.tile, this.tile.properties["resourceName"]);
+}
+
+Resource.prototype.isDepleted = function () {
+    return this.tile.properties["resourceCount"] <= 0;
 }
 
 
