@@ -77,13 +77,10 @@
 		width: 320,
 		height: 360,
 
-
-		//tabs components
 		children: [
 			{
 				id: 'robotDetailLayout',
 				component: 'Layout',
-				text: 'tab 2',
 				title: 'Detail',
 				layout: [1, 10],
 				width: 340,
@@ -161,15 +158,66 @@
 						]
 					}]
 				}, {
-					id: 'lvl2',
-					text: '[Hacking as fast as I can]',
+					id: 'robotProgramLayout',
+					component: 'Layout',
 					title: 'Program',
-					userData: 'level 2',
-					component: 'Label',
+					layout: [1, 3],
+					width: 340,
+					height: 300,
 					position: 'center',
-					width: "100%",
-					height: "100%",
-					skin: 'levelBtn'
+					active: false,
+					children: [
+						{
+							id: 'robotProgramCurrentLabel',
+							component: 'Label',
+							width: 100,
+							height: 40,
+							position: 'center',
+							text: '001'
+						},
+						{
+							id: 'robotProgramLayout',
+							component: 'Layout',
+							title: 'Program',
+							layout: [2, 1],
+							width: 340,
+							height: 40,
+							position: 'center',
+							active: false,
+							children: [
+								{
+									id: 'robotProgramZeroButton',
+									component: 'Button',
+									width: 100,
+									height: 40,
+									position: {
+										x: 20,
+										y: 0
+									},
+									text: '0'
+								}, {
+									id: 'robotProgramOneButton',
+									component: 'Button',
+									width: 100,
+									height: 40,
+									position: {
+										x: 40,
+										y: 0
+									},
+									text: '1'
+								}
+							]
+						},
+						{
+							id: 'robotProgramSubmitButton',
+							component: 'Button',
+							width: 250,
+							height: 40,
+							position: 'center',
+							text: 'Set Command'
+						}
+						
+					]
 				}
 			]
 		}]
