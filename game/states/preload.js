@@ -15,6 +15,7 @@ Preload.prototype = {
     this.load.spritesheet('robot', 'assets/robot.png', 32, 32);
     this.load.spritesheet('city', 'assets/city.png', 32, 32);
     this.load.image('nuclear', 'assets/nuclear-01.png');
+    this.load.image('fog', 'assets/fog.png');
     
     this.load.tilemap('testmap', 'assets/testmap.json', null, Phaser.Tilemap.TILED_JSON);
     this.load.image('mapTiles', 'assets/tileset.png');

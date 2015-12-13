@@ -1,17 +1,23 @@
 function Command (game, robot) {
     this.game = game;
     this.robot = robot;
-    
+    this.state = null;
 }
 
 Command.prototype = Object.create(Object.prototype);
 
+Command.prototype.goState = function (state) {
+    console.log("State: " + this.state.name + " ==>" + state.name);
+    this.state = state;
+    this.state.start();
+};
+
 Command.prototype.update = function () {
-    console.log("deze mag je zo niet aanroepen, panneNkoek.");
-}
+    this.state.update();
+};
 
 Command.prototype.isFinished = function () {
-    console.log("deze mag je zo niet aanroepen, panneNkoek.");
-}
+    return this.state.isFinal();
+};
 
 module.exports = Command;
