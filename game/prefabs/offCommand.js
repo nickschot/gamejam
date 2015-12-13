@@ -22,7 +22,7 @@ OffCommand.prototype.goToCity = function () {
                                 new EndState(this)));
 };
 
-Command.prototype.toString = function () {
+OffCommand.prototype.toString = function () {
     return "Off";
 };
 

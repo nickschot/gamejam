@@ -206,7 +206,7 @@ Hud.prototype.renderRobotsView = function(){
             ]
         };
         
-        self.templates.robots.children[0].children[1].children.push(currentElem);
+        self.templates.robots.children[0].children[2].children.push(currentElem);
     });  
     
     //Destroy the old view;

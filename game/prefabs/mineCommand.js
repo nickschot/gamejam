@@ -30,7 +30,7 @@ MineCommand.prototype.goToCity = function () {
                                 new CityDumpState(this)));
 };
 
-Command.prototype.toString = function () {
+MineCommand.prototype.toString = function () {
     return "Mine " + this.resourceType;
 };
 
