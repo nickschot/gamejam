@@ -90,6 +90,42 @@ Hud.prototype.initBinds = function() {
             self.showTechDetailView();
 	    });
 	});
+	
+	EZGUI.components.robotProgramZeroButton.on('click', function (event, me) {
+	    var text = EZGUI.components.robotProgramCurrentLabel.text;
+	    
+	    text += '0';
+	    
+	    var bits = 1 + self.game.techTree.getValueModification('bits');
+	    
+	    text = text.substring(text.length - bits, text.length);
+	    
+	    console.log(text);
+	    
+	    EZGUI.components.robotProgramCurrentLabel.text = text;
+	    
+	    
+	});
+	
+	EZGUI.components.robotProgramOneButton.on('click', function (event, me) {
+	    var text = EZGUI.components.robotProgramCurrentLabel.text;
+	    
+	    text += '1';
+	    
+	    var bits = 1 + self.game.techTree.getValueModification('bits');
+	    
+	    text = text.substring(text.length - bits, text.length);
+	    
+	    
+	    console.log(text);
+	    
+	    EZGUI.components.robotProgramCurrentLabel.text = text;
+	});
+	
+	EZGUI.components.robotProgramSubmitButton.on('click', function (event, me) {
+	    console.log("Setting command to: " + EZGUI.components.robotProgramCurrentLabel.text);
+	    self.currentRobotDetailView.robot.changeCommand(EZGUI.components.robotProgramCurrentLabel.text);
+	})
 };
 
 Hud.prototype.update = function(){
@@ -178,6 +214,8 @@ Hud.prototype.showRobotDetailView = function(){
         var headerLabel = EZGUI.components.robotDetailHeader;
         var inventory = EZGUI.components.robotDetailInventory;
         var inventoryStatus = EZGUI.components.robotDetailInventoryStatus;
+        
+        EZGUI.components.robotDetailTaskStatus.text = robot.command.toString();
         
         var inventoryCount = 0;
         var keyIndex = 0;
