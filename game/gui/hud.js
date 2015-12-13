@@ -92,11 +92,16 @@ Hud.prototype.initBinds = function() {
 	});
 	
 	EZGUI.components.techBuyButton.on('click', function(event, me){
-	    var name = this.currentTechDetailView.tech.name;
-	    var city = this.game.city;
+	    var name = self.currentTechDetailView.tech.name;
+	    var city = self.game.city;
 	    
 	    if(name && name !== ""){
-	        this.tech.buyUpgrade(city, name);
+	        var didBuy = self.tech.buyUpgrade(city, name);
+	        if(didBuy){
+	            //hide buy button
+	            EZGUI.components.techBoughtButton.visible = true;
+                EZGUI.components.techBuyButton.visible = false;
+	        }
 	    }
 	});
 };
