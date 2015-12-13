@@ -178,8 +178,8 @@ Hud.prototype.showRobotDetailView = function(){
     if(this.robotsWindow.visible && this.currentRobotDetailView.robot){
         var robot = this.currentRobotDetailView.robot;
         var index = this.currentRobotDetailView.index;
-        
-        var header = EZGUI.components.robotDetailHeader;
+
+        var headerLabel = EZGUI.components.robotDetailHeader;
         var inventory = EZGUI.components.robotDetailInventory;
         var inventoryStatus = EZGUI.components.robotDetailInventoryStatus;
         
@@ -203,7 +203,7 @@ Hud.prototype.showRobotDetailView = function(){
             keyIndex++;
         }
         
-        header.text = 'Robot '+index;
+        headerLabel.text = 'Robot '+index;
         inventoryStatus.text = inventoryCount + '/' + robot.getMaxCapacity();
     }
 };
