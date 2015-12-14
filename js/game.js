@@ -1147,7 +1147,7 @@ Hud.prototype.renderRobotsView = function(){
 	    return function(event, me) {
 	        console.log("clickyclick on " + index);
 	        
-	        if (getIndex(index) < self.game.city.robots.length) {
+	        if (index < self.game.city.robots.length) {
     	        self.currentRobotDetailView = {'robot':self.game.city.robots[index], 'index':index };
 	        }
         };
