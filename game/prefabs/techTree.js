@@ -8,7 +8,7 @@ var TechTree = function() {
     this.tree = [];
     
     this.createModNode('Commands I', 'Increases command input bits by one', {iron: 300}, 'bits', 1);
-    this.createModNode('Commands II', 'Increases command input bits by one', {iron: 500, pastic: 500, stone: 500}, 'bits', 1);
+    this.createModNode('Commands II', 'Increases command input bits by one', {iron: 500, plastic: 500, stone: 500}, 'bits', 1);
     
     this.createModNode('Storage I', 'Increases storage by 25 units', {plastic: 300, stone: 300}, 'storageSize', 25);
     this.createModNode('Storage II', 'Increases storage by 50 units', {plastic: 500, stone: 500}, 'storageSize', 50);
