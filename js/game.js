@@ -870,7 +870,6 @@ module.exports = FindNodeState;
 
 },{"../utils":34,"./commandState":4,"./driveState":5,"./endState":6,"./mineState":9}],9:[function(require,module,exports){
 var CommandState = require("./commandState");
-var FindNodeState = require("./findNodeState");
 var Utils = require("../utils");
 
 function MineState(command) {
@@ -883,6 +882,7 @@ MineState.prototype.update = function () {
     this.command.resource.mine(this.robot);
     
     if (this.command.resource.isDepleted() && !this.robot.isFull()) {
+        var FindNodeState = require("./findNodeState");
         this.command.goState(new FindNodeState(this.command));
     } else if (this.robot.isFull()) {
         this.command.goToAirlock();
@@ -1139,19 +1139,22 @@ Hud.prototype.renderRobotsView = function(){
     this.robotsWindow = EZGUI.create(this.templates.robots, this.theme);
 	this.robotsWindow.visible = false;
 	
-	for (var index = 0; index < 25; index++) {
-	    EZGUI.components['robot'+index+'Button'].on('click', function(event, me) {
-	        var getIndex =  function() {return index;};
-	        
-	        console.log("clickyclick on " + getIndex(index));
-	        
-	        if (getIndex(index) < self.game.city.robots.length) {
-    	        self.currentRobotDetailView = {'robot':self.game.city.robots[getIndex(index)], 'index':getIndex(index) };
-	        }
-        });
+	var createCallback = function (index ) {
+	    
         
         console.log("creating new handler for robot: " + index);
-	    
+        
+	    return function(event, me) {
+	        console.log("clickyclick on " + index);
+	        
+	        if (getIndex(index) < self.game.city.robots.length) {
+    	        self.currentRobotDetailView = {'robot':self.game.city.robots[index], 'index':index };
+	        }
+        };
+	}
+	
+	for (let index = 0; index < 25; index++) {
+	    EZGUI.components['robot'+index+'Button'].on('click', createCallback(index));
     }
 };
 
@@ -2546,7 +2549,7 @@ var TechTree = function() {
     this.tree = [];
     
     this.createModNode('Commands I', 'Increases command input bits by one', {iron: 300}, 'bits', 1);
-    this.createModNode('Commands II', 'Increases command input bits by one', {iron: 500, pastic: 500, stone: 500}, 'bits', 1);
+    this.createModNode('Commands II', 'Increases command input bits by one', {iron: 500, plastic: 500, stone: 500}, 'bits', 1);
     
     this.createModNode('Storage I', 'Increases storage by 25 units', {plastic: 300, stone: 300}, 'storageSize', 25);
     this.createModNode('Storage II', 'Increases storage by 50 units', {plastic: 500, stone: 500}, 'storageSize', 50);
