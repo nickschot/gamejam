@@ -1,9 +1,9 @@
 var Command = require("./command");
 var Utils = require("../utils");
 
-var AirlockState = require("../commandStates/airlockState");
-var DriveState = require("../commandStates/driveState");
-var EndState = require("../commandStates/endState");
+var AirlockState = require("../commandStates/states").AirlockState;
+var DriveState = require("../commandStates/states").DriveState;
+var EndState = require("../commandStates/states").EndState;
 
 function OffCommand (game, robot) {
     Command.call(this, game, robot);

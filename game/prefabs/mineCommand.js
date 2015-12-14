@@ -1,10 +1,10 @@
 var Command = require("./command");
 var Utils = require("../utils");
 
-var AirlockState = require("../commandStates/airlockState");
-var CityDumpState = require("../commandStates/cityDumpState");
-var DriveState = require("../commandStates/driveState");
-var FindNodeState = require("../commandStates/findNodeState");
+var AirlockState = require("../commandStates/states").AirlockState;
+var CityDumpState = require("../commandStates/states").CityDumpState;
+var DriveState = require("../commandStates/states").DriveState;
+var FindNodeState = require("../commandStates/states").FindNodeState;
 
 function MineCommand (game, robot, resourceType) {
     Command.call(this, game, robot);

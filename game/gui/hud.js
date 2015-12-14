@@ -22,6 +22,8 @@ var Hud = function(game, tech, stats) {
     
     this.theme = 'kenney';
     this.doneLoading = false;
+    
+    this.ticks = 0;
 };
 
 Hud.prototype = Object.create(Object.prototype);
@@ -150,7 +152,14 @@ Hud.prototype.initBinds = function() {
 Hud.prototype.update = function(){
     this.showRobotDetailView();
     this.updateStats();
-    this.updateInlineResourceCount();
+    
+    if (this.ticks < 60) {
+        this.ticks++;
+    } else {
+        this.updateInlineResourceCount();
+        
+        this.ticks = 0;
+    }
 };
 
 Hud.prototype.updateInlineResourceCount = function () {

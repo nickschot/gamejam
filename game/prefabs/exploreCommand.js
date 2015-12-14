@@ -1,7 +1,7 @@
 var Command = require("./command");
 var Utils = require("../utils");
 
-var ExploreState = require("../commandStates/exploreState");
+var ExploreState = require("../commandStates/states").ExploreState;
 
 function ExploreCommand (game, robot) {
     Command.call(this, game, robot);

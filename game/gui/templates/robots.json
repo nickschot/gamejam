@@ -17,27 +17,26 @@
 		height: 380,
 		position: 'center',
 		children: [{
-			text: 'Robots',
-			font: {
-				size: '24px',
-				family: 'Arial'
-			},
-			component: 'Label',
-
-			position: 'left',
-
-			width: 200,
-			height: 40
-		}, {
             id: 'robotBuy',
             component: 'Button',
             text: 'Buy robot',
-            width: 75,
+            width: 100,
             height: 40,
             position: 'center',
             font: {
                 size: '16px'
             }
+        }, {
+        	id: 'robotsLayoutPriceLabel'
+        	component: 'Label',
+        	text: '(250 plastic, 250 iron)',
+        	width: 200,
+        	height: 40,
+        	position: 'right',
+        	font: {
+                size: '16px'
+            }
+        	
         }, {
 			id: 'levelsList',
 			component: 'List',

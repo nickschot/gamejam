@@ -1,4 +1,4 @@
-var EndState = require("../commandStates/endState");
+var EndState = require("../commandStates/states").EndState;
 
 function Command (game, robot) {
     this.game = game;
