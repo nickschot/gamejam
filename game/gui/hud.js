@@ -30,7 +30,7 @@ Hud.prototype.constructor = Hud;
 Hud.prototype.setupGUI = function() {
     var self = this;
     
-    EZGUI.Theme.load(['../assets/EZGUI/'+this.theme+'-theme/'+this.theme+'-theme.json'], function () {
+    EZGUI.Theme.load(['assets/EZGUI/'+this.theme+'-theme/'+this.theme+'-theme.json'], function () {
 	    //EZGUI.themes['metalworks'].override(themeOverride);
 		
 		self.hudWindow = EZGUI.create(self.templates.hud, self.theme);
