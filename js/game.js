@@ -672,51 +672,6 @@ EasyStar.js = function() {
 	};
 }
 },{}],2:[function(require,module,exports){
-var CommandState = require("./commandState");
-var EndState = require("./endState");
-var Utils = require("../utils");
-
-function AirlockState(command, callback) {
-    CommandState.call(this, "airlock", command);
-    this.callback = callback;
-}
-
-Utils.extend(CommandState, AirlockState);
-
-AirlockState.prototype.start = function () {
-    this.airlockTimer = 120; // TODO Get airlocktime from Game.
-};
-
-AirlockState.prototype.update = function () {
-    if(this.airlockTimer > 0) {
-        this.airlockTimer--;
-    } else {
-        this.callback();
-    }
-};
-
-module.exports = AirlockState;
-
-},{"../utils":34,"./commandState":4,"./endState":6}],3:[function(require,module,exports){
-var CommandState = require("./commandState");
-var Utils = require("../utils");
-
-var FindNodeState = require("../commandStates/findNodeState");
-
-function CityDumpState(command) {
-    CommandState.call(this, "cityDump", command);
-}
-
-Utils.extend(CommandState, CityDumpState);
-
-CityDumpState.prototype.update = function () {
-    this.robot.emptyToCity(this.game.city);
-    this.command.goState(new FindNodeState(this.command));
-};
-
-module.exports = CityDumpState;
-
-},{"../commandStates/findNodeState":8,"../utils":34,"./commandState":4}],4:[function(require,module,exports){
 function CommandState (name, command) {
     this.name = name;
     this.command = command;
@@ -740,10 +695,36 @@ CommandState.prototype.isFinal = function () {
 
 module.exports = CommandState;
 
-},{}],5:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 var CommandState = require("./commandState");
-var EndState = require("./endState");
 var Utils = require("../utils");
+
+// -----------------------------------------------------------------------------
+// AirlockState
+// -----------------------------------------------------------------------------
+
+function AirlockState(command, callback) {
+    CommandState.call(this, "airlock", command);
+    this.callback = callback;
+}
+
+Utils.extend(CommandState, AirlockState);
+
+AirlockState.prototype.start = function () {
+    this.airlockTimer = 120; // TODO Get airlocktime from Game.
+};
+
+AirlockState.prototype.update = function () {
+    if(this.airlockTimer > 0) {
+        this.airlockTimer--;
+    } else {
+        this.callback();
+    }
+};
+
+// -----------------------------------------------------------------------------
+// DriveState
+// -----------------------------------------------------------------------------
 
 function DriveState(command, destination, nextState, errorState) {
     CommandState.call(this, "drive", command);
@@ -767,11 +748,9 @@ DriveState.prototype.update = function () {
     }
 };
 
-module.exports = DriveState;
-
-},{"../utils":34,"./commandState":4,"./endState":6}],6:[function(require,module,exports){
-var CommandState = require("./commandState");
-var Utils = require("../utils");
+// -----------------------------------------------------------------------------
+// EndState
+// -----------------------------------------------------------------------------
 
 function EndState(command) {
     CommandState.call(this, "end", command);
@@ -787,14 +766,9 @@ EndState.prototype.isFinal = function () {
     return true;
 };
 
-module.exports = EndState;
-
-},{"../utils":34,"./commandState":4}],7:[function(require,module,exports){
-var CommandState = require("./commandState");
-var DriveState = require("./driveState");
-var EndState = require("./endState");
-var MineState = require("./mineState");
-var Utils = require("../utils");
+// -----------------------------------------------------------------------------
+// ExploreState
+// -----------------------------------------------------------------------------
 
 function ExploreState(command) {
     CommandState.call(this, "findNode", command);
@@ -833,14 +807,9 @@ ExploreState.prototype.update = function () {
                                         new ExploreState(this.command)));
 };
 
-module.exports = ExploreState;
-
-},{"../utils":34,"./commandState":4,"./driveState":5,"./endState":6,"./mineState":9}],8:[function(require,module,exports){
-var CommandState = require("./commandState");
-var DriveState = require("./driveState");
-var EndState = require("./endState");
-var MineState = require("./mineState");
-var Utils = require("../utils");
+// -----------------------------------------------------------------------------
+// FindNodeState
+// -----------------------------------------------------------------------------
 
 function FindNodeState(command) {
     CommandState.call(this, "findNode", command);
@@ -866,11 +835,9 @@ FindNodeState.prototype.update = function () {
     }
 };
 
-module.exports = FindNodeState;
-
-},{"../utils":34,"./commandState":4,"./driveState":5,"./endState":6,"./mineState":9}],9:[function(require,module,exports){
-var CommandState = require("./commandState");
-var Utils = require("../utils");
+// -----------------------------------------------------------------------------
+// MineState
+// -----------------------------------------------------------------------------
 
 function MineState(command) {
     CommandState.call(this, "mine", command);
@@ -882,16 +849,38 @@ MineState.prototype.update = function () {
     this.command.resource.mine(this.robot);
     
     if (this.command.resource.isDepleted() && !this.robot.isFull()) {
-        var FindNodeState = require("./findNodeState");
         this.command.goState(new FindNodeState(this.command));
     } else if (this.robot.isFull()) {
         this.command.goToAirlock();
     }
 };
 
-module.exports = MineState;
+// -----------------------------------------------------------------------------
+// CityDumpState
+// -----------------------------------------------------------------------------
 
-},{"../utils":34,"./commandState":4,"./findNodeState":8}],10:[function(require,module,exports){
+function CityDumpState(command) {
+    CommandState.call(this, "cityDump", command);
+}
+
+Utils.extend(CommandState, CityDumpState);
+
+CityDumpState.prototype.update = function () {
+    this.robot.emptyToCity(this.game.city);
+    this.command.goState(new FindNodeState(this.command));
+};
+
+module.exports = {
+    AirlockState: AirlockState,
+    CityDumpState: CityDumpState,
+    DriveState: DriveState,
+    EndState: EndState,
+    ExploreState: ExploreState,
+    MineState: MineState,
+    FindNodeState: FindNodeState
+}
+
+},{"../utils":28,"./commandState":2}],4:[function(require,module,exports){
 'use strict';
 
 var Hud = function(game, tech, stats) {
@@ -916,6 +905,8 @@ var Hud = function(game, tech, stats) {
     
     this.theme = 'kenney';
     this.doneLoading = false;
+    
+    this.ticks = 0;
 };
 
 Hud.prototype = Object.create(Object.prototype);
@@ -1044,7 +1035,14 @@ Hud.prototype.initBinds = function() {
 Hud.prototype.update = function(){
     this.showRobotDetailView();
     this.updateStats();
-    this.updateInlineResourceCount();
+    
+    if (this.ticks < 60) {
+        this.ticks++;
+    } else {
+        this.updateInlineResourceCount();
+        
+        this.ticks = 0;
+    }
 };
 
 Hud.prototype.updateInlineResourceCount = function () {
@@ -1153,7 +1151,7 @@ Hud.prototype.renderRobotsView = function(){
         };
 	}
 	
-	for (let index = 0; index < 25; index++) {
+	for (var index = 0; index < 25; index++) {
 	    EZGUI.components['robot'+index+'Button'].on('click', createCallback(index));
     }
 };
@@ -1348,7 +1346,7 @@ Hud.prototype.updateStats = function(){
 
 module.exports = Hud;
 
-},{"./templates/hud.json":11,"./templates/menu.json":12,"./templates/robots.json":13,"./templates/stats.json":14,"./templates/tech.json":15}],11:[function(require,module,exports){
+},{"./templates/hud.json":5,"./templates/menu.json":6,"./templates/robots.json":7,"./templates/stats.json":8,"./templates/tech.json":9}],5:[function(require,module,exports){
 module.exports={
     id: 'bottomHud',
 	component: 'Window',	
@@ -1540,7 +1538,7 @@ module.exports={
 		},
 	]
 }
-},{}],12:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 module.exports={
     id: 'menuOverlay',
 	component: 'Window',	
@@ -1572,7 +1570,7 @@ module.exports={
 		}
 	]
 }
-},{}],13:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 module.exports={
 	id: 'robotsWindow',
 	component: 'Window',
@@ -1592,27 +1590,26 @@ module.exports={
 		height: 380,
 		position: 'center',
 		children: [{
-			text: 'Robots',
-			font: {
-				size: '24px',
-				family: 'Arial'
-			},
-			component: 'Label',
-
-			position: 'left',
-
-			width: 200,
-			height: 40
-		}, {
             id: 'robotBuy',
             component: 'Button',
             text: 'Buy robot',
-            width: 75,
+            width: 100,
             height: 40,
             position: 'center',
             font: {
                 size: '16px'
             }
+        }, {
+        	id: 'robotsLayoutPriceLabel',
+        	component: 'Label',
+        	text: '(250 plastic, 250 iron)',
+        	width: 200,
+        	height: 40,
+        	position: 'right',
+        	font: {
+                size: '16px'
+            }
+        	
         }, {
 			id: 'levelsList',
 			component: 'List',
@@ -1808,7 +1805,7 @@ module.exports={
 		}]
 	}]
 }
-},{}],14:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 module.exports={
     id: 'statsWindow',
 	component: 'Window',	
@@ -1851,7 +1848,7 @@ module.exports={
 	    }
 	]
 }
-},{}],15:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 module.exports={
     id: 'techWindow',
 	component: 'Window',	
@@ -1983,7 +1980,7 @@ module.exports={
 	    }
 	]
 }
-},{}],16:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 
 //global variables
@@ -2000,7 +1997,7 @@ window.onload = function () {
 
   game.state.start('boot');
 };
-},{"./states/boot":29,"./states/gameover":30,"./states/menu":31,"./states/play":32,"./states/preload":33}],17:[function(require,module,exports){
+},{"./states/boot":23,"./states/gameover":24,"./states/menu":25,"./states/play":26,"./states/preload":27}],11:[function(require,module,exports){
 'use strict';
 
 
@@ -2076,8 +2073,8 @@ City.prototype.addRobot = function () {
 
 module.exports = City;
 
-},{"../prefabs/robot":24}],18:[function(require,module,exports){
-var EndState = require("../commandStates/endState");
+},{"../prefabs/robot":18}],12:[function(require,module,exports){
+var EndState = require("../commandStates/states").EndState;
 
 function Command (game, robot) {
     this.game = game;
@@ -2108,11 +2105,11 @@ Command.prototype.isFinished = function () {
 
 module.exports = Command;
 
-},{"../commandStates/endState":6}],19:[function(require,module,exports){
+},{"../commandStates/states":3}],13:[function(require,module,exports){
 var Command = require("./command");
 var Utils = require("../utils");
 
-var ExploreState = require("../commandStates/exploreState");
+var ExploreState = require("../commandStates/states").ExploreState;
 
 function ExploreCommand (game, robot) {
     Command.call(this, game, robot);
@@ -2128,14 +2125,14 @@ ExploreCommand.prototype.toString = function () {
 
 module.exports = ExploreCommand;
 
-},{"../commandStates/exploreState":7,"../utils":34,"./command":18}],20:[function(require,module,exports){
+},{"../commandStates/states":3,"../utils":28,"./command":12}],14:[function(require,module,exports){
 var Command = require("./command");
 var Utils = require("../utils");
 
-var AirlockState = require("../commandStates/airlockState");
-var CityDumpState = require("../commandStates/cityDumpState");
-var DriveState = require("../commandStates/driveState");
-var FindNodeState = require("../commandStates/findNodeState");
+var AirlockState = require("../commandStates/states").AirlockState;
+var CityDumpState = require("../commandStates/states").CityDumpState;
+var DriveState = require("../commandStates/states").DriveState;
+var FindNodeState = require("../commandStates/states").FindNodeState;
 
 function MineCommand (game, robot, resourceType) {
     Command.call(this, game, robot);
@@ -2167,13 +2164,13 @@ MineCommand.prototype.toString = function () {
 
 module.exports = MineCommand;
 
-},{"../commandStates/airlockState":2,"../commandStates/cityDumpState":3,"../commandStates/driveState":5,"../commandStates/findNodeState":8,"../utils":34,"./command":18}],21:[function(require,module,exports){
+},{"../commandStates/states":3,"../utils":28,"./command":12}],15:[function(require,module,exports){
 var Command = require("./command");
 var Utils = require("../utils");
 
-var AirlockState = require("../commandStates/airlockState");
-var DriveState = require("../commandStates/driveState");
-var EndState = require("../commandStates/endState");
+var AirlockState = require("../commandStates/states").AirlockState;
+var DriveState = require("../commandStates/states").DriveState;
+var EndState = require("../commandStates/states").EndState;
 
 function OffCommand (game, robot) {
     Command.call(this, game, robot);
@@ -2198,7 +2195,7 @@ OffCommand.prototype.toString = function () {
 
 module.exports = OffCommand;
 
-},{"../commandStates/airlockState":2,"../commandStates/driveState":5,"../commandStates/endState":6,"../utils":34,"./command":18}],22:[function(require,module,exports){
+},{"../commandStates/states":3,"../utils":28,"./command":12}],16:[function(require,module,exports){
 'use strict';
 
 var Resource = function(resourceMap, tile) {
@@ -2240,7 +2237,7 @@ Resource.prototype.isDepleted = function () {
 
 
 module.exports = Resource;
-},{}],23:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 'use strict';
 
 var Resource = require('./resource');
@@ -2315,7 +2312,7 @@ ResourceMap.prototype.removeDepletedResource = function (tile, type) {
 
 
 module.exports = ResourceMap;
-},{"./resource":22}],24:[function(require,module,exports){
+},{"./resource":16}],18:[function(require,module,exports){
 'use strict';
 
 function normalizeAngle(angle) {
@@ -2538,7 +2535,7 @@ Robot.prototype.changeCommand = function (bits) {
 
 module.exports = Robot;
 
-},{"../../bower_components/easystarjs":1,"../prefabs/mineCommand":20,"../utils":34}],25:[function(require,module,exports){
+},{"../../bower_components/easystarjs":1,"../prefabs/mineCommand":14,"../utils":28}],19:[function(require,module,exports){
 'use strict';
 
 var TechTreeNode = require("./techTreeNode");
@@ -2643,7 +2640,7 @@ TechTree.prototype.buyUpgrade = function (city, upgradeName) {
 
 
 module.exports = TechTree;
-},{"./techTreeModificationNode":26,"./techTreeNode":27,"./techTreeUnlockNode":28}],26:[function(require,module,exports){
+},{"./techTreeModificationNode":20,"./techTreeNode":21,"./techTreeUnlockNode":22}],20:[function(require,module,exports){
 'use strict';
 
 var Utils = require('../utils');
@@ -2667,7 +2664,7 @@ TechtreeModificationNode.prototype.getModificaton = function () {
 }
 
 module.exports = TechtreeModificationNode;
-},{"../utils":34,"./techTreeNode":27}],27:[function(require,module,exports){
+},{"../utils":28,"./techTreeNode":21}],21:[function(require,module,exports){
 'use strict';
 
 var TechTreeNode = function(name, desc, costs) {
@@ -2683,7 +2680,7 @@ TechTreeNode.prototype = Object.create(Object.prototype);
 
 
 module.exports = TechTreeNode;
-},{}],28:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 'use strict';
 
 var Utils = require('../utils');
@@ -2704,7 +2701,7 @@ TechtreeUnlockNode.prototype.affects = function (value) {
 }
 
 module.exports = TechtreeUnlockNode;
-},{"../utils":34,"./techTreeNode":27}],29:[function(require,module,exports){
+},{"../utils":28,"./techTreeNode":21}],23:[function(require,module,exports){
 
 'use strict';
 
@@ -2723,7 +2720,7 @@ Boot.prototype = {
 
 module.exports = Boot;
 
-},{}],30:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 
 'use strict';
 function GameOver() {}
@@ -2751,7 +2748,7 @@ GameOver.prototype = {
 };
 module.exports = GameOver;
 
-},{}],31:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 
 'use strict';
 function Menu() {}
@@ -2785,7 +2782,7 @@ Today, one very old robot was found, and a way off this destroyed world lies bef
 
 module.exports = Menu;
 
-},{}],32:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 
   'use strict';
   function Play() {}
@@ -2974,7 +2971,7 @@ module.exports = Menu;
   };
   
   module.exports = Play;
-},{"../gui/hud":10,"../prefabs/city":17,"../prefabs/resourceMap":23,"../prefabs/techTree":25}],33:[function(require,module,exports){
+},{"../gui/hud":4,"../prefabs/city":11,"../prefabs/resourceMap":17,"../prefabs/techTree":19}],27:[function(require,module,exports){
 
 'use strict';
 function Preload() {
@@ -3013,7 +3010,7 @@ Preload.prototype = {
 
 module.exports = Preload;
 
-},{}],34:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 // From http://stackoverflow.com/a/4389429
 function extend(base, sub) {
   // Avoid instantiating the base class just to setup inheritance
@@ -3091,4 +3088,4 @@ module.exports = {
     bitsToCommand: bitsToCommand
 };
 
-},{"./prefabs/exploreCommand":19,"./prefabs/mineCommand":20,"./prefabs/offCommand":21}]},{},[16])
+},{"./prefabs/exploreCommand":13,"./prefabs/mineCommand":14,"./prefabs/offCommand":15}]},{},[10])
