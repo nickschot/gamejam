@@ -43,9 +43,9 @@ City.prototype.transferResource = function (robot) {
 
 City.prototype.buyRobot = function () {
   if (this.game.techTree.hasAchieved('robotFactory')) {
-    if (this.storage["iron"] >= 500 && this.storage["plastic"] >= 500) {
-      this.storage["iron"] -= 500;
-      this.storage["plastic"] -= 500;
+    if (this.storage["iron"] >= 250 && this.storage["plastic"] >= 250) {
+      this.storage["iron"] -= 250;
+      this.storage["plastic"] -= 250;
       
       this.addRobot();
       

@@ -7,18 +7,18 @@ var TechTreeUnlockNode = require("./techTreeUnlockNode");
 var TechTree = function() {
     this.tree = [];
     
-    this.createModNode('Commands I', 'Increases command input bits by one', {iron: 500}, 'bits', 1);
-    this.createModNode('Commands II', 'Increases command input bits by one', {iron: 1000, pastic: 1000, stone: 1000}, 'bits', 1);
+    this.createModNode('Commands I', 'Increases command input bits by one', {iron: 300}, 'bits', 1);
+    this.createModNode('Commands II', 'Increases command input bits by one', {iron: 500, pastic: 500, stone: 500}, 'bits', 1);
     
-    this.createModNode('Storage I', 'Increases storage by 25 units', {plastic: 500, stone: 500}, 'storageSize', 25);
-    this.createModNode('Storage II', 'Increases storage by 50 units', {plastic: 1000, stone: 1000}, 'storageSize', 50);
-    this.createModNode('Storage III', 'Increases storage by 75 units', {plastic: 2000, stone: 2000, glass: 2000}, 'storageSize', 75);
+    this.createModNode('Storage I', 'Increases storage by 25 units', {plastic: 300, stone: 300}, 'storageSize', 25);
+    this.createModNode('Storage II', 'Increases storage by 50 units', {plastic: 500, stone: 500}, 'storageSize', 50);
+    this.createModNode('Storage III', 'Increases storage by 75 units', {plastic: 800, stone: 800, glass: 800}, 'storageSize', 75);
     
-    this.createUnlockNode('RobotFactory', 'Allows you to make new robots', {iron: 1000, plastic: 500}, 'robotFactory');
+    this.createUnlockNode('RobotFactory', 'Allows you to make new robots', {iron: 300, plastic: 300}, 'robotFactory');
     
-    this.createModNode('DriveSpeed I', 'Increases drive speed by 25%', {glass: 500}, 'drivingSpeed', 0.25);
-    this.createModNode('DriveSpeed II', 'Increases drive speed by another 50%', {plastic: 2000}, 'drivingSpeed', 0.25);
-    this.createModNode('DriveSpeed III', 'Increases drive speed by another 75%', {glass: 2000, lead: 2000},'drivingSpeed', 0.25);
+    this.createModNode('DriveSpeed I', 'Increases drive speed by 25%', {glass: 300}, 'drivingSpeed', 0.25);
+    this.createModNode('DriveSpeed II', 'Increases drive speed by another 50%', {plastic: 500}, 'drivingSpeed', 0.25);
+    this.createModNode('DriveSpeed III', 'Increases drive speed by another 75%', {glass: 800, lead: 800},'drivingSpeed', 0.25);
 }
 
 TechTree.prototype = Object.create(Object.prototype);

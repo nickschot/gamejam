@@ -10,7 +10,7 @@
 	height: 400,
 	layout: [2, 1],
 	children: [{
-		id: 'robotsLayout',
+		id: 'robotsLayoutLeft',
 		component: 'Layout',
 		layout: [2, 10],
 		width: 340,
@@ -55,7 +55,7 @@
 			]
 		}]
 	}, {
-		id: 'robotsLayout',
+		id: 'robotsLayoutRight',
 		component: 'Layout',
 		layout: [1, 10],
 		width: 340,

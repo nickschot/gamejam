@@ -21,6 +21,7 @@ var Hud = function(game, tech, stats) {
     this.currentTechDetailView  = {};
     
     this.theme = 'kenney';
+    this.doneLoading = false;
 };
 
 Hud.prototype = Object.create(Object.prototype);
@@ -41,6 +42,8 @@ Hud.prototype.setupGUI = function() {
         self.renderStatsView();
         
 		self.initBinds();
+		
+		self.doneLoading = true;
 	});
 };
 
@@ -134,10 +137,12 @@ Hud.prototype.initBinds = function() {
 	
 	EZGUI.components.robotBuy.on('click', function (event, me) {
 	    console.log("Buying robot!");
-	    if (self.game.city.buyRobot()) {
-            console.log("HOI");
-            self.renderRobotsView();
-            self.robotsWindow.visible = true;
+	    if (self.game.city.robots.length < 25) {
+    	    if (self.game.city.buyRobot()) {
+                self.robotBought();
+    	    }
+	    } else {
+	        console.log("25 robots max, HACK :(");
 	    }
 	});
 };
@@ -145,7 +150,18 @@ Hud.prototype.initBinds = function() {
 Hud.prototype.update = function(){
     this.showRobotDetailView();
     this.updateStats();
+    this.updateInlineResourceCount();
 };
+
+Hud.prototype.updateInlineResourceCount = function () {
+    if (this.doneLoading) {
+        EZGUI.components.ironLabel.text = this.game.city.storage["iron"];
+        EZGUI.components.plasticLabel.text = this.game.city.storage["plastic"];
+        EZGUI.components.stoneLabel.text = this.game.city.storage["stone"];
+        EZGUI.components.leadLabel.text = this.game.city.storage["lead"];
+        EZGUI.components.glassLabel.text = this.game.city.storage["glass"];
+    }
+}
 
 Hud.prototype.hideWindows = function(){
     this.menuWindow.visible     = false;
@@ -167,7 +183,10 @@ Hud.prototype.renderRobotsView = function(){
     
     //Empty the list of robots and add all current robots to the template
     this.templates.robots.children[0].children[2].children = [];
-	this.game.city.robots.forEach(function(robot, index){
+
+    
+    
+	for (var index = 0; index < 25; index++) {
         var currentElem = {   
             id: 'robot'+index+'Entry',
             component: 'Layout',
@@ -187,9 +206,9 @@ Hud.prototype.renderRobotsView = function(){
                 {
                     id: 'robot'+index+'Status',
                     component: 'Label',
-                    text: 'LIVE',
+                    text: 'not bought',
                     font: {
-                        color: 'green'
+                        size: '12px;'
                     },
                     width: 100,
                     height: 50,
@@ -197,7 +216,7 @@ Hud.prototype.renderRobotsView = function(){
                 },
                 {
                     id: 'robot'+index+'Button',
-                    component: 'Button',
+                    component: 'Header',
                     text: 'open',
                     width: 75,
                     height: 30,
@@ -209,8 +228,12 @@ Hud.prototype.renderRobotsView = function(){
             ]
         };
         
+        if (index < self.game.city.robots.length) {
+            currentElem.children[1].text = "LIVE";
+        }
+        
         self.templates.robots.children[0].children[2].children.push(currentElem);
-    });  
+    }
     
     //Destroy the old view;
     if(this.robotsWindow && this.robotsWindow.destroy){
@@ -222,17 +245,31 @@ Hud.prototype.renderRobotsView = function(){
     this.robotsWindow = EZGUI.create(this.templates.robots, this.theme);
 	this.robotsWindow.visible = false;
 	
-	//Add a click handler to each robot button
-	this.game.city.robots.forEach(function(robot, index){
+	for (let index = 0; index < 25; index++) {
 	    EZGUI.components['robot'+index+'Button'].on('click', function(event, me) {
-            self.currentRobotDetailView = {'robot':robot, 'index':index };
-            
-            console.log("clickyclick on " + index);
+	        var getIndex =  function() {return index;};
+	        
+	        console.log("clickyclick on " + getIndex(index));
+	        
+	        if (getIndex(index) < self.game.city.robots.length) {
+    	        self.currentRobotDetailView = {'robot':self.game.city.robots[getIndex(index)], 'index':getIndex(index) };
+	        }
         });
         
         console.log("creating new handler for robot: " + index);
-	});
+	    
+    }
 };
+
+
+Hud.prototype.robotBought = function () {
+    for (var index = 0; index < this.city.robots.length; index++) {
+           EZGUI.components['robot'+index+'Status'].text = "LIVE";
+           EZGUI.components['robot'+index+'Button'].component = "Button";
+           
+           console.log('robot'+index+'Status');
+    }
+}
 
 Hud.prototype.showRobotDetailView = function(){
     if(this.robotsWindow.visible && this.currentRobotDetailView.robot){

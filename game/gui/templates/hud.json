@@ -4,8 +4,8 @@
 	padding: 0,
 	position: {x: 50, y: 500},
 	width: 700,
-	height: 50,
-	layout: [5, 1],
+	height: 70,
+	layout: [5, 2],
 	children: [
 		{
             id: 'menuButton',
@@ -13,7 +13,7 @@
             component: 'Button',
             position: 'center',
             width: 130,
-            height: 40,
+            height: 30,
         	font: {
                 color: '#333'
             }
@@ -25,7 +25,7 @@
 		    component: 'Button',
 		    position: 'center',
 		    width: 130,
-		    height: 40,
+		    height: 30,
         	font: {
                 color: '#333'
             }
@@ -36,7 +36,7 @@
 		    component: 'Button',
 		    position: 'center',
 		    width: 130,
-		    height: 40,
+		    height: 30,
         	font: {
                 color: '#333'
             }
@@ -47,10 +47,145 @@
 		    component: 'Button',
 		    position: 'center',
 		    width: 130,
-		    height: 40,
+		    height: 30,
         	font: {
                 color: '#333'
             }
-		}
+		},
+		{
+			component: 'Layout',
+			position: 'center', 
+			width: 130,
+			height: 30,
+			layout: [2,1],
+			children: [{
+			    text: 'Iron: ',
+			    component: 'Label',
+			    position: 'center',
+			    width: 60,
+			    height: 30,
+	        	font: {
+	                color: '#333'
+	        	}
+	        },{
+			    id: 'ironLabel',
+			    text: '0',
+			    component: 'Label',
+			    position: 'center',
+			    width: 40,
+			    height: 30,
+	        	font: {
+	                color: '#333'
+	        	}
+			}]
+		},
+		{
+			component: 'Layout',
+			position: 'center', 
+			width: 130,
+			height: 30,
+			layout: [2,1],
+			children: [{
+			    text: 'Plastic:',
+			    component: 'Label',
+			    position: 'center',
+			    width: 60,
+			    height: 30,
+	        	font: {
+	                color: '#333'
+	        	}
+	        },{
+			    id: 'plasticLabel',
+			    text: '0',
+			    component: 'Label',
+			    position: 'center',
+			    width: 40,
+			    height: 30,
+	        	font: {
+	                color: '#333'
+	        	}
+			}]
+		},
+		{
+			component: 'Layout',
+			position: 'center', 
+			width: 130,
+			height: 30,
+			layout: [2,1],
+			children: [{
+			    text: 'Stone:',
+			    component: 'Label',
+			    position: 'center',
+			    width: 60,
+			    height: 30,
+	        	font: {
+	                color: '#333'
+	        	}
+	        },{
+			    id: 'stoneLabel',
+			    text: '0',
+			    component: 'Label',
+			    position: 'center',
+			    width: 70,
+			    height: 30,
+	        	font: {
+	                color: '#333'
+	        	}
+			}]
+		},
+		{
+			component: 'Layout',
+			position: 'center', 
+			width: 130,
+			height: 30,
+			layout: [2,1],
+			children: [{
+			    text: 'Lead:',
+			    component: 'Label',
+			    position: 'center',
+			    width: 60,
+			    height: 30,
+	        	font: {
+	                color: '#333'
+	        	}
+	        },{
+			    id: 'leadLabel',
+			    text: '0',
+			    component: 'Label',
+			    position: 'center',
+			    width: 70,
+			    height: 30,
+	        	font: {
+	                color: '#333'
+	        	}
+			}]
+		},
+		{
+			component: 'Layout',
+			position: 'center', 
+			width: 130,
+			height: 30,
+			layout: [2,1],
+			children: [{
+			    text: 'Glass:',
+			    component: 'Label',
+			    position: 'center',
+			    width: 60,
+			    height: 30,
+	        	font: {
+	                color: '#333'
+	        	}
+	        },{
+			    id: 'glassLabel',
+			    text: '0',
+			    component: 'Label',
+			    position: 'center',
+			    width: 70,
+			    height: 30,
+	        	font: {
+	                color: '#333'
+	        	}
+			}]
+		},
 	]
 }
