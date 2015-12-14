@@ -245,7 +245,7 @@ Hud.prototype.renderRobotsView = function(){
     this.robotsWindow = EZGUI.create(this.templates.robots, this.theme);
 	this.robotsWindow.visible = false;
 	
-	for (let index = 0; index < 25; index++) {
+	for (var index = 0; index < 25; index++) {
 	    EZGUI.components['robot'+index+'Button'].on('click', function(event, me) {
 	        var getIndex =  function() {return index;};
 	        
