@@ -27,7 +27,7 @@
                 size: '16px'
             }
         }, {
-        	id: 'robotsLayoutPriceLabel'
+        	id: 'robotsLayoutPriceLabel',
         	component: 'Label',
         	text: '(250 plastic, 250 iron)',
         	width: 200,
