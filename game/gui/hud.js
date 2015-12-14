@@ -245,19 +245,22 @@ Hud.prototype.renderRobotsView = function(){
     this.robotsWindow = EZGUI.create(this.templates.robots, this.theme);
 	this.robotsWindow.visible = false;
 	
-	for (var index = 0; index < 25; index++) {
-	    EZGUI.components['robot'+index+'Button'].on('click', function(event, me) {
-	        var getIndex =  function() {return index;};
-	        
-	        console.log("clickyclick on " + getIndex(index));
-	        
-	        if (getIndex(index) < self.game.city.robots.length) {
-    	        self.currentRobotDetailView = {'robot':self.game.city.robots[getIndex(index)], 'index':getIndex(index) };
-	        }
-        });
+	var createCallback = function (index ) {
+	    
         
         console.log("creating new handler for robot: " + index);
-	    
+        
+	    return function(event, me) {
+	        console.log("clickyclick on " + index);
+	        
+	        if (getIndex(index) < self.game.city.robots.length) {
+    	        self.currentRobotDetailView = {'robot':self.game.city.robots[index], 'index':index };
+	        }
+        };
+	}
+	
+	for (let index = 0; index < 25; index++) {
+	    EZGUI.components['robot'+index+'Button'].on('click', createCallback(index));
     }
 };
 
