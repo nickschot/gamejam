@@ -2554,7 +2554,7 @@ var TechTree = function() {
     
     this.createUnlockNode('RobotFactory', 'Allows you to make new robots', {iron: 300, plastic: 300}, 'robotFactory');
     
-    this.createModNode('DriveSpeed I', 'Increases drive speed by 25%', {glass: 300}, 'drivingSpeed', 0.25);
+    this.createModNode('DriveSpeed I', 'Increases drive speed by 25%', {iron: 300}, 'drivingSpeed', 0.25);
     this.createModNode('DriveSpeed II', 'Increases drive speed by another 50%', {plastic: 500}, 'drivingSpeed', 0.25);
     this.createModNode('DriveSpeed III', 'Increases drive speed by another 75%', {glass: 800, lead: 800},'drivingSpeed', 0.25);
 }
