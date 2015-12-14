@@ -259,7 +259,7 @@ Hud.prototype.renderRobotsView = function(){
         };
 	}
 	
-	for (let index = 0; index < 25; index++) {
+	for (var index = 0; index < 25; index++) {
 	    EZGUI.components['robot'+index+'Button'].on('click', createCallback(index));
     }
 };
