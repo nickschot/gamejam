@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="1" height="1" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tileset" tilewidth="32" tileheight="32">
+  <image source="tileset.png" width="512" height="512"/>
+ </tileset>
+ <layer name="regions" width="1" height="1">
+  <data encoding="base64" compression="zlib">
+   eJyzYGBgAAAA5AA5
+  </data>
+ </layer>
+ <layer name="input_Building" width="1" height="1" opacity="0.63">
+  <data encoding="base64" compression="zlib">
+   eJxjYGBgAAAABAAB
+  </data>
+ </layer>
+ <layer name="output_Collision" width="1" height="1">
+  <data encoding="base64" compression="zlib">
+   eJwTYmBgAAAATAAT
+  </data>
+ </layer>
+</map>
